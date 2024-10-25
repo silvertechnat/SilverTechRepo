@@ -4,12 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS Styling */
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Calibri, Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #0F213E;
+            color: white;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+        }
+
+        .logo {
+            height: 40px; /* Adjust logo size */
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar-links li {
+            margin-left: 20px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .navbar-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #0F213E;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        /* Services Section */
+        .section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .service-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .service-card {
+            position: relative;
+            width: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-info {
+            background-color: #0F213E;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0F213E;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                background-color: #0F213E;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .service-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <header class="navbar">
-        <div class="navbar-brand">Silver Tech Support</div>
+        <div class="navbar-brand">
+            <img src="images/logo.png" alt="Silver Tech Support Logo" class="logo">
+            Silver Tech Support
+        </div>
         <nav>
             <ul class="navbar-links">
                 <li><a href="#services">Services</a></li>
@@ -66,6 +219,12 @@
         <p>© 2024 Silver Tech Support. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript for Navbar Toggle
+        function toggleNavbar() {
+            const navbarLinks = document.querySelector('.navbar-links');
+            navbarLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
