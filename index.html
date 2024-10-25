@@ -1,32 +1,71 @@
-<!-- Images Section -->
-<section class="images">
-    <div class="container">
-        <h2>Our Services at a Glance</h2>
-        <div class="image-grid">
-            <!-- Networking Solutions -->
-            <div class="image-card">
-                <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45" alt="Networking Solutions">
-                <div class="info">
-                    <h3>Networking Solutions</h3>
-                    <p>Secure, high-speed networking setups tailored to your needs.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Tech Support</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="navbar-brand">Silver Tech Support</div>
+        <nav>
+            <ul class="navbar-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="navbar-toggle" onclick="toggleNavbar()">☰</div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Your Trusted IT Partner</h1>
+            <p>Professional IT solutions for businesses and individuals.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <!-- Card 1 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45" alt="Networking Solutions">
+                    <div class="service-info">
+                        <h3>Networking Solutions</h3>
+                        <p>Secure, high-speed network setups tailored to your needs.</p>
+                    </div>
                 </div>
-            </div>
-            <!-- Hardware Recommendations -->
-            <div class="image-card">
-                <img src="https://images.unsplash.com/photo-1537432376769-00a0b9c34c28" alt="Hardware Recommendations">
-                <div class="info">
-                    <h3>Hardware Recommendations</h3>
-                    <p>Guidance on reliable, cost-effective hardware choices.</p>
+                <!-- Card 2 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1537432376769-00a0b9c34c28" alt="Hardware Recommendations">
+                    <div class="service-info">
+                        <h3>Hardware Recommendations</h3>
+                        <p>Reliable, cost-effective hardware recommendations.</p>
+                    </div>
                 </div>
-            </div>
-            <!-- Cybersecurity Training -->
-            <div class="image-card">
-                <img src="https://images.unsplash.com/photo-1547658719-da2b511691a2" alt="Cybersecurity Training">
-                <div class="info">
-                    <h3>Cybersecurity Training</h3>
-                    <p>Personalised training to protect against online threats.</p>
+                <!-- Card 3 -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b511691a2" alt="Cybersecurity Training">
+                    <div class="service-info">
+                        <h3>Cybersecurity Training</h3>
+                        <p>Personalised training to protect against online threats.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Silver Tech Support. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

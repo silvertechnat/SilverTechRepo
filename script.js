@@ -1,8 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const navbarToggle = document.getElementById('navbarToggle');
+// Toggle mobile navigation menu
+function toggleNavbar() {
     const navbarLinks = document.querySelector('.navbar-links');
-
-    navbarToggle.addEventListener('click', () => {
-        navbarLinks.classList.toggle('active');
-    });
-});
+    navbarLinks.classList.toggle('active');
+}

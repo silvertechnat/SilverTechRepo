@@ -1,4 +1,4 @@
-/* Reset some basic styling */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +6,7 @@
     font-family: Calibri, Arial, sans-serif;
 }
 
-body {
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Navbar Styling */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -20,9 +14,6 @@ body {
     padding: 20px;
     background-color: #0F213E;
     color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .navbar-brand {
@@ -30,8 +21,8 @@ body {
 }
 
 .navbar-links {
-    list-style: none;
     display: flex;
+    list-style: none;
 }
 
 .navbar-links li {
@@ -40,4 +31,77 @@ body {
 
 .navbar-links a {
     color: white;
-    text-dec
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.navbar-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #0F213E;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Services Section */
+.section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.service-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-card {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+.service-info {
+    background-color: #0F213E;
+    color: white;
+    padding: 20px;
+    text-align: left;
+}
+
+/* Foo
