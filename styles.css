@@ -1,70 +1,43 @@
-/* Images Section */
-.images {
-    padding: 60px 0;
-    background-color: #e8e8e8;
-    text-align: center;
+/* Reset some basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Calibri, Arial, sans-serif;
 }
 
-.images h2 {
-    color: #0F213E;
-    font-size: 2em;
-    margin-bottom: 20px;
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
 }
 
-.image-grid {
+/* Navbar Styling */
+.navbar {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.image-card {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.image-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.image-card:hover img {
-    transform: scale(1.1);
-}
-
-.image-card .info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 33, 62, 0.85);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    padding: 20px;
+    background-color: #0F213E;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.image-card:hover .info {
-    opacity: 1;
-}
-
-.image-card .info h3 {
+.navbar-brand {
     font-size: 1.5em;
-    margin-bottom: 10px;
 }
 
-.image-card .info p {
-    font-size: 1em;
-    text-align: center;
-    padding: 0 15px;
+.navbar-links {
+    list-style: none;
+    display: flex;
 }
+
+.navbar-links li {
+    margin-left: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-dec
