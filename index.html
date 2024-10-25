@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <h1>Silver Tech Support</h1>
-            <p>Your trusted partner for professional IT solutions</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">Silver Tech Support</div>
+        <ul class="navbar-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#values">Our Values</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="navbar-toggle" id="navbarToggle">&#9776;</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Silver Tech Support</h1>
+            <p>Your trusted partner for IT solutions</p>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>At Silver Tech Support, we specialise in providing expert IT support and solutions to both businesses and individuals. From network configuration to cybersecurity training, we’re dedicated to delivering professional services that simplify technology and give you peace of mind.</p>
-        </div>
-    </section>
-
-    <!-- Mission Statement Section -->
-    <section class="mission">
+    <!-- Mission Section -->
+    <section class="section" id="mission">
         <div class="container">
             <h2>Our Mission</h2>
             <p>To empower businesses and individuals by providing accessible, expert IT solutions that simplify technology, enhance productivity, and ensure peace of mind.</p>
@@ -32,41 +37,37 @@
     </section>
 
     <!-- Services Section -->
-    <section class="services">
+    <section class="section" id="services">
         <div class="container">
             <h2>Our Services</h2>
             <p>Explore our range of professional IT services tailored to meet the unique needs of businesses and individuals alike:</p>
             <ul>
-                <li><strong>Tech Support for Business & Personal:</strong> Reliable support on-site and remotely.</li>
-                <li><strong>Networking Solutions:</strong> Setup and configure secure, high-speed Wi-Fi and networks.</li>
-                <li><strong>Hardware Recommendations & Setup:</strong> Expert guidance in choosing and setting up technology.</li>
-                <li><strong>Domain & Email Configuration:</strong> Assistance with custom domains, Microsoft 365, and more.</li>
-                <li><strong>Cybersecurity Training:</strong> One-on-one training to protect yourself and your business.</li>
+                <li>Tech Support for Business & Personal</li>
+                <li>Networking Solutions</li>
+                <li>Hardware Recommendations & Setup</li>
+                <li>Domain & Email Configuration</li>
+                <li>Cybersecurity Training</li>
             </ul>
         </div>
     </section>
 
-    <!-- Core Values Section -->
-    <section class="values">
+    <!-- Values Section -->
+    <section class="section" id="values">
         <div class="container">
             <h2>Our Core Values</h2>
-            <p>We believe in building trust and offering outstanding service through our core values:</p>
             <ul>
-                <li><strong>Customer-Centricity:</strong> We prioritise our clients’ needs and aim to exceed expectations.</li>
-                <li><strong>Integrity:</strong> Operating with honesty and transparency to establish lasting trust.</li>
-                <li><strong>Expertise:</strong> Committed to continuous learning to provide the latest solutions.</li>
-                <li><strong>Accessibility:</strong> Making IT support available and understandable to everyone.</li>
-                <li><strong>Reliability:</strong> Dependable support whenever you need it.</li>
-                <li><strong>Empowerment:</strong> Educating clients to use technology confidently and securely.</li>
+                <li><strong>Customer-Centricity:</strong> We prioritise our clients’ needs and exceed expectations.</li>
+                <li><strong>Integrity:</strong> Operating with honesty and transparency.</li>
+                <li><strong>Expertise:</strong> Providing knowledgeable solutions.</li>
+                <li><strong>Accessibility:</strong> Making IT support easy to understand.</li>
             </ul>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="container">
             <h3>Contact Us</h3>
-            <p>Have a question or need assistance? Reach out to us:</p>
             <p>Email: <a href="mailto:info@silvertechsupport.uk">info@silvertechsupport.uk</a></p>
             <p>Phone: 01234 567890</p>
         </div>
