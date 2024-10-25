@@ -1,28 +1,45 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset some basic styling */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: Calibri, Arial, sans-serif;
+}
+
+/* Overall Page Style */
+body {
     background-color: #f4f4f4;
+    color: #333;
 }
 
-header {
-    background: #35424a;
-    color: #ffffff;
-    padding: 20px 0;
-    text-align: center;
-}
-
-main {
-    padding: 20px;
-    text-align: center;
-}
-
-footer {
-    background: #35424a;
+/* Header Section */
+.header {
+    background-color: #0F213E;
     color: #ffffff;
     text-align: center;
-    padding: 10px 0;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    padding: 40px 0;
 }
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.2em;
+}
+
+/* Container to Center Content */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* About Section */
+.about {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 20px 0;
+    border-left: 5px solid #0F213E;
+    box-shadow: 0 4px 8px rgba(0, 0,
