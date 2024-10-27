@@ -5,169 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
-        /* CSS Styling */
-
-        /* Reset */
-        * {
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Calibri, Arial, sans-serif;
+            background-color: #0F213E;
+            color: #F4F4F4;
         }
 
-        /* Colors */
-        :root {
-            --main-bg-color: #0F213E;
-            --text-color: rgb(244, 244, 244);
-            --emoji-color: rgb(0, 255, 200); /* Light teal green */
-            --eye-mouth-color: var(--main-bg-color); /* Background color for eyes and mouth */
-            --happy-color: #FFD700; /* Gold for happy */
-            --surprised-color: #FF4500; /* OrangeRed for surprised */
-        }
-
-        /* Navbar */
+        /* Navbar Styling */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             padding: 20px;
-            background-color: var(--main-bg-color);
-            color: var(--text-color);
+            background-color: #0F213E;
+            color: #F4F4F4;
         }
 
-        .navbar-brand {
-            display: flex;
-            align-items: center; /* Aligns text vertically with the emoji */
-        }
-
-        /* Emoji logo styling */
-        .emoji {
-            display: grid;
-            grid-template-columns: repeat(8, 8px);
-            grid-template-rows: repeat(8, 8px);
-            gap: 1px;
-            margin-right: 10px;
-            animation: bounce 1s infinite; /* Animation for emoji */
-            border-radius: 50%; /* Makes the emoji round */
-            overflow: hidden; /* Ensures the corner squares are transparent */
-            position: relative; /* For positioning eyes and mouth */
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .emoji div {
-            width: 8px;
-            height: 8px;
-            background-color: transparent;
-        }
-
-        /* Create the border of the emoji with transparent corners */
-        .emoji .border {
-            background-color: var(--emoji-color);
-        }
-
-        /* Set eye and mouth colors */
-        .emoji .eye {
-            background-color: var(--eye-mouth-color);
-        }
-
-        .emoji .mouth {
-            background-color: var(--eye-mouth-color);
-        }
-
-        /* Navbar links */
         .navbar-links {
-            display: flex;
             list-style: none;
+            display: flex;
+            gap: 20px;
         }
 
         .navbar-links li {
-            margin-left: 20px;
+            display: inline;
         }
 
         .navbar-links a {
-            color: var(--text-color);
+            color: #F4F4F4;
             text-decoration: none;
-            font-size: 1em;
-            position: relative; /* For hover effect */
+            font-size: 18px;
         }
 
-        .navbar-links a::after {
-            content: '';
-            display: block;
+        /* Emoji Canvas Styling */
+        .emoji-canvas {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .emoji-eye, .emoji-mouth {
             position: absolute;
-            left: 50%;
-            bottom: -2px; /* Position below the text */
-            width: 0%;
-            height: 2px; /* Line height */
-            background-color: var(--text-color);
-            transition: width 0.3s ease, left 0.3s ease; /* Animation */
+            background-color: #F4F4F4; /* Changed to white for visibility */
+            border-radius: 50%;
         }
 
-        .navbar-links a:hover::after {
-            width: 100%;
-            left: 0;
+        .emoji-eye {
+            width: 12px;
+            height: 12px;
+            box-shadow: 0 0 0 2px #0F213E; /* Dark border */
         }
 
-        .navbar-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
+        .emoji-eye.left {
+            top: 35px;
+            left: 25px; /* Adjusted for better positioning */
+        }
+
+        .emoji-eye.right {
+            top: 35px;
+            left: 60px; /* Adjusted for better positioning */
+        }
+
+        .emoji-mouth {
+            width: 30px;
+            height: 8px;
+            background-color: #F4F4F4; /* Changed to white for visibility */
+            border-radius: 20px;
+            top: 65px;
+            left: 35px;
+            transform: rotate(0deg); /* Keep mouth flat */
         }
 
         /* Hero Section */
         .hero-section {
-            background-color: var(--main-bg-color);
-            color: var(--text-color);
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
         }
 
-        .hero-content h1 {
+        .hero-section h1 {
             font-size: 2.5em;
-            margin-bottom: 10px;
         }
 
-        .hero-content p {
+        .hero-section p {
             font-size: 1.2em;
-            margin-bottom: 20px;
         }
 
-        /* Services Section */
-        .section {
-            padding: 60px 0;
+        /* Carousel Section */
+        .carousel-section {
+            width: 80%;
+            position: relative;
             text-align: center;
+            padding: 60px 20px;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: auto;
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
         }
 
-        .service-grid {
+        .carousel {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            transition: transform 0.5s ease-in-out; /* Smooth transition */
         }
 
         .service-card {
-            position: relative;
-            width: 300px;
-            overflow: hidden;
+            min-width: 300px;
+            margin: 0 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column; /* Allows for flexible card structure */
+            background-color: #1A3457;
+            color: #F4F4F4;
+            text-align: left;
+            flex-shrink: 0;
+            overflow: hidden;
         }
 
         .service-card img {
@@ -176,123 +133,68 @@
             object-fit: cover;
         }
 
-        .service-card:hover {
-            transform: scale(1.05);
+        .service-info {
+            padding: 20px;
         }
 
-        .service-info {
-            background-color: var(--main-bg-color);
-            color: var(--text-color);
-            padding: 20px;
-            text-align: left;
-            flex-grow: 1; /* Allows text box to fill remaining space */
+        /* Carousel Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(15, 33, 62, 0.8);
+            color: #F4F4F4;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Ensures equal spacing */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1; /* Ensure arrows are above carousel */
+        }
+
+        .carousel-arrow.left {
+            left: -20px;
+        }
+
+        .carousel-arrow.right {
+            right: -20px;
         }
 
         /* Footer */
         .footer {
-            background-color: var(--main-bg-color);
-            color: var(--text-color);
             text-align: center;
             padding: 20px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar-links {
-                display: none;
-                flex-direction: column;
-                background-color: var(--main-bg-color);
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-            }
-
-            .navbar-links.active {
-                display: flex;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .service-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Text alignment for the emoji */
-        .emoji-container {
-            display: flex;
-            align-items: center; /* Centers text vertically with emoji */
-        }
-
-        .support-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Align text to the left of emoji */
-            margin-left: 20px; /* Space between emoji and text */
-        }
-
-        .support-text h1 {
-            font-size: 1.4em; /* 70% of the emoji height */
-            margin-top: -10px; /* Adjust to align with emoji */
-        }
-
-        .support-text p {
-            font-size: 1em; /* Tagline font size */
-            margin-top: 5px; /* Margin between title and tagline */
+            background-color: #0F213E;
+            color: #F4F4F4;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <header class="navbar">
-        <div class="navbar-brand">
-            <div class="emoji-container">
-                <div class="emoji" id="emoji">
-                    <!-- 8-bit style blocks for circular emoji -->
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="mouth"></div><div class="mouth"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                </div>
-                <div class="support-text">
-                    <h1>Silver Tech Support</h1>
-                    <p>Professional IT solutions for businesses and individuals.</p>
-                </div>
-            </div>
-        </div>
+        <div class="emoji-canvas" id="emojiCanvas"></div>
         <ul class="navbar-links">
             <li><a href="#">Home</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
-        <div class="navbar-toggle" onclick="toggleNavbar()">☰</div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-content">
-            <h1>Welcome to Silver Tech Support</h1>
-            <p>Your trusted partner in IT solutions.</p>
-        </div>
+        <h1>Welcome to Silver Tech Support</h1>
+        <p>Your trusted partner in IT solutions.</p>
     </section>
 
-    <!-- Services Section -->
-    <section class="section">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="service-grid">
-                <!-- Card 1 -->
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+        <h2>Our Services</h2>
+        <div class="carousel-container">
+            <div class="carousel-arrow left" onclick="moveCarousel(-1)">&#10094;</div>
+            <div class="carousel" id="carousel">
                 <div class="service-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Networking+Solutions" alt="Networking Solutions">
                     <div class="service-info">
@@ -300,23 +202,29 @@
                         <p>Secure, high-speed network setups tailored to your needs.</p>
                     </div>
                 </div>
-                <!-- Card 2 -->
                 <div class="service-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Hardware+Recommendations" alt="Hardware Recommendations">
                     <div class="service-info">
                         <h3>Bespoke Hardware</h3>
-                        <p>Understanding your requirements we provide bespoke hardware recommendations that are sure to meet your needs with a mindfulness to remaining cost-effective.</p>
+                        <p>Personalized hardware recommendations that meet your needs.</p>
                     </div>
                 </div>
-                <!-- Card 3 -->
                 <div class="service-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Cybersecurity+Training" alt="Cybersecurity Training">
                     <div class="service-info">
-                        <h3>Cybersecurity Made Simple</h3>
-                        <p>We simplify your cybersecurity and offer personalized training to you and your team to protect against rising cyber threats.</p>
+                        <h3>Cybersecurity Training</h3>
+                        <p>Personalized training to protect against cyber threats.</p>
                     </div>
-                </div> 
+                </div>
+                <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Domain+Configuration" alt="Domain Configuration">
+                    <div class="service-info">
+                        <h3>Domain Configuration</h3>
+                        <p>Complete setup and management for your web domains.</p>
+                    </div>
+                </div>
             </div>
+            <div class="carousel-arrow right" onclick="moveCarousel(1)">&#10095;</div>
         </div>
     </section>
 
@@ -326,45 +234,64 @@
     </footer>
 
     <script>
-        // JavaScript for Navbar Toggle
-        function toggleNavbar() {
-            const navbarLinks = document.querySelector('.navbar-links');
-            navbarLinks.classList.toggle('active');
+        // Emoji Setup
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.width = 100;
+        canvas.height = 100;
+        document.getElementById("emojiCanvas").appendChild(canvas);
+
+        function drawCircleBorder() {
+            context.clearRect(0, 0, 100, 100);
+            context.lineWidth = 4;
+            context.strokeStyle = "#00FFC8";
+            context.beginPath();
+            context.arc(50, 50, 48, 0, 2 * Math.PI);
+            context.stroke();
         }
+        drawCircleBorder();
 
-        // Emoji Expression Change on Hover
-        const emoji = document.getElementById('emoji');
-        const links = document.querySelectorAll('.navbar-links a');
+        // Add eyes and mouth
+        const leftEye = document.createElement("div");
+        const rightEye = document.createElement("div");
+        const mouth = document.createElement("div");
+        leftEye.classList.add("emoji-eye", "left");
+        rightEye.classList.add("emoji-eye", "right");
+        mouth.classList.add("emoji-mouth");
+        document.getElementById("emojiCanvas").appendChild(leftEye);
+        document.getElementById("emojiCanvas").appendChild(rightEye);
+        document.getElementById("emojiCanvas").appendChild(mouth);
 
-        links.forEach(link => {
-            link.addEventListener('mouseover', () => {
-                // Change emoji to happy expression
-                emoji.innerHTML = `
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="mouth"></div><div class="mouth"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                `;
-            });
-
-            link.addEventListener('mouseout', () => {
-                // Change emoji back to surprised expression
-                emoji.innerHTML = `
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="eye"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                    <div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div><div class="border"></div>
-                `;
-            });
+        // Eyes movement effect
+        document.addEventListener("mousemove", (e) => {
+            const emojiRect = canvas.getBoundingClientRect();
+            const emojiCenterX = emojiRect.left + emojiRect.width / 2;
+            const emojiCenterY = emojiRect.top + emojiRect.height / 2;
+            const angleLeftEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX - 10);
+            const angleRightEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX + 10);
+            leftEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleLeftEye) * 10}px, ${Math.sin(angleLeftEye) * 10}px)`;
+            rightEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleRightEye) * 10}px, ${Math.sin(angleRightEye) * 10}px)`;
         });
+
+        // Carousel Functionality
+        let currentSlide = 0;
+
+        function moveCarousel(direction) {
+            const totalSlides = document.querySelectorAll(".service-card").length;
+            const maxSlides = totalSlides - 3; // 3 visible at a time
+
+            currentSlide += direction;
+
+            // Loop the slides
+            if (currentSlide < 0) {
+                currentSlide = maxSlides;
+            } else if (currentSlide > maxSlides) {
+                currentSlide = 0;
+            }
+
+            const carousel = document.getElementById("carousel");
+            carousel.style.transform = `translateX(-${currentSlide * 310}px)`; // 310 to account for card width + margin
+        }
     </script>
 </body>
 </html>
