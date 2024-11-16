@@ -25,7 +25,6 @@
             height: 200px;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
-            text-align: center;
         }
 
         .hero-title {
@@ -38,6 +37,8 @@
             position: relative;
             width: 100px;
             height: 100px;
+            background-color: #1A3457;
+            border-radius: 50%;
         }
 
         .emoji-eye {
@@ -50,7 +51,7 @@
 
         .emoji-eye.left {
             top: 35px;
-            left: 30px;
+            left: 25px;
         }
 
         .emoji-eye.right {
@@ -85,23 +86,22 @@
             transition: transform 0.5s ease-in-out;
         }
 
-        /* Increased height for cards */
+        /* Service Card Styling */
         .service-card {
             width: 300px;
-            height: 350px; /* Increased height */
+            height: 370px;
             margin: 0 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             background-color: #1A3457;
             color: #F4F4F4;
             flex-shrink: 0;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
             text-align: center;
-            padding-bottom: 20px; /* Padding at the bottom */
+            padding: 20px;
         }
 
         .service-card img {
@@ -122,12 +122,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
         .service-button:hover {
             background-color: #F4F4F4;
-            color: #1A3457;
         }
 
         .carousel-arrow {
@@ -144,7 +143,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1;
         }
 
         .carousel-arrow.left {
@@ -182,7 +180,7 @@
                     <img src="https://via.placeholder.com/300x200.png?text=Networking+Solutions" alt="Networking Solutions">
                     <div class="service-info">
                         <h3>Networking Solutions</h3>
-                        <p>Secure, high-speed network setups tailored to your needs. We specialise in ensuring seamless connectivity, robust security, and future-proof infrastructure to support your business.</p>
+                        <p>Secure, high-speed network setups tailored to your needs.</p>
                         <button class="service-button">Learn More</button>
                     </div>
                 </div>
@@ -190,7 +188,7 @@
                     <img src="https://via.placeholder.com/300x200.png?text=Cloud+Solutions" alt="Cloud Solutions">
                     <div class="service-info">
                         <h3>Cloud Solutions</h3>
-                        <p>Flexible cloud storage and computing solutions. We help businesses scale efficiently with cloud-based services, offering secure data storage and reliable computing power tailored to your requirements.</p>
+                        <p>Flexible cloud storage and computing solutions.</p>
                         <button class="service-button">Learn More</button>
                     </div>
                 </div>
@@ -198,7 +196,7 @@
                     <img src="https://via.placeholder.com/300x200.png?text=IT+Consulting" alt="IT Consulting">
                     <div class="service-info">
                         <h3>IT Consulting</h3>
-                        <p>Expert advice tailored to your business needs. Our IT consulting services are designed to optimise your technology strategy, enhance productivity, and solve complex challenges within your organisation.</p>
+                        <p>Expert advice tailored to your business needs.</p>
                         <button class="service-button">Learn More</button>
                     </div>
                 </div>
@@ -206,7 +204,7 @@
                     <img src="https://via.placeholder.com/300x200.png?text=Tech+Support" alt="Tech Support">
                     <div class="service-info">
                         <h3>Tech Support</h3>
-                        <p>Reliable tech support services to keep your systems running smoothly. We offer 24/7 assistance for all your hardware and software issues, ensuring minimal downtime and maximum productivity.</p>
+                        <p>Reliable tech support to keep your systems running smoothly.</p>
                         <button class="service-button">Learn More</button>
                     </div>
                 </div>
@@ -227,35 +225,17 @@
 
         function moveCarousel(direction) {
             const totalSlides = cards.length;
-            currentSlide += direction;
-            if (currentSlide >= totalSlides) currentSlide = 0;
-            else if (currentSlide < 0) currentSlide = totalSlides - 1;
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
             carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
         }
 
         // Emoji Setup
         const emojiCanvas = document.getElementById("emojiCanvas");
-        const leftEye = document.createElement("div");
-        const rightEye = document.createElement("div");
-        const mouth = document.createElement("div");
-
-        leftEye.className = "emoji-eye left";
-        rightEye.className = "emoji-eye right";
-        mouth.className = "emoji-mouth";
-
-        emojiCanvas.appendChild(leftEye);
-        emojiCanvas.appendChild(rightEye);
-        emojiCanvas.appendChild(mouth);
-
-        document.addEventListener("mousemove", (e) => {
-            const rect = emojiCanvas.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const angleLeft = Math.atan2(e.clientY - centerY, e.clientX - centerX + 10);
-            const angleRight = Math.atan2(e.clientY - centerY, e.clientX - centerX - 10);
-            leftEye.style.transform = `translate(${Math.cos(angleLeft) * 6}px, ${Math.sin(angleLeft) * 6}px)`;
-            rightEye.style.transform = `translate(${Math.cos(angleRight) * 6}px, ${Math.sin(angleRight) * 6}px)`;
-        });
+        emojiCanvas.innerHTML = `
+            <div class="emoji-eye left"></div>
+            <div class="emoji-eye right"></div>
+            <div class="emoji-mouth"></div>
+        `;
     </script>
 </body>
 </html>
