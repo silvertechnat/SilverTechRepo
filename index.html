@@ -164,66 +164,25 @@
     <div class="service-card">
         <h3>Networking Solutions</h3>
 
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centered Spinning Globe in Card</title>
-  <style>
-    /* Card styles */
-    .card {
-      width: 300px; /* Width of the card */
-      height: 300px; /* Height of the card */
-      border: 2px solid #00FFC8; /* Border color */
-      border-radius: 10px; /* Rounded corners */
-      display: flex; /* Flexbox to center content */
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
-      background-color: #1e1e1e; /* Background color of the card */
-      overflow: hidden; /* To ensure content stays within card */
-    }
-
-    /* SVG Spinning Globe */
-    .networking-icon {
-      width: 80px; /* Set the size of the globe */
-      height: 80px;
-      transform-origin: center center; /* Set the origin of the rotation */
-    }
-
-    .networking-icon:hover {
-      animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-      100% {
-        transform: rotate(360deg); /* Spin around its axis */
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <!-- Globe SVG centered inside the card -->
-    <svg width="100" height="100" viewBox="0 0 100 100" class="networking-icon">
-      <!-- Outer Circle (Globe) -->
-      <circle cx="50" cy="50" r="40" stroke="#00FFC8" stroke-width="3" fill="none" />
-
-      <!-- Abstract country-like shapes (random lines representing continents or countries) -->
-      <path d="M30,25 Q50,15 70,30 Q60,50 50,50 Q40,45 30,45 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-      <path d="M50,50 Q60,55 75,45 Q70,65 50,60 Q40,55 40,50 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-      <path d="M30,50 Q20,70 50,75 Q40,60 30,50 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-      <path d="M50,50 Q55,35 65,60 Q60,70 50,50 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-      <path d="M45,45 Q40,35 35,45 Q25,40 35,30 Q40,20 45,30 Q50,25 50,40 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-
-      <!-- Optional diagonal crossing lines for the globe effect -->
-      <line x1="10" y1="30" x2="90" y2="70" stroke="#00FFC8" stroke-width="2" />
-      <line x1="10" y1="70" x2="90" y2="30" stroke="#00FFC8" stroke-width="2" />
-    </svg>
-  </div>
-</body>
-</html>
-
+        <svg width="100" height="100" viewBox="0 0 100 100" class="networking-icon">
+            <!-- Outline of the globe -->
+            <circle cx="50" cy="50" r="45" stroke="#00FFC8" stroke-width="3" fill="none" />
+            
+            <!-- Basic continents -->
+            <path d="M50,5 Q65,20 50,35 Q35,50 20,65 Q5,80 20,95 Q35,110 50,95 Q65,80 80,65 Q95,50 80,35 Q65,20 50,5 Z" 
+                  stroke="#00FFC8" stroke-width="2" fill="none" />
+            <path d="M50,5 Q65,30 50,55 Q35,80 20,105" stroke="#00FFC8" stroke-width="2" fill="none" />
+        </svg>
+        
+        <style>
+        .networking-icon:hover {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+        
                     
         <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
     </div>
