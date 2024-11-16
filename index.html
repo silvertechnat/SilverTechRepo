@@ -27,6 +27,7 @@
             height: 200px;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
+            text-align: center;
         }
 
         .hero-title {
@@ -46,9 +47,6 @@
             background-color: #00FFC8;
             border-radius: 50%;
             position: absolute;
-            top: 0;
-            left: 0;
-            border: 5px solid #0F213E;
         }
 
         .emoji-eye {
@@ -110,28 +108,21 @@
         }
 
         .service-card {
-            width: 320px;
-            height: 350px; /* Increased height for more text */
+            width: 300px;
+            height: 250px;
             margin: 0 10px;
             border-radius: 10px;
             background-color: #1A3457;
             color: #F4F4F4;
             flex-shrink: 0;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .service-info {
-            padding: 20px;
-        }
-
-        .service-info h3 {
-            margin: 0;
-        }
-
-        .service-info p {
-            margin: 10px 0 0;
+            padding: 10px;
         }
 
         .carousel-arrow {
@@ -150,21 +141,9 @@
             right: -20px;
         }
 
-        /* Footer Contact Link */
-        .contact-footer {
-            margin: 60px 0;
-            text-align: center;
-        }
-
-        .contact-button {
-            background-color: #00FFC8;
-            color: #0F213E;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            text-decoration: none;
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -174,6 +153,10 @@
     <header class="header">
         <div class="emoji-canvas" id="emojiCanvas"></div>
         <h1 class="hero-title">Silver Tech Support</h1>
+        <ul class="navbar-links">
+            <li><a href="#carousel">Services</a></li>
+            <li><a href="mailto:help@silvertechsupport.uk?subject=Click from Website">Contact</a></li>
+        </ul>
     </header>
 
     <!-- Carousel Section -->
@@ -183,44 +166,29 @@
             <div class="carousel-arrow left" onclick="moveCarousel(-1)">&#10094;</div>
             <div class="carousel" id="carouselInner">
                 <div class="service-card">
-                    <div class="service-info">
-                        <h3>Networking Solutions</h3>
-                        <p>We provide secure, high-speed network setups, ensuring your business stays connected seamlessly. From Wi-Fi optimization to VPN setups, we've got you covered.</p>
-                    </div>
+                    <h3>Networking Solutions</h3>
+                    <p>Secure, high-speed network setups.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-info">
-                        <h3>Bespoke Hardware</h3>
-                        <p>Personalized hardware recommendations based on your specific needs. Whether it's a new workstation or server, we help you choose the best technology.</p>
-                    </div>
+                    <h3>Bespoke Hardware</h3>
+                    <p>Personalied hardware recommendations.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-info">
-                        <h3>Cybersecurity Training</h3>
-                        <p>Comprehensive training to protect your staff from cyber threats. We offer hands-on sessions to enhance security awareness and practices.</p>
-                    </div>
+                    <h3>Cybersecurity Training</h3>
+                    <p>Protect against cyber threats.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-info">
-                        <h3>Domain Configuration</h3>
-                        <p>Complete setup and management of your web domains, ensuring smooth and secure configurations for your online presence.</p>
-                    </div>
+                    <h3>Domain Configuration</h3>
+                    <p>Setup and management for your web domains.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-info">
-                        <h3>Cloud Solutions</h3>
-                        <p>Leverage our cloud solutions for flexible storage and computing power. Secure, scalable, and optimized for your business needs.</p>
-                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Flexible cloud storage solutions.</p>
                 </div>
             </div>
             <div class="carousel-arrow right" onclick="moveCarousel(1)">&#10095;</div>
         </div>
     </section>
-
-    <!-- Footer Contact Link -->
-    <div class="contact-footer">
-        <a href="mailto:help@silvertechsupport.uk?subject=Click from Website" class="contact-button">Contact Us</a>
-    </div>
 
     <script>
         // Draw Emoji Eyes and Mouth
@@ -241,11 +209,23 @@
         emojiCanvas.appendChild(rightEye);
         emojiCanvas.appendChild(mouth);
 
+        document.addEventListener("mousemove", (e) => {
+            const rect = emojiCanvas.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const angleLeft = Math.atan2(e.clientY - centerY, e.clientX - centerX + 10);
+            const angleRight = Math.atan2(e.clientY - centerY, e.clientX - centerX - 10);
+            
+            leftEye.style.transform = `translate(${Math.cos(angleLeft) * 5}px, ${Math.sin(angleLeft) * 5}px)`;
+            rightEye.style.transform = `translate(${Math.cos(angleRight) * 5}px, ${Math.sin(angleRight) * 5}px)`;
+        });
+
         // Carousel Functionality
         let currentSlide = 0;
         function moveCarousel(direction) {
             const carousel = document.getElementById("carouselInner");
-            const cardWidth = 340; 
+            const cardWidth = 320; 
             const totalCards = carousel.children.length;
 
             currentSlide += direction;
