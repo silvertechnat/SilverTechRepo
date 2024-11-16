@@ -62,12 +62,21 @@
             left: 60px;
         }
 
-        .emoji-eyes-cute {
+        .emoji-eyes-cute-left {
             position: absolute;
-            top: 32px;
-            left: 22px;
+            top: 30px;
+            left: 18px;
             font-size: 24px;
-            font-weight: bold;
+            color: #00FFC8;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .emoji-eyes-cute-right {
+            position: absolute;
+            top: 30px;
+            left: 55px;
+            font-size: 24px;
             color: #00FFC8;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -93,13 +102,13 @@
             width: 20px;
             height: 10px;
             background-color: pink;
-            border-radius: 10px 10px 0 0;
+            border-radius: 0 0 10px 10px;
             top: 75px;
             left: 40px;
             display: none;
         }
 
-        /* Carousel Styling */
+        /* Carousel Section Styling */
         .carousel-section {
             width: 100%;
             max-width: 800px;
@@ -162,7 +171,8 @@
             <div class="emoji-eye right" id="rightEye"></div>
             <div class="emoji-mouth" id="emojiMouth"></div>
             <div class="emoji-tongue" id="emojiTongue"></div>
-            <div class="emoji-eyes-cute" id="emojiEyesCute">><</div>
+            <div class="emoji-eyes-cute-left" id="emojiEyesLeft">&gt;</div>
+            <div class="emoji-eyes-cute-right" id="emojiEyesRight">&lt;</div>
         </div>
         <h1 class="hero-title">Silver Tech Support</h1>
     </header>
@@ -176,7 +186,6 @@
                     <img src="https://via.placeholder.com/300x200.png?text=Networking+Solutions" alt="Networking Solutions">
                     <div class="service-info">
                         <h3>Networking Solutions</h3>
-                        <p>Secure, high-speed network setups tailored to your needs.</p>
                         <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                     </div>
                 </div>
@@ -184,7 +193,13 @@
                     <img src="https://via.placeholder.com/300x200.png?text=Cloud+Solutions" alt="Cloud Solutions">
                     <div class="service-info">
                         <h3>Cloud Solutions</h3>
-                        <p>Flexible cloud storage and computing solutions.</p>
+                        <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=IT+Consulting" alt="IT Consulting">
+                    <div class="service-info">
+                        <h3>IT Consulting</h3>
                         <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                     </div>
                 </div>
@@ -201,7 +216,8 @@
         const rightEye = document.getElementById("rightEye");
         const emojiMouth = document.getElementById("emojiMouth");
         const emojiTongue = document.getElementById("emojiTongue");
-        const emojiEyesCute = document.getElementById("emojiEyesCute");
+        const emojiEyesLeft = document.getElementById("emojiEyesLeft");
+        const emojiEyesRight = document.getElementById("emojiEyesRight");
 
         document.addEventListener("mousemove", (e) => {
             const x = (e.clientX / window.innerWidth) * 30 - 15;
@@ -209,14 +225,15 @@
             leftEye.style.transform = `translate(${x}px, ${y}px)`;
             rightEye.style.transform = `translate(${x}px, ${y}px)`;
 
-            const isNearTopRight = e.clientX > window.innerWidth - 100 && e.clientY < 100;
-            if (isNearTopRight) {
-                emojiEyesCute.style.opacity = 1;
+            if (e.clientX > window.innerWidth - 100 && e.clientY < 100) {
+                emojiEyesLeft.style.opacity = 1;
+                emojiEyesRight.style.opacity = 1;
                 leftEye.style.opacity = 0;
                 rightEye.style.opacity = 0;
                 emojiTongue.style.display = "block";
             } else {
-                emojiEyesCute.style.opacity = 0;
+                emojiEyesLeft.style.opacity = 0;
+                emojiEyesRight.style.opacity = 0;
                 leftEye.style.opacity = 1;
                 rightEye.style.opacity = 1;
                 emojiTongue.style.display = "none";
