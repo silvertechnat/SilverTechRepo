@@ -89,7 +89,7 @@
         /* Service Card Styling */
         .service-card {
             width: 300px;
-            height: 370px;
+            height: 400px; /* Increased height for more content */
             margin: 0 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -200,14 +200,6 @@
                         <button class="service-button">Learn More</button>
                     </div>
                 </div>
-                <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Tech+Support" alt="Tech Support">
-                    <div class="service-info">
-                        <h3>Tech Support</h3>
-                        <p>Reliable tech support to keep your systems running smoothly.</p>
-                        <button class="service-button">Learn More</button>
-                    </div>
-                </div>
             </div>
             <div class="carousel-arrow right" onclick="moveCarousel(1)">&#10095;</div>
         </div>
@@ -229,13 +221,28 @@
             carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
         }
 
-        // Emoji Setup
+        // Emoji Eye Tracking
         const emojiCanvas = document.getElementById("emojiCanvas");
         emojiCanvas.innerHTML = `
-            <div class="emoji-eye left"></div>
-            <div class="emoji-eye right"></div>
+            <div class="emoji-eye left" id="leftEye"></div>
+            <div class="emoji-eye right" id="rightEye"></div>
             <div class="emoji-mouth"></div>
         `;
+
+        const leftEye = document.getElementById("leftEye");
+        const rightEye = document.getElementById("rightEye");
+
+        document.addEventListener("mousemove", (event) => {
+            const rect = emojiCanvas.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const angleLeft = Math.atan2(event.clientY - centerY, event.clientX - centerX + 15);
+            const angleRight = Math.atan2(event.clientY - centerY, event.clientX - centerX - 15);
+
+            leftEye.style.transform = `translate(${Math.cos(angleLeft) * 6}px, ${Math.sin(angleLeft) * 6}px)`;
+            rightEye.style.transform = `translate(${Math.cos(angleRight) * 6}px, ${Math.sin(angleRight) * 6}px)`;
+        });
     </script>
 </body>
 </html>
