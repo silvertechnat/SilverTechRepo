@@ -15,7 +15,6 @@
             color: #F4F4F4;
         }
 
-        /* Header Styling */
         .header {
             display: flex;
             align-items: center;
@@ -31,7 +30,6 @@
             font-size: 2.5em;
         }
 
-        /* Emoji Styling */
         .emoji-canvas {
             position: relative;
             width: 100px;
@@ -49,7 +47,7 @@
             height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .emoji-eye.left {
@@ -64,49 +62,50 @@
 
         .emoji-eyes-cute {
             position: absolute;
-            font-size: 24px;
+            font-size: 20px;
             color: #00FFC8;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .emoji-eyes-cute.left {
-            top: 30px;
+            top: 32px;
             left: 22px;
         }
 
         .emoji-eyes-cute.right {
-            top: 30px;
-            left: 57px;
+            top: 32px;
+            left: 58px;
         }
 
         .emoji-mouth {
             position: absolute;
-            width: 40px;
-            height: 8px;
+            width: 35px;
+            height: 5px;
             background-color: #00FFC8;
-            border-radius: 0 0 20px 20px;
-            top: 65px;
-            left: 30px;
+            border-radius: 0;
+            top: 70px;
+            left: 33px;
             transition: all 0.3s ease;
         }
 
         .emoji-mouth.smile {
-            border-bottom: 3px solid #00FFC8;
+            border: none;
+            border-bottom: 4px solid #00FFC8;
+            border-radius: 0 0 20px 20px;
         }
 
         .emoji-tongue {
             position: absolute;
-            width: 25px;
-            height: 15px;
+            width: 30px;
+            height: 20px;
             background-color: pink;
-            border-radius: 0 0 15px 15px;
-            top: 80px;
-            left: 38px;
+            border-radius: 0 0 30px 30px;
+            top: 82px;
+            left: 35px;
             display: none;
         }
 
-        /* Carousel Section Styling */
         .carousel-section {
             width: 100%;
             max-width: 800px;
@@ -180,17 +179,15 @@
         <div class="carousel" id="carousel">
             <div class="service-card">
                 <img src="https://via.placeholder.com/240x180.png?text=Networking+Solutions" alt="Networking Solutions">
-                <div class="service-info">
-                    <h3>Networking Solutions</h3>
-                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-                </div>
+                <h3>Networking Solutions</h3>
             </div>
             <div class="service-card">
                 <img src="https://via.placeholder.com/240x180.png?text=Cloud+Solutions" alt="Cloud Solutions">
-                <div class="service-info">
-                    <h3>Cloud Solutions</h3>
-                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-                </div>
+                <h3>Cloud Solutions</h3>
+            </div>
+            <div class="service-card">
+                <img src="https://via.placeholder.com/240x180.png?text=Tech+Support" alt="Tech Support">
+                <h3>Tech Support</h3>
             </div>
         </div>
     </div>
@@ -205,8 +202,8 @@
     const emojiEyesRight = document.getElementById("emojiEyesRight");
 
     document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth) * 30 - 15;
-        const y = (e.clientY / window.innerHeight) * 30 - 15;
+        const x = (e.clientX / window.innerWidth) * 20 - 10;
+        const y = (e.clientY / window.innerHeight) * 20 - 10;
         leftEye.style.transform = `translate(${x}px, ${y}px)`;
         rightEye.style.transform = `translate(${x}px, ${y}px)`;
 
