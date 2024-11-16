@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
+        /* Base Styles */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -15,6 +16,7 @@
             color: #F4F4F4;
         }
 
+        /* Navbar Styling */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -22,6 +24,7 @@
             width: 100%;
             padding: 20px;
             background-color: #0F213E;
+            color: #F4F4F4;
         }
 
         .navbar-links {
@@ -30,66 +33,115 @@
             gap: 20px;
         }
 
+        .navbar-links li {
+            display: inline;
+        }
+
         .navbar-links a {
             color: #F4F4F4;
             text-decoration: none;
             font-size: 18px;
+            position: relative;
         }
 
+        /* Emoji Canvas Styling */
+        .emoji-canvas {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .emoji-eye, .emoji-mouth {
+            position: absolute;
+            background-color: #00FFC8; /* Light teal green */
+            border-radius: 50%;
+        }
+
+        .emoji-eye {
+            width: 12px;
+            height: 12px;
+            box-shadow: 0 0 0 2px #0F213E; /* Dark border */
+        }
+
+        .emoji-eye.left {
+            top: 35px;
+            left: 25px; /* Adjusted for better positioning */
+        }
+
+        .emoji-eye.right {
+            top: 35px;
+            left: 60px; /* Adjusted for better positioning */
+        }
+
+        .emoji-mouth {
+            width: 30px;
+            height: 8px;
+            background-color: #00FFC8; /* Light teal green */
+            border-radius: 20px;
+            top: 65px;
+            left: 35px;
+            transform: rotate(0deg); /* Keep mouth flat */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        /* Hero Section */
         .hero-section {
-            display: flex;
-            align-items: center;
+            display: flex; /* Change to flex for alignment */
+            align-items: center; /* Center align items vertically */
             padding: 60px 20px;
-            text-align: center;
         }
 
         .hero-section h1 {
             font-size: 2.5em;
+            margin: 0; /* Remove default margin */
+            line-height: 1; /* Prevent spacing issues */
         }
 
         .hero-section p {
             font-size: 1.2em;
+            margin: 0; /* Remove default margin */
+            line-height: 1; /* Prevent spacing issues */
         }
 
+        /* Carousel Section */
         .carousel-section {
-            width: 100%;
-            max-width: 800px;
-            padding: 40px 20px;
+            width: 80%;
+            position: relative;
+            text-align: center;
+            padding: 60px 20px;
         }
 
         .carousel-container {
-            position: relative;
             overflow: hidden;
+            position: relative;
         }
 
         .carousel {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.5s ease-in-out; /* Smooth transition */
         }
 
         .service-card {
-            min-width: 80%;
-            max-width: 300px;
-            height: 250px;
+            width: 300px; /* Fixed width for uniformity */
+            height: 250px; /* Fixed height for consistent appearance */
             margin: 0 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             background-color: #1A3457;
             color: #F4F4F4;
+            text-align: left;
             flex-shrink: 0;
             overflow: hidden;
         }
 
         .service-card img {
             width: 100%;
-            height: 150px;
+            height: 150px; /* Adjusted height for consistent appearance */
             object-fit: cover;
         }
 
-        .service-info {
-            padding: 10px;
-        }
-
+        /* Carousel Arrows */
         .carousel-arrow {
             position: absolute;
             top: 50%;
@@ -104,7 +156,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1;
+            z-index: 1; /* Ensure arrows are above carousel */
         }
 
         .carousel-arrow.left {
@@ -115,27 +167,36 @@
             right: -20px;
         }
 
+        /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
             background-color: #0F213E;
+            color: #F4F4F4;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <header class="navbar">
+        <div class="emoji-canvas" id="emojiCanvas"></div>
         <ul class="navbar-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#" onmouseover="changeMouth(true)" onmouseout="resetMouth()">Home</a></li>
+            <li><a href="#" onmouseover="changeMouth(true)" onmouseout="resetMouth()">Services</a></li>
+            <li><a href="#" onmouseover="changeMouth(true)" onmouseout="resetMouth()">Contact</a></li>
         </ul>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero-section">
-        <h1>Silver Tech Support</h1>
-        <p>Your trusted partner in IT solutions.</p>
+        <div class="emoji-canvas" id="emojiCanvas"></div>
+        <div>
+            <h1>Silver Tech Support</h1>
+            <p>Your trusted partner in IT solutions.</p>
+        </div>
     </section>
 
+    <!-- Carousel Section -->
     <section class="carousel-section">
         <h2>Our Services</h2>
         <div class="carousel-container">
@@ -149,10 +210,38 @@
                     </div>
                 </div>
                 <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Hardware+Recommendations" alt="Hardware Recommendations">
+                    <div class="service-info">
+                        <h3>Bespoke Hardware</h3>
+                        <p>Personalized hardware recommendations that meet your needs.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Cybersecurity+Training" alt="Cybersecurity Training">
+                    <div class="service-info">
+                        <h3>Cybersecurity Training</h3>
+                        <p>Personalized training to protect against cyber threats.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Domain+Configuration" alt="Domain Configuration">
+                    <div class="service-info">
+                        <h3>Domain Configuration</h3>
+                        <p>Complete setup and management for your web domains.</p>
+                    </div>
+                </div>
+                <div class="service-card">
                     <img src="https://via.placeholder.com/300x200.png?text=Cloud+Solutions" alt="Cloud Solutions">
                     <div class="service-info">
                         <h3>Cloud Solutions</h3>
                         <p>Flexible cloud storage and computing solutions.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=IT+Consulting" alt="IT Consulting">
+                    <div class="service-info">
+                        <h3>IT Consulting</h3>
+                        <p>Expert advice tailored to your business needs.</p>
                     </div>
                 </div>
             </div>
@@ -160,46 +249,88 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <p>© 2024 Silver Tech Support. All rights reserved.</p>
     </footer>
 
     <script>
-        let currentSlide = 0;
-        const carousel = document.getElementById("carousel");
-        const cards = document.querySelectorAll(".service-card");
-        const cardWidth = cards[0].offsetWidth + 20;
+        // Emoji Setup
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        canvas.width = 100;
+        canvas.height = 100;
+        document.getElementById("emojiCanvas").appendChild(canvas);
 
-        function moveCarousel(direction) {
-            const totalSlides = cards.length;
-            currentSlide += direction;
-
-            // Wrap around continuously
-            if (currentSlide >= totalSlides) {
-                currentSlide = 0;
-            } else if (currentSlide < 0) {
-                currentSlide = totalSlides - 1;
-            }
-
-            carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+        function drawCircleBorder() {
+            context.lineWidth = 5;
+            context.strokeStyle = '#00FFC8';
+            context.beginPath();
+            context.arc(50, 50, 45, 0, Math.PI * 2);
+            context.stroke();
         }
 
-        // Emoji Eye Movement
-        const leftEye = document.querySelector(".emoji-eye.left");
-        const rightEye = document.querySelector(".emoji-eye.right");
-        const emojiCanvas = document.getElementById("emojiCanvas");
-        const rect = emojiCanvas.getBoundingClientRect();
+        drawCircleBorder();
 
+        // Create eyes and mouth
+        const leftEye = document.createElement("div");
+        const rightEye = document.createElement("div");
+        const mouth = document.createElement("div");
+
+        leftEye.className = "emoji-eye left";
+        rightEye.className = "emoji-eye right";
+        mouth.className = "emoji-mouth";
+
+        document.getElementById("emojiCanvas").appendChild(leftEye);
+        document.getElementById("emojiCanvas").appendChild(rightEye);
+        document.getElementById("emojiCanvas").appendChild(mouth);
+
+        // Mouse movement for eyes
+        const emojiRect = document.getElementById("emojiCanvas").getBoundingClientRect();
         document.addEventListener("mousemove", (e) => {
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+            const emojiCenterX = emojiRect.left + emojiRect.width / 2;
+            const emojiCenterY = emojiRect.top + emojiRect.height / 2;
 
-            const angleLeft = Math.atan2(e.clientY - centerY, e.clientX - centerX + 10);
-            const angleRight = Math.atan2(e.clientY - centerY, e.clientX - centerX - 10);
-
-            leftEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleLeft) * 6}px, ${Math.sin(angleLeft) * 6}px)`;
-            rightEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleRight) * 6}px, ${Math.sin(angleRight) * 6}px)`;
+            const angleLeftEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX + 10);
+            const angleRightEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX - 10);
+            leftEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleLeftEye) * 10}px, ${Math.sin(angleLeftEye) * 10}px)`;
+            rightEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleRightEye) * 10}px, ${Math.sin(angleRightEye) * 10}px)`;
         });
+
+        // Change mouth to smile
+        function changeMouth(smiling) {
+            mouth.style.transform = 'rotate(180deg)'; // Smile effect
+            mouth.style.transition = 'transform 0.3s'; // Smooth transition
+            setTimeout(resetMouth, 5000); // Reset after 5 seconds
+        }
+
+        // Reset mouth to flat line
+        function resetMouth() {
+            mouth.style.transform = 'rotate(0deg)'; // Flat mouth
+        }
+
+        // Carousel Functionality
+        let currentSlide = 0;
+
+        function moveCarousel(direction) {
+            const totalSlides = document.querySelectorAll(".service-card").length;
+            const maxVisibleSlides = 3; // Number of visible slides
+            const maxSlides = totalSlides; // Maximum index for sliding
+            const cardWidth = 320; // Width of each card including margin
+
+            // Update currentSlide based on direction
+            currentSlide += direction;
+
+            // Loop back to first card when reaching the end
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0; // Loop back to the first card
+            } else if (currentSlide < 0) {
+                currentSlide = totalSlides - 1; // Loop back to the last card
+            }
+
+            const carousel = document.getElementById("carousel");
+            carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`; // Update the transform to move carousel
+        }
     </script>
 </body>
 </html>
