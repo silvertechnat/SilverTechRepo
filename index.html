@@ -7,21 +7,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin: 0;
             background-color: #0F213E;
             color: #F4F4F4;
         }
 
+        /* Header Styling */
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
-            width: 100%;
-            height: 200px;
+            padding: 20px;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
         }
@@ -30,6 +27,7 @@
             font-size: 2.5em;
         }
 
+        /* Emoji Styling */
         .emoji-canvas {
             position: relative;
             width: 100px;
@@ -50,15 +48,8 @@
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        .emoji-eye.left {
-            top: 35px;
-            left: 25px;
-        }
-
-        .emoji-eye.right {
-            top: 35px;
-            left: 60px;
-        }
+        .emoji-eye.left { top: 35px; left: 25px; }
+        .emoji-eye.right { top: 35px; left: 60px; }
 
         .emoji-eyes-cute {
             position: absolute;
@@ -68,15 +59,8 @@
             transition: opacity 0.3s ease;
         }
 
-        .emoji-eyes-cute.left {
-            top: 32px;
-            left: 22px;
-        }
-
-        .emoji-eyes-cute.right {
-            top: 32px;
-            left: 58px;
-        }
+        .emoji-eyes-cute.left { top: 32px; left: 22px; }
+        .emoji-eyes-cute.right { top: 32px; left: 58px; }
 
         .emoji-mouth {
             position: absolute;
@@ -98,51 +82,59 @@
         .emoji-tongue {
             position: absolute;
             width: 30px;
-            height: 20px;
+            height: 25px;
             background-color: pink;
-            border-radius: 0 0 30px 30px;
+            border-radius: 0 0 20px 20px;
             top: 82px;
             left: 35px;
-            display: none;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
         }
 
-        .carousel-section {
-            width: 100%;
-            max-width: 800px;
-            padding: 40px 20px;
+        /* Service Cards Section */
+        .services-section {
+            background: radial-gradient(#1A3457 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding: 60px 20px;
+            transition: background-size 1s, background-color 1s;
         }
 
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
+        .services-section:hover {
+            background-size: 50px 50px;
+            background-color: #FFFFFF;
         }
 
-        .carousel {
+        .services-container {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .service-card {
-            width: 240px;
-            height: 400px;
-            margin: 0 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             background-color: #1A3457;
-            color: #F4F4F4;
-            text-align: center;
+            width: 240px;
+            height: 420px;
             padding: 20px;
-            flex-shrink: 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
         }
 
         .service-card img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
+            border-radius: 5px;
         }
 
         .service-info {
-            padding: 10px;
+            flex-grow: 1;
         }
 
         .service-button {
@@ -152,6 +144,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         .service-button:hover {
@@ -173,62 +166,50 @@
     <h1 class="hero-title">Silver Tech Support</h1>
 </header>
 
-<section class="carousel-section">
+<section class="services-section">
     <h2>Our Services</h2>
-    <div class="carousel-container">
-        <div class="carousel" id="carousel">
-            <div class="service-card">
-                <img src="https://via.placeholder.com/240x180.png?text=Networking+Solutions" alt="Networking Solutions">
+    <div class="services-container">
+        <div class="service-card">
+            <img src="https://via.placeholder.com/240x160.png?text=Networking+Solutions" alt="Networking Solutions">
+            <div class="service-info">
                 <h3>Networking Solutions</h3>
+                <p>Secure, high-speed network setups tailored to your needs.</p>
+                <button class="service-button">Learn More</button>
             </div>
-            <div class="service-card">
-                <img src="https://via.placeholder.com/240x180.png?text=Cloud+Solutions" alt="Cloud Solutions">
+        </div>
+        <div class="service-card">
+            <img src="https://via.placeholder.com/240x160.png?text=Cloud+Solutions" alt="Cloud Solutions">
+            <div class="service-info">
                 <h3>Cloud Solutions</h3>
+                <p>Flexible cloud storage and computing solutions.</p>
+                <button class="service-button">Learn More</button>
             </div>
-            <div class="service-card">
-                <img src="https://via.placeholder.com/240x180.png?text=Tech+Support" alt="Tech Support">
-                <h3>Tech Support</h3>
+        </div>
+        <div class="service-card">
+            <img src="https://via.placeholder.com/240x160.png?text=IT+Consulting" alt="IT Consulting">
+            <div class="service-info">
+                <h3>IT Consulting</h3>
+                <p>Expert advice tailored to your business needs.</p>
+                <button class="service-button">Learn More</button>
             </div>
         </div>
     </div>
 </section>
 
 <script>
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
     const emojiMouth = document.getElementById("emojiMouth");
     const emojiTongue = document.getElementById("emojiTongue");
-    const emojiEyesLeft = document.getElementById("emojiEyesLeft");
-    const emojiEyesRight = document.getElementById("emojiEyesRight");
 
     document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth) * 20 - 10;
-        const y = (e.clientY / window.innerHeight) * 20 - 10;
-        leftEye.style.transform = `translate(${x}px, ${y}px)`;
-        rightEye.style.transform = `translate(${x}px, ${y}px)`;
-
         if (e.clientX > window.innerWidth - 100 && e.clientY < 100) {
-            emojiEyesLeft.style.opacity = 1;
-            emojiEyesRight.style.opacity = 1;
-            leftEye.style.opacity = 0;
-            rightEye.style.opacity = 0;
-            emojiTongue.style.display = "block";
+            emojiTongue.style.transform = "scaleY(1)";
         } else {
-            emojiEyesLeft.style.opacity = 0;
-            emojiEyesRight.style.opacity = 0;
-            leftEye.style.opacity = 1;
-            rightEye.style.opacity = 1;
-            emojiTongue.style.display = "none";
+            emojiTongue.style.transform = "scaleY(0)";
         }
     });
 
-    function makeSmile() {
-        emojiMouth.classList.add("smile");
-    }
-
-    function resetMouth() {
-        emojiMouth.classList.remove("smile");
-    }
+    function makeSmile() { emojiMouth.classList.add("smile"); }
+    function resetMouth() { emojiMouth.classList.remove("smile"); }
 </script>
 </body>
 </html>
