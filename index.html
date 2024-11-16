@@ -39,6 +39,12 @@
             height: 100px;
             background-color: #1A3457;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #00FFC8;
+            font-weight: bold;
         }
 
         .emoji-eye {
@@ -47,6 +53,7 @@
             height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
+            transition: transform 0.1s ease;
         }
 
         .emoji-eye.left {
@@ -61,30 +68,31 @@
 
         .emoji-mouth {
             position: absolute;
-            width: 30px;
-            height: 8px;
+            width: 40px;
+            height: 20px;
             background-color: #00FFC8;
-            border-radius: 0;
+            border-radius: 0 0 20px 20px;
             top: 65px;
-            left: 35px;
+            left: 30px;
             transition: all 0.3s ease;
         }
 
         .emoji-mouth.smile {
-            width: 50px;
+            width: 40px;
             height: 20px;
-            border-radius: 0 0 50px 50px;
-            top: 55px;
+            border-radius: 0 0 30px 30px;
+            top: 65px;
+            left: 30px;
         }
 
         .emoji-tongue {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 12px;
             background-color: #FF5F5F;
-            border-radius: 50%;
-            top: 80px;
-            left: 40px;
+            border-radius: 10px;
+            top: 85px;
+            left: 37px;
             display: none;
         }
 
@@ -147,8 +155,8 @@
     <!-- Header with Emoji and Title -->
     <header class="header">
         <div class="emoji-canvas" id="emojiCanvas">
-            <div class="emoji-eye left" id="leftEye"></div>
-            <div class="emoji-eye right" id="rightEye"></div>
+            <div class="emoji-eye left" id="leftEye">></div>
+            <div class="emoji-eye right" id="rightEye"><</div>
             <div class="emoji-mouth" id="emojiMouth"></div>
             <div class="emoji-tongue" id="emojiTongue"></div>
         </div>
@@ -188,15 +196,21 @@
     <script>
         const emojiMouth = document.getElementById("emojiMouth");
         const emojiTongue = document.getElementById("emojiTongue");
+        const leftEye = document.getElementById("leftEye");
+        const rightEye = document.getElementById("rightEye");
 
         document.addEventListener("mousemove", (event) => {
             const isNearTopRight = event.clientX > window.innerWidth - 100 && event.clientY < 100;
-            
+
             if (isNearTopRight) {
                 emojiMouth.classList.remove("smile");
                 emojiTongue.classList.add("show");
+                leftEye.textContent = ">";
+                rightEye.textContent = "<";
             } else {
                 emojiTongue.classList.remove("show");
+                leftEye.textContent = ">";
+                rightEye.textContent = "<";
             }
         });
 
