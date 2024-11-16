@@ -29,6 +29,12 @@
             font-size: 1.5em;
         }
 
+        .tagline {
+            margin-top: 10px;
+            font-size: 1em;
+            font-style: italic;
+        }
+
         /* Emoji Styles */
         .emoji-canvas {
             position: relative;
@@ -109,30 +115,34 @@
             flex-direction: column;
             justify-content: space-between;
             text-align: center;
-            height: 300px;
+            height: 350px;
         }
 
         .service-button {
-            display: none;
             background-color: #00FFC8;
             color: #1A3457;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-
-        .service-button.show {
-            display: block;
+            display: none;
             position: fixed;
             bottom: 20px;
             right: 20px;
         }
 
+        .service-button.show {
+            display: block;
+        }
+
+        .service-card:hover ~ .service-button,
+        .service-card:focus ~ .service-button {
+            display: block;
+        }
+
         .service-button:hover {
             background-color: #F4F4F4;
         }
-
     </style>
 </head>
 <body>
@@ -145,6 +155,7 @@
         <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
     <h4 class="hero-title">Silver Tech Support</h4>
+    <div class="tagline">Friendly local IT Advice in East Anglia</div>
 </header>
 
 <!-- Services Cards -->
@@ -152,27 +163,27 @@
     <!-- Service Cards -->
     <div class="service-card">
         <h3>Networking Solutions</h3>
-        <p>We configure networks so robust, they'll survive an office stampede... or at least a busy Monday morning!</p>
+        <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
     </div>
     <div class="service-card">
         <h3>Cloud Solutions</h3>
-        <p>Your data in the cloud, safe from coffee spills and office mishaps. Let’s keep it floating above!</p>
+        <p>Your data in the cloud, secured and always accessible with industry-leading tools for your business needs.</p>
     </div>
     <div class="service-card">
         <h3>IT Consulting</h3>
-        <p>We diagnose tech woes like a doctor, minus the awkward small talk. Let's strategise your IT needs.</p>
+        <p>We diagnose tech issues swiftly and efficiently, ensuring your systems run smoothly for optimal performance.</p>
     </div>
     <div class="service-card">
         <h3>Remote Technical Support</h3>
-        <p>Got an IT issue? We’ll fix it remotely while you enjoy your coffee. Fast, friendly, and no extra jargon.</p>
+        <p>Quickly resolve IT issues remotely, providing fast and friendly support without unnecessary jargon.</p>
     </div>
     <div class="service-card">
         <h3>Domain Configuration</h3>
-        <p>We set up your domains like a digital locksmith, ensuring everything’s secure and efficient—minus the fees!</p>
+        <p>Secure and efficient domain setups with industry-leading tools for small businesses.</p>
     </div>
     <div class="service-card">
         <h3>Microsoft 365 Management</h3>
-        <p>Boost productivity with a perfectly managed Microsoft 365 setup. We handle the boring stuff so you don’t have to.</p>
+        <p>Boost productivity with expertly managed Microsoft 365 setups, tailored to your business requirements.</p>
     </div>
 </div>
 
@@ -205,8 +216,10 @@
         }
     });
 
-    contactUsButton.addEventListener("mouseover", () => {
-        contactUsButton.classList.add("show");
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseover', () => {
+            contactUsButton.classList.add('show');
+        });
     });
 
     contactUsButton.addEventListener("mouseout", () => {
