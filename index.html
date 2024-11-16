@@ -163,11 +163,9 @@
         <div class="emoji-eyes-cute left" id="emojiEyesLeft">&gt;</div>
         <div class="emoji-eyes-cute right" id="emojiEyesRight">&lt;</div>
     </div>
-    <h1 class="hero-title">Silver Tech Support</h1>
 </header>
 
 <section class="services-section">
-    <h2>Our Services</h2>
     <div class="services-container">
         <div class="service-card">
             <img src="https://via.placeholder.com/240x160.png?text=Networking+Solutions" alt="Networking Solutions">
@@ -199,13 +197,19 @@
 <script>
     const emojiMouth = document.getElementById("emojiMouth");
     const emojiTongue = document.getElementById("emojiTongue");
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
 
+    // Make eyes follow the mouse
     document.addEventListener("mousemove", (e) => {
-        if (e.clientX > window.innerWidth - 100 && e.clientY < 100) {
-            emojiTongue.style.transform = "scaleY(1)";
-        } else {
-            emojiTongue.style.transform = "scaleY(0)";
-        }
+        const { clientX: x, clientY: y } = e;
+        const rect = emojiCanvas.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const angle = Math.atan2(y - centerY, x - centerX);
+
+        leftEye.style.transform = `translate(${Math.cos(angle) * 10}px, ${Math.sin(angle) * 10}px)`;
+        rightEye.style.transform = `translate(${Math.cos(angle) * 10}px, ${Math.sin(angle) * 10}px)`;
     });
 
     function makeSmile() { emojiMouth.classList.add("smile"); }
