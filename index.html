@@ -15,6 +15,7 @@
             color: #F4F4F4;
         }
 
+        /* Header Styling */
         .header {
             display: flex;
             align-items: center;
@@ -38,14 +39,18 @@
             height: 100px;
             background-color: #1A3457;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .emoji-eye {
             position: absolute;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
+            transition: transform 0.1s ease;
         }
 
         .emoji-eye.left {
@@ -60,41 +65,48 @@
 
         .emoji-mouth {
             position: absolute;
-            width: 30px;
-            height: 15px;
+            width: 40px;
+            height: 8px;
             background-color: #00FFC8;
-            border-radius: 0 0 50px 50px;
-            top: 60px;
-            left: 35px;
+            border-radius: 20px;
+            top: 65px;
+            left: 30px;
             transition: all 0.3s ease;
         }
 
         .emoji-mouth.smile {
-            border-radius: 0 0 50px 50px;
-            width: 30px;
-            height: 15px;
-            top: 58px;
+            width: 40px;
+            height: 8px;
+            border-radius: 0 0 20px 20px;
+            border-top: 3px solid transparent;
+            top: 65px;
+            left: 30px;
+            border-bottom: 3px solid #00FFC8;
         }
 
-        .emoji-tongue {
+        .emoji-eyes-cute {
+            font-size: 24px;
+            font-weight: bold;
             position: absolute;
-            width: 28px;
-            height: 15px;
-            background-color: #FF5F5F;
-            border-radius: 0 0 30px 30px;
-            top: 75px;
-            left: 36px;
+            top: 32px;
+            left: 22px;
             display: none;
         }
 
-        .emoji-tongue.show {
-            display: block;
-        }
-
+        /* Carousel Section Styling */
         .carousel-section {
             width: 100%;
             max-width: 800px;
             padding: 40px 20px;
+        }
+
+        .carousel-container {
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
 
         .service-card {
@@ -139,7 +151,7 @@
             <div class="emoji-eye left" id="leftEye"></div>
             <div class="emoji-eye right" id="rightEye"></div>
             <div class="emoji-mouth" id="emojiMouth"></div>
-            <div class="emoji-tongue" id="emojiTongue"></div>
+            <div class="emoji-eyes-cute" id="emojiEyesCute">><</div>
         </div>
         <div>
             <h1 class="hero-title">Silver Tech Support</h1>
@@ -149,16 +161,23 @@
     <!-- Carousel Section -->
     <section class="carousel-section">
         <h2>Our Services</h2>
-        <div class="carousel">
-            <div class="service-card">
-                <h3>Networking Solutions</h3>
-                <p>Secure, high-speed network setups.</p>
-                <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-            </div>
-            <div class="service-card">
-                <h3>Cloud Solutions</h3>
-                <p>Flexible cloud storage solutions.</p>
-                <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="service-card">
+                    <h3>Networking Solutions</h3>
+                    <p>Secure, high-speed network setups.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
+                </div>
+                <div class="service-card">
+                    <h3>Cloud Solutions</h3>
+                    <p>Flexible cloud storage solutions.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
+                </div>
+                <div class="service-card">
+                    <h3>IT Consulting</h3>
+                    <p>Expert advice tailored to your business.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
+                </div>
             </div>
         </div>
     </section>
@@ -169,33 +188,21 @@
 
     <script>
         const emojiMouth = document.getElementById("emojiMouth");
-        const emojiTongue = document.getElementById("emojiTongue");
         const leftEye = document.getElementById("leftEye");
         const rightEye = document.getElementById("rightEye");
-        const emojiCanvas = document.getElementById("emojiCanvas");
+        const emojiEyesCute = document.getElementById("emojiEyesCute");
 
         document.addEventListener("mousemove", (event) => {
             const isNearTopRight = event.clientX > window.innerWidth - 100 && event.clientY < 100;
-            
-            // Eye Tracking
-            const eyes = [leftEye, rightEye];
-            eyes.forEach(eye => {
-                const rect = eye.getBoundingClientRect();
-                const eyeX = rect.left + rect.width / 2;
-                const eyeY = rect.top + rect.height / 2;
-                const angle = Math.atan2(event.clientY - eyeY, event.clientX - eyeX);
-                eye.style.transform = `translate(${Math.cos(angle) * 5}px, ${Math.sin(angle) * 5}px)`;
-            });
 
             if (isNearTopRight) {
-                emojiMouth.classList.remove("smile");
-                emojiTongue.classList.add("show");
-                leftEye.textContent = ">";
-                rightEye.textContent = "<";
+                leftEye.style.display = 'none';
+                rightEye.style.display = 'none';
+                emojiEyesCute.style.display = 'block';
             } else {
-                emojiTongue.classList.remove("show");
-                leftEye.textContent = "";
-                rightEye.textContent = "";
+                leftEye.style.display = 'block';
+                rightEye.style.display = 'block';
+                emojiEyesCute.style.display = 'none';
             }
         });
 
