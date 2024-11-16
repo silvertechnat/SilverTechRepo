@@ -15,7 +15,7 @@
             color: #F4F4F4;
         }
 
-        /* Header Styling with Dot Matrix Background */
+        /* Header Styling */
         .header {
             display: flex;
             align-items: center;
@@ -62,11 +62,26 @@
         .emoji-mouth {
             position: absolute;
             width: 30px;
-            height: 8px;
+            height: 6px;
             background-color: #00FFC8;
             border-radius: 20px;
             top: 65px;
             left: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .emoji-mouth.smile {
+            width: 40px;
+            height: 20px;
+            border-radius: 40px 40px 0 0;
+            top: 55px;
+        }
+
+        .emoji-mouth.sad {
+            width: 40px;
+            height: 20px;
+            border-radius: 0 0 40px 40px;
+            top: 75px;
         }
 
         /* Carousel Section Styling */
@@ -89,29 +104,16 @@
         /* Service Card Styling */
         .service-card {
             width: 300px;
-            height: 400px; /* Increased height for more content */
+            height: 400px;
             margin: 0 10px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             background-color: #1A3457;
             color: #F4F4F4;
-            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             text-align: center;
             padding: 20px;
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        .service-info {
-            padding: 10px;
         }
 
         .service-button {
@@ -129,34 +131,9 @@
             background-color: #F4F4F4;
         }
 
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(15, 33, 62, 0.8);
-            color: #F4F4F4;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .carousel-arrow.left {
-            left: -20px;
-        }
-
-        .carousel-arrow.right {
-            right: -20px;
-        }
-
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: #0F213E;
         }
     </style>
 </head>
@@ -164,7 +141,11 @@
 
     <!-- Header with Emoji and Title -->
     <header class="header">
-        <div class="emoji-canvas" id="emojiCanvas"></div>
+        <div class="emoji-canvas" id="emojiCanvas">
+            <div class="emoji-eye left" id="leftEye"></div>
+            <div class="emoji-eye right" id="rightEye"></div>
+            <div class="emoji-mouth" id="emojiMouth"></div>
+        </div>
         <div>
             <h1 class="hero-title">Silver Tech Support</h1>
         </div>
@@ -174,34 +155,23 @@
     <section class="carousel-section">
         <h2>Our Services</h2>
         <div class="carousel-container">
-            <div class="carousel-arrow left" onclick="moveCarousel(-1)">&#10094;</div>
             <div class="carousel" id="carousel">
                 <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Networking+Solutions" alt="Networking Solutions">
-                    <div class="service-info">
-                        <h3>Networking Solutions</h3>
-                        <p>Secure, high-speed network setups tailored to your needs.</p>
-                        <button class="service-button">Learn More</button>
-                    </div>
+                    <h3>Networking Solutions</h3>
+                    <p>Secure, high-speed network setups.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
                 <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Cloud+Solutions" alt="Cloud Solutions">
-                    <div class="service-info">
-                        <h3>Cloud Solutions</h3>
-                        <p>Flexible cloud storage and computing solutions.</p>
-                        <button class="service-button">Learn More</button>
-                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Flexible cloud storage and computing solutions.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
                 <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=IT+Consulting" alt="IT Consulting">
-                    <div class="service-info">
-                        <h3>IT Consulting</h3>
-                        <p>Expert advice tailored to your business needs.</p>
-                        <button class="service-button">Learn More</button>
-                    </div>
+                    <h3>IT Consulting</h3>
+                    <p>Expert advice tailored to your business needs.</p>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
             </div>
-            <div class="carousel-arrow right" onclick="moveCarousel(1)">&#10095;</div>
         </div>
     </section>
 
@@ -210,27 +180,10 @@
     </footer>
 
     <script>
-        let currentSlide = 0;
-        const carousel = document.getElementById("carousel");
-        const cards = document.querySelectorAll(".service-card");
-        const cardWidth = 300 + 20;
-
-        function moveCarousel(direction) {
-            const totalSlides = cards.length;
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-        }
-
-        // Emoji Eye Tracking
         const emojiCanvas = document.getElementById("emojiCanvas");
-        emojiCanvas.innerHTML = `
-            <div class="emoji-eye left" id="leftEye"></div>
-            <div class="emoji-eye right" id="rightEye"></div>
-            <div class="emoji-mouth"></div>
-        `;
-
         const leftEye = document.getElementById("leftEye");
         const rightEye = document.getElementById("rightEye");
+        const emojiMouth = document.getElementById("emojiMouth");
 
         document.addEventListener("mousemove", (event) => {
             const rect = emojiCanvas.getBoundingClientRect();
@@ -242,7 +195,23 @@
 
             leftEye.style.transform = `translate(${Math.cos(angleLeft) * 6}px, ${Math.sin(angleLeft) * 6}px)`;
             rightEye.style.transform = `translate(${Math.cos(angleRight) * 6}px, ${Math.sin(angleRight) * 6}px)`;
+
+            // Sad face if mouse is in top-right corner
+            if (event.clientX > window.innerWidth - 100 && event.clientY < 100) {
+                emojiMouth.classList.add("sad");
+            } else {
+                emojiMouth.classList.remove("sad");
+            }
         });
+
+        // Functions for mouth animations
+        function makeSmile() {
+            emojiMouth.classList.add("smile");
+        }
+
+        function resetMouth() {
+            emojiMouth.classList.remove("smile");
+        }
     </script>
 </body>
 </html>
