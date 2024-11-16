@@ -36,19 +36,59 @@
             font-size: 18px;
         }
 
+        /* Hero Section Styling */
         .hero-section {
             display: flex;
             align-items: center;
-            padding: 60px 20px;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
         .hero-section h1 {
             font-size: 2.5em;
+            margin: 0;
         }
 
         .hero-section p {
             font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Emoji Styles */
+        .emoji-canvas {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .emoji-eye {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #00FFC8;
+            border-radius: 50%;
+        }
+
+        .emoji-eye.left {
+            top: 35px;
+            left: 30px;
+        }
+
+        .emoji-eye.right {
+            top: 35px;
+            left: 60px;
+        }
+
+        .emoji-mouth {
+            position: absolute;
+            width: 30px;
+            height: 8px;
+            background-color: #00FFC8;
+            border-radius: 20px;
+            top: 65px;
+            left: 35px;
         }
 
         .carousel-section {
@@ -68,7 +108,7 @@
         }
 
         .service-card {
-            width: 300px; /* Fixed width for cards */
+            width: 300px;
             height: 250px;
             margin: 0 10px;
             border-radius: 10px;
@@ -77,6 +117,11 @@
             color: #F4F4F4;
             flex-shrink: 0;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
         }
 
         .service-card img {
@@ -86,7 +131,7 @@
         }
 
         .service-info {
-            padding: 10px; /* Added padding for text */
+            padding: 10px;
         }
 
         .carousel-arrow {
@@ -119,47 +164,11 @@
             padding: 20px;
             background-color: #0F213E;
         }
-
-        /* Emoji Styles */
-        .emoji-canvas {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin-right: 20px;
-        }
-
-        .emoji-eye {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #00FFC8;
-            border-radius: 50%;
-        }
-
-        .emoji-eye.left {
-            top: 35px;
-            left: 30px;
-        }
-
-        .emoji-eye.right {
-            top: 35px;
-            left: 60px;
-        }
-
-        .emoji-mouth {
-            position: absolute;
-            width: 30px;
-            height: 8px;
-            background-color: #00FFC8;
-            border-radius: 20px;
-            top: 65px;
-            left: 35px;
-        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <header class="navbar">
-        <div class="emoji-canvas" id="emojiCanvas"></div>
         <ul class="navbar-links">
             <li><a href="#">Home</a></li>
             <li><a href="#">Services</a></li>
@@ -167,11 +176,16 @@
         </ul>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero-section">
-        <h1>Silver Tech Support</h1>
-        <p>Your trusted partner in IT solutions.</p>
+        <div class="emoji-canvas" id="emojiCanvas"></div>
+        <div>
+            <h1>Silver Tech Support</h1>
+            <p>Your trusted partner in IT solutions.</p>
+        </div>
     </section>
 
+    <!-- Carousel Section -->
     <section class="carousel-section">
         <h2>Our Services</h2>
         <div class="carousel-container">
@@ -216,7 +230,7 @@
             carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
         }
 
-        // Emoji Drawing and Movement
+        // Emoji Setup
         const emojiCanvas = document.getElementById("emojiCanvas");
         const leftEye = document.createElement("div");
         const rightEye = document.createElement("div");
