@@ -293,8 +293,8 @@
 
             const angleLeftEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX + 10);
             const angleRightEye = Math.atan2(e.clientY - emojiCenterY, e.clientX - emojiCenterX - 10);
-            leftEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleLeftEye) * 10}px, ${Math.sin(angleLeftEye) * 10}px)`;
-            rightEye.style.transform = `translate(-50%, -50%) translate(${Math.cos(angleRightEye) * 10}px, ${Math.sin(angleRightEye) * 10}px)`;
+            leftEye.style.transform = translate(-50%, -50%) translate(${Math.cos(angleLeftEye) * 10}px, ${Math.sin(angleLeftEye) * 10}px);
+            rightEye.style.transform = translate(-50%, -50%) translate(${Math.cos(angleRightEye) * 10}px, ${Math.sin(angleRightEye) * 10}px);
         });
 
         // Change mouth to smile
@@ -329,7 +329,7 @@
             }
 
             const carousel = document.getElementById("carousel");
-            carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`; // Update the transform to move carousel
+            carousel.style.transform = translateX(-${currentSlide * cardWidth}px); // Update the transform to move carousel
         }
     </script>
 </body>
