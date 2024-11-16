@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
-        /* Basic Styles */
+        /* Base Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: #0F213E;
-            color: #F4F4F4;
             display: flex;
             flex-direction: column;
             align-items: center;
             margin: 0;
+            background-color: #0F213E;
+            color: #F4F4F4;
             overflow-x: hidden;
         }
 
-        /* Header Section */
+        /* Header with Dot Matrix Background */
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
             gap: 20px;
+            width: 100%;
+            height: 200px;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
-            width: 100%;
         }
 
         .hero-title {
@@ -43,11 +43,12 @@
         .emoji-circle {
             width: 100px;
             height: 100px;
-            border: 5px solid #00FFC8;
+            background-color: #00FFC8;
             border-radius: 50%;
             position: absolute;
             top: 0;
             left: 0;
+            border: 5px solid #0F213E;
         }
 
         .emoji-eye {
@@ -58,8 +59,16 @@
             border-radius: 50%;
         }
 
-        .emoji-eye.left { top: 35px; left: 30px; }
-        .emoji-eye.right { top: 35px; left: 60px; }
+        .emoji-eye.left {
+            top: 35px;
+            left: 30px;
+        }
+
+        .emoji-eye.right {
+            top: 35px;
+            left: 60px;
+        }
+
         .emoji-mouth {
             position: absolute;
             width: 30px;
@@ -68,6 +77,19 @@
             border-radius: 20px;
             top: 65px;
             left: 35px;
+        }
+
+        /* Navbar Links */
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links a {
+            color: #F4F4F4;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         /* Carousel Section */
@@ -89,23 +111,28 @@
 
         .service-card {
             width: 320px;
-            height: 370px;
+            height: 350px; /* Increased height for more text */
             margin: 0 10px;
             border-radius: 10px;
             background-color: #1A3457;
             color: #F4F4F4;
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            flex-shrink: 0;
         }
 
         .service-info {
             padding: 20px;
         }
 
-        .service-info h3 { margin: 0; }
-        .service-info p { margin: 10px 0; }
+        .service-info h3 {
+            margin: 0;
+        }
+
+        .service-info p {
+            margin: 10px 0 0;
+        }
 
         .carousel-arrow {
             position: absolute;
@@ -113,20 +140,17 @@
             transform: translateY(-50%);
             font-size: 24px;
             cursor: pointer;
-            background-color: rgba(15, 33, 62, 0.8);
-            color: #F4F4F4;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .carousel-arrow.left { left: -50px; }
-        .carousel-arrow.right { right: -50px; }
+        .carousel-arrow.left {
+            left: -20px;
+        }
 
-        /* Footer Contact Button */
+        .carousel-arrow.right {
+            right: -20px;
+        }
+
+        /* Footer Contact Link */
         .contact-footer {
             margin: 60px 0;
             text-align: center;
@@ -145,16 +169,15 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+
+    <!-- Header with Emoji and Title -->
     <header class="header">
-        <div class="emoji-canvas" id="emojiCanvas">
-            <div class="emoji-circle"></div>
-        </div>
+        <div class="emoji-canvas" id="emojiCanvas"></div>
         <h1 class="hero-title">Silver Tech Support</h1>
     </header>
 
     <!-- Carousel Section -->
-    <section class="carousel-section" id="services">
+    <section id="carousel" class="carousel-section">
         <h2>Our Services</h2>
         <div class="carousel-container">
             <div class="carousel-arrow left" onclick="moveCarousel(-1)">&#10094;</div>
@@ -162,25 +185,31 @@
                 <div class="service-card">
                     <div class="service-info">
                         <h3>Networking Solutions</h3>
-                        <p>Secure, high-speed network setups to keep your business seamlessly connected.</p>
+                        <p>We provide secure, high-speed network setups, ensuring your business stays connected seamlessly. From Wi-Fi optimization to VPN setups, we've got you covered.</p>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-info">
                         <h3>Bespoke Hardware</h3>
-                        <p>Personalized hardware recommendations for optimal performance.</p>
+                        <p>Personalized hardware recommendations based on your specific needs. Whether it's a new workstation or server, we help you choose the best technology.</p>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-info">
                         <h3>Cybersecurity Training</h3>
-                        <p>Training your team to identify and mitigate cybersecurity threats.</p>
+                        <p>Comprehensive training to protect your staff from cyber threats. We offer hands-on sessions to enhance security awareness and practices.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Domain Configuration</h3>
+                        <p>Complete setup and management of your web domains, ensuring smooth and secure configurations for your online presence.</p>
                     </div>
                 </div>
                 <div class="service-card">
                     <div class="service-info">
                         <h3>Cloud Solutions</h3>
-                        <p>Secure cloud storage and computing solutions for your business.</p>
+                        <p>Leverage our cloud solutions for flexible storage and computing power. Secure, scalable, and optimized for your business needs.</p>
                     </div>
                 </div>
             </div>
@@ -188,41 +217,41 @@
         </div>
     </section>
 
-    <!-- Footer Contact Button -->
+    <!-- Footer Contact Link -->
     <div class="contact-footer">
         <a href="mailto:help@silvertechsupport.uk?subject=Click from Website" class="contact-button">Contact Us</a>
     </div>
 
     <script>
-        // Emoji Eyes Tracking
+        // Draw Emoji Eyes and Mouth
         const emojiCanvas = document.getElementById("emojiCanvas");
+        const circle = document.createElement("div");
+        circle.className = "emoji-circle";
+        emojiCanvas.appendChild(circle);
+
         const leftEye = document.createElement("div");
         const rightEye = document.createElement("div");
         const mouth = document.createElement("div");
+
         leftEye.className = "emoji-eye left";
         rightEye.className = "emoji-eye right";
         mouth.className = "emoji-mouth";
+
         emojiCanvas.appendChild(leftEye);
         emojiCanvas.appendChild(rightEye);
         emojiCanvas.appendChild(mouth);
-
-        document.addEventListener("mousemove", (e) => {
-            const rect = emojiCanvas.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const angleLeft = Math.atan2(e.clientY - centerY, e.clientX - centerX + 10);
-            const angleRight = Math.atan2(e.clientY - centerY, e.clientX - centerX - 10);
-            leftEye.style.transform = `translate(${Math.cos(angleLeft) * 8}px, ${Math.sin(angleLeft) * 8}px)`;
-            rightEye.style.transform = `translate(${Math.cos(angleRight) * 8}px, ${Math.sin(angleRight) * 8}px)`;
-        });
 
         // Carousel Functionality
         let currentSlide = 0;
         function moveCarousel(direction) {
             const carousel = document.getElementById("carouselInner");
+            const cardWidth = 340; 
             const totalCards = carousel.children.length;
-            const cardWidth = 340;
-            currentSlide = (currentSlide + direction + totalCards) % totalCards;
+
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalCards - 1;
+            if (currentSlide >= totalCards) currentSlide = 0;
+
             carousel.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
         }
     </script>
