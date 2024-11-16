@@ -8,13 +8,15 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #0F213E;
-            color: #F4F4F4;
+            background-color: #F4F4F4; /* Light grey background */
+            color: #0F213E; /* Dark text for contrast */
             transition: background 0.5s ease-in-out;
         }
 
         /* Header */
         .header {
+            position: sticky;
+            top: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,6 +24,7 @@
             padding: 40px;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
+            z-index: 1000;
         }
 
         .hero-title {
@@ -33,6 +36,22 @@
             margin-top: 10px;
             font-size: 1em;
             font-style: italic;
+        }
+
+        .contact-button-header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #00FFC8;
+            color: #1A3457;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-button-header:hover {
+            background-color: #F4F4F4;
         }
 
         /* Emoji Styles */
@@ -107,7 +126,7 @@
         }
 
         .service-card {
-            background-color: #1A3457;
+            background-color: #1A3457; /* Original blue */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -115,33 +134,41 @@
             flex-direction: column;
             justify-content: space-between;
             text-align: center;
-            height: 350px;
+            height: 400px; /* Increased height */
         }
 
-        .service-button {
-            background-color: #00FFC8;
-            color: #1A3457;
+        .service-card h3 {
+            margin-top: 0;
+        }
+
+        .service-description {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-description img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
             padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
+            background-color: #1A3457;
+            color: #F4F4F4;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            width: 100%;
+            bottom: 0;
         }
 
-        .service-button.show {
-            display: block;
-        }
-
-        .service-card:hover ~ .service-button,
-        .service-card:focus ~ .service-button {
-            display: block;
-        }
-
-        .service-button:hover {
-            background-color: #F4F4F4;
+        /* Dynamic Year */
+        .year {
+            display: inline;
         }
     </style>
 </head>
@@ -156,6 +183,7 @@
     </div>
     <h4 class="hero-title">Silver Tech Support</h4>
     <div class="tagline">Friendly local IT Advice in East Anglia</div>
+    <a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="contact-button-header" id="contactUsButton">Contact Us</a>
 </header>
 
 <!-- Services Cards -->
@@ -163,31 +191,51 @@
     <!-- Service Cards -->
     <div class="service-card">
         <h3>Networking Solutions</h3>
-        <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="Networking Solutions">
+            <p>We configure networks so robust, they'll handle anything from office hustle to Monday madness!</p>
+        </div>
     </div>
     <div class="service-card">
         <h3>Cloud Solutions</h3>
-        <p>Your data in the cloud, secured and always accessible with industry-leading tools for your business needs.</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="Cloud Solutions">
+            <p>Your data in the cloud, safe from spills and secured with industry-leading tools. Always ready, always accessible.</p>
+        </div>
     </div>
     <div class="service-card">
         <h3>IT Consulting</h3>
-        <p>We diagnose tech issues swiftly and efficiently, ensuring your systems run smoothly for optimal performance.</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="IT Consulting">
+            <p>We diagnose tech issues like pros, ensuring your systems run smoother than a well-oiled machine. No awkward small talk required!</p>
+        </div>
     </div>
     <div class="service-card">
         <h3>Remote Technical Support</h3>
-        <p>Quickly resolve IT issues remotely, providing fast and friendly support without unnecessary jargon.</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="Remote Technical Support">
+            <p>Quickly resolve IT issues remotely, providing fast and friendly support without any unnecessary jargon. Your tech issues, resolved in a snap!</p>
+        </div>
     </div>
     <div class="service-card">
         <h3>Domain Configuration</h3>
-        <p>Secure and efficient domain setups with industry-leading tools for small businesses.</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="Domain Configuration">
+            <p>Secure and efficient domain setups with industry-leading tools for small businesses. Like a digital locksmith, but cooler.</p>
+        </div>
     </div>
     <div class="service-card">
         <h3>Microsoft 365 Management</h3>
-        <p>Boost productivity with expertly managed Microsoft 365 setups, tailored to your business requirements.</p>
+        <div class="service-description">
+            <img src="https://via.placeholder.com/150" alt="Microsoft 365 Management">
+            <p>Boost productivity with expertly managed Microsoft 365 setups, tailored to your business needs. Let us handle the boring stuff so you can shine!</p>
+        </div>
     </div>
 </div>
 
-<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button" id="contactUsButton">Contact Us</a>
+<footer>
+    <p>&copy; <span class="year"></span> Silver Tech Support UK. All rights reserved.</p>
+</footer>
 
 <script>
     const leftEye = document.getElementById("leftEye");
@@ -198,34 +246,4 @@
 
     document.addEventListener("mousemove", (e) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 50;
-        const y = (e.clientY / window.innerHeight - 0.5) * 30;
-        leftEye.style.transform = `translate(${x}px, ${y}px)`;
-        rightEye.style.transform = `translate(${x}px, ${y}px)`;
-
-        if (e.clientX > window.innerWidth - 100 && e.clientY < 50) {
-            emojiMouth.classList.add("sad");
-            emojiTongue.style.transform = "scaleY(1)";
-        } else {
-            emojiMouth.classList.remove("sad");
-        }
-
-        if (e.clientY < 50) {
-            emojiTongue.style.transform = "scaleY(1)";
-        } else {
-            emojiTongue.style.transform = "scaleY(0)";
-        }
-    });
-
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mouseover', () => {
-            contactUsButton.classList.add('show');
-        });
-    });
-
-    contactUsButton.addEventListener("mouseout", () => {
-        contactUsButton.classList.remove("show");
-    });
-</script>
-
-</body>
-</html>
+        const y = (e[_{{{CITATION{{{_1{](https://github.com/ajrussell999/PHP_FI_EN/tree/e061c836c8869dc4933a7376380292fa2c3b7dcd/vl_royal_spey.php)
