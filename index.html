@@ -8,13 +8,12 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
             background-color: #0F213E;
             color: #F4F4F4;
             transition: background 0.5s ease-in-out;
         }
 
-        /* Header Styling */
+        /* Header */
         .header {
             display: flex;
             flex-direction: column;
@@ -30,7 +29,7 @@
             font-size: 1.5em;
         }
 
-        /* Emoji Styling */
+        /* Emoji Styles */
         .emoji-canvas {
             position: relative;
             width: 100px;
@@ -59,7 +58,6 @@
             width: 35px;
             height: 5px;
             background-color: #00FFC8;
-            border-radius: 0;
             top: 70px;
             left: 33px;
             transition: all 0.3s ease;
@@ -90,31 +88,22 @@
 
         /* Services Section */
         .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 40px;
         }
 
         .service-card {
             background-color: #1A3457;
-            width: 220px;
-            height: 480px;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: space-between;
             text-align: center;
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
+            height: 300px;
         }
 
         .service-button {
@@ -124,7 +113,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
 
         .service-button:hover {
@@ -146,54 +134,51 @@
 
 <!-- Services Cards -->
 <div class="services-container">
-    <!-- First Row -->
+    <!-- Service Cards -->
     <div class="service-card">
         <h3>Networking Solutions</h3>
-        <p>Secure, high-speed network setups tailored to your needs.</p>
+        <p>We configure networks so robust, they'll survive an office stampede... or at least a busy Monday morning!</p>
         <a href="mailto:help@silvertechsupport.uk?subject=Networking Solutions Help" class="service-button">Contact Us</a>
     </div>
     <div class="service-card">
         <h3>Cloud Solutions</h3>
-        <p>Flexible cloud storage and computing solutions.</p>
+        <p>Your data in the cloud, safe from coffee spills and office mishaps. Let’s keep it floating above!</p>
         <a href="mailto:help@silvertechsupport.uk?subject=Cloud Solutions Help" class="service-button">Contact Us</a>
     </div>
     <div class="service-card">
         <h3>IT Consulting</h3>
-        <p>Expert advice tailored to your business needs.</p>
+        <p>We diagnose tech woes like a doctor, minus the awkward small talk. Let's strategise your IT needs.</p>
         <a href="mailto:help@silvertechsupport.uk?subject=IT Consulting Help" class="service-button">Contact Us</a>
     </div>
-
-    <!-- Second Row -->
     <div class="service-card">
         <h3>Remote Technical Support</h3>
-        <p>Quick remote assistance to resolve IT issues, saving you time and ensuring business continuity.</p>
+        <p>Got an IT issue? We’ll fix it remotely while you enjoy your coffee. Fast, friendly, and no extra jargon.</p>
         <a href="mailto:help@silvertechsupport.uk?subject=Remote Technical Support Help" class="service-button">Contact Us</a>
     </div>
     <div class="service-card">
         <h3>Domain Configuration</h3>
-        <p>We set up and manage your domains, ensuring secure and efficient configurations using free services.</p>
+        <p>We set up your domains like a digital locksmith, ensuring everything’s secure and efficient—minus the fees!</p>
         <a href="mailto:help@silvertechsupport.uk?subject=Domain Configuration Help" class="service-button">Contact Us</a>
     </div>
     <div class="service-card">
         <h3>Microsoft 365 Management</h3>
-        <p>Comprehensive management of your Microsoft 365 environment to optimise productivity and collaboration.</p>
+        <p>Boost productivity with a perfectly managed Microsoft 365 setup. We handle the boring stuff so you don’t have to.</p>
         <a href="mailto:help@silvertechsupport.uk?subject=Microsoft 365 Management Help" class="service-button">Contact Us</a>
     </div>
 </div>
 
 <script>
-    const emojiCanvas = document.getElementById("emojiCanvas");
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
     const emojiMouth = document.getElementById("emojiMouth");
     const emojiTongue = document.getElementById("emojiTongue");
 
-    // Smile and sad face detection
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', () => emojiMouth.classList.add("smile"));
-        card.addEventListener('mouseleave', () => emojiMouth.classList.remove("smile"));
-    });
-
     document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 50;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        leftEye.style.transform = `translate(${x}px, ${y}px)`;
+        rightEye.style.transform = `translate(${x}px, ${y}px)`;
+
         if (e.clientX > window.innerWidth - 100 && e.clientY < 50) {
             emojiMouth.classList.add("sad");
             emojiTongue.style.transform = "scaleY(1)";
