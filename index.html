@@ -62,26 +62,34 @@
         .emoji-mouth {
             position: absolute;
             width: 30px;
-            height: 6px;
+            height: 8px;
             background-color: #00FFC8;
-            border-radius: 20px;
+            border-radius: 0;
             top: 65px;
             left: 35px;
             transition: all 0.3s ease;
         }
 
         .emoji-mouth.smile {
-            width: 40px;
+            width: 50px;
             height: 20px;
-            border-radius: 40px 40px 0 0;
+            border-radius: 0 0 50px 50px;
             top: 55px;
         }
 
-        .emoji-mouth.sad {
-            width: 40px;
+        .emoji-tongue {
+            position: absolute;
+            width: 20px;
             height: 20px;
-            border-radius: 0 0 40px 40px;
-            top: 75px;
+            background-color: #FF5F5F;
+            border-radius: 50%;
+            top: 80px;
+            left: 40px;
+            display: none;
+        }
+
+        .emoji-tongue.show {
+            display: block;
         }
 
         /* Carousel Section Styling */
@@ -92,7 +100,6 @@
         }
 
         .carousel-container {
-            position: relative;
             overflow: hidden;
         }
 
@@ -101,7 +108,6 @@
             transition: transform 0.5s ease-in-out;
         }
 
-        /* Service Card Styling */
         .service-card {
             width: 300px;
             height: 400px;
@@ -123,7 +129,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
             margin-top: 10px;
         }
 
@@ -145,6 +150,7 @@
             <div class="emoji-eye left" id="leftEye"></div>
             <div class="emoji-eye right" id="rightEye"></div>
             <div class="emoji-mouth" id="emojiMouth"></div>
+            <div class="emoji-tongue" id="emojiTongue"></div>
         </div>
         <div>
             <h1 class="hero-title">Silver Tech Support</h1>
@@ -163,12 +169,12 @@
                 </div>
                 <div class="service-card">
                     <h3>Cloud Solutions</h3>
-                    <p>Flexible cloud storage and computing solutions.</p>
+                    <p>Flexible cloud storage solutions.</p>
                     <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
                 <div class="service-card">
                     <h3>IT Consulting</h3>
-                    <p>Expert advice tailored to your business needs.</p>
+                    <p>Expert advice tailored to your business.</p>
                     <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
             </div>
@@ -180,31 +186,20 @@
     </footer>
 
     <script>
-        const emojiCanvas = document.getElementById("emojiCanvas");
-        const leftEye = document.getElementById("leftEye");
-        const rightEye = document.getElementById("rightEye");
         const emojiMouth = document.getElementById("emojiMouth");
+        const emojiTongue = document.getElementById("emojiTongue");
 
         document.addEventListener("mousemove", (event) => {
-            const rect = emojiCanvas.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            const angleLeft = Math.atan2(event.clientY - centerY, event.clientX - centerX + 15);
-            const angleRight = Math.atan2(event.clientY - centerY, event.clientX - centerX - 15);
-
-            leftEye.style.transform = `translate(${Math.cos(angleLeft) * 6}px, ${Math.sin(angleLeft) * 6}px)`;
-            rightEye.style.transform = `translate(${Math.cos(angleRight) * 6}px, ${Math.sin(angleRight) * 6}px)`;
-
-            // Sad face if mouse is in top-right corner
-            if (event.clientX > window.innerWidth - 100 && event.clientY < 100) {
-                emojiMouth.classList.add("sad");
+            const isNearTopRight = event.clientX > window.innerWidth - 100 && event.clientY < 100;
+            
+            if (isNearTopRight) {
+                emojiMouth.classList.remove("smile");
+                emojiTongue.classList.add("show");
             } else {
-                emojiMouth.classList.remove("sad");
+                emojiTongue.classList.remove("show");
             }
         });
 
-        // Functions for mouth animations
         function makeSmile() {
             emojiMouth.classList.add("smile");
         }
