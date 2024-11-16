@@ -62,24 +62,22 @@
             left: 60px;
         }
 
-        .emoji-eyes-cute-left {
+        .emoji-eyes-cute {
             position: absolute;
-            top: 30px;
-            left: 18px;
             font-size: 24px;
             color: #00FFC8;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .emoji-eyes-cute-right {
-            position: absolute;
+        .emoji-eyes-cute.left {
             top: 30px;
-            left: 55px;
-            font-size: 24px;
-            color: #00FFC8;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            left: 22px;
+        }
+
+        .emoji-eyes-cute.right {
+            top: 30px;
+            left: 57px;
         }
 
         .emoji-mouth {
@@ -99,12 +97,12 @@
 
         .emoji-tongue {
             position: absolute;
-            width: 20px;
-            height: 10px;
+            width: 25px;
+            height: 15px;
             background-color: pink;
-            border-radius: 0 0 10px 10px;
-            top: 75px;
-            left: 40px;
+            border-radius: 0 0 15px 15px;
+            top: 80px;
+            left: 38px;
             display: none;
         }
 
@@ -126,8 +124,8 @@
         }
 
         .service-card {
-            width: 300px;
-            height: 370px;
+            width: 240px;
+            height: 400px;
             margin: 0 10px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -140,7 +138,7 @@
 
         .service-card img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
         }
 
@@ -164,89 +162,76 @@
 </head>
 <body>
 
-    <!-- Header with Emoji and Title -->
-    <header class="header">
-        <div class="emoji-canvas" id="emojiCanvas">
-            <div class="emoji-eye left" id="leftEye"></div>
-            <div class="emoji-eye right" id="rightEye"></div>
-            <div class="emoji-mouth" id="emojiMouth"></div>
-            <div class="emoji-tongue" id="emojiTongue"></div>
-            <div class="emoji-eyes-cute-left" id="emojiEyesLeft">&gt;</div>
-            <div class="emoji-eyes-cute-right" id="emojiEyesRight">&lt;</div>
-        </div>
-        <h1 class="hero-title">Silver Tech Support</h1>
-    </header>
+<header class="header">
+    <div class="emoji-canvas" id="emojiCanvas">
+        <div class="emoji-eye left" id="leftEye"></div>
+        <div class="emoji-eye right" id="rightEye"></div>
+        <div class="emoji-mouth" id="emojiMouth"></div>
+        <div class="emoji-tongue" id="emojiTongue"></div>
+        <div class="emoji-eyes-cute left" id="emojiEyesLeft">&gt;</div>
+        <div class="emoji-eyes-cute right" id="emojiEyesRight">&lt;</div>
+    </div>
+    <h1 class="hero-title">Silver Tech Support</h1>
+</header>
 
-    <!-- Carousel Section -->
-    <section class="carousel-section">
-        <h2>Our Services</h2>
-        <div class="carousel-container">
-            <div class="carousel" id="carousel">
-                <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Networking+Solutions" alt="Networking Solutions">
-                    <div class="service-info">
-                        <h3>Networking Solutions</h3>
-                        <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-                    </div>
+<section class="carousel-section">
+    <h2>Our Services</h2>
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <div class="service-card">
+                <img src="https://via.placeholder.com/240x180.png?text=Networking+Solutions" alt="Networking Solutions">
+                <div class="service-info">
+                    <h3>Networking Solutions</h3>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
-                <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=Cloud+Solutions" alt="Cloud Solutions">
-                    <div class="service-info">
-                        <h3>Cloud Solutions</h3>
-                        <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="https://via.placeholder.com/300x200.png?text=IT+Consulting" alt="IT Consulting">
-                    <div class="service-info">
-                        <h3>IT Consulting</h3>
-                        <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
-                    </div>
+            </div>
+            <div class="service-card">
+                <img src="https://via.placeholder.com/240x180.png?text=Cloud+Solutions" alt="Cloud Solutions">
+                <div class="service-info">
+                    <h3>Cloud Solutions</h3>
+                    <button class="service-button" onmouseover="makeSmile()" onmouseout="resetMouth()">Learn More</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer class="footer">
-        <p>© 2024 Silver Tech Support. All rights reserved.</p>
-    </footer>
+<script>
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
+    const emojiMouth = document.getElementById("emojiMouth");
+    const emojiTongue = document.getElementById("emojiTongue");
+    const emojiEyesLeft = document.getElementById("emojiEyesLeft");
+    const emojiEyesRight = document.getElementById("emojiEyesRight");
 
-    <script>
-        const leftEye = document.getElementById("leftEye");
-        const rightEye = document.getElementById("rightEye");
-        const emojiMouth = document.getElementById("emojiMouth");
-        const emojiTongue = document.getElementById("emojiTongue");
-        const emojiEyesLeft = document.getElementById("emojiEyesLeft");
-        const emojiEyesRight = document.getElementById("emojiEyesRight");
+    document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth) * 30 - 15;
+        const y = (e.clientY / window.innerHeight) * 30 - 15;
+        leftEye.style.transform = `translate(${x}px, ${y}px)`;
+        rightEye.style.transform = `translate(${x}px, ${y}px)`;
 
-        document.addEventListener("mousemove", (e) => {
-            const x = (e.clientX / window.innerWidth) * 30 - 15;
-            const y = (e.clientY / window.innerHeight) * 30 - 15;
-            leftEye.style.transform = `translate(${x}px, ${y}px)`;
-            rightEye.style.transform = `translate(${x}px, ${y}px)`;
-
-            if (e.clientX > window.innerWidth - 100 && e.clientY < 100) {
-                emojiEyesLeft.style.opacity = 1;
-                emojiEyesRight.style.opacity = 1;
-                leftEye.style.opacity = 0;
-                rightEye.style.opacity = 0;
-                emojiTongue.style.display = "block";
-            } else {
-                emojiEyesLeft.style.opacity = 0;
-                emojiEyesRight.style.opacity = 0;
-                leftEye.style.opacity = 1;
-                rightEye.style.opacity = 1;
-                emojiTongue.style.display = "none";
-            }
-        });
-
-        function makeSmile() {
-            emojiMouth.classList.add("smile");
+        if (e.clientX > window.innerWidth - 100 && e.clientY < 100) {
+            emojiEyesLeft.style.opacity = 1;
+            emojiEyesRight.style.opacity = 1;
+            leftEye.style.opacity = 0;
+            rightEye.style.opacity = 0;
+            emojiTongue.style.display = "block";
+        } else {
+            emojiEyesLeft.style.opacity = 0;
+            emojiEyesRight.style.opacity = 0;
+            leftEye.style.opacity = 1;
+            rightEye.style.opacity = 1;
+            emojiTongue.style.display = "none";
         }
+    });
 
-        function resetMouth() {
-            emojiMouth.classList.remove("smile");
-        }
-    </script>
+    function makeSmile() {
+        emojiMouth.classList.add("smile");
+    }
+
+    function resetMouth() {
+        emojiMouth.classList.remove("smile");
+    }
+</script>
 </body>
 </html>
