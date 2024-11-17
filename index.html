@@ -94,7 +94,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            padding: 40px;
+            padding: 60px 40px; 
         }
 
         @media (max-width: 768px) {
@@ -124,6 +124,8 @@
         .service-button {
             background-color: #00FFC8;
             color: #1A3457;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
             padding: 15px;
             text-align: center;
             border: none;
@@ -191,6 +193,9 @@
     const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
     const contactUsButton = document.getElementById("contactUsButton");
+    const emojiCanvas = document.getElementById("emojiCanvas");
+    const mouth = document.getElementById("emojiMouth");
+ 
 
     // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
@@ -201,16 +206,33 @@
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
 
-        // Tongue behavior
-        const tongueScale = Math.max(0, (rect.top - e.clientY) / 50);
-        emojiTongue.style.transform = `scaleY(${tongueScale})`;
-    });
+
+   // Mouth and tongue behavior
+   document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+
+        // Open mouth if cursor is in emoji circle
+        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
+            mouth.style.height = "20px"; // Open mouth
+        } else {
+            mouth.style.height = "5px"; // Close mouth
+        }
 
     // Show contact button on hover over service cards
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('mouseover', () => {
             contactUsButton.classList.add('show-button');
         });
+        
+        // Tongue appears based on mouse position above it
+        if (e.clientY < rect.top) {
+            tongue.style.opacity = "1";
+            tongue.style.transform = `scaleY(${(rect.top - e.clientY) / 50})`;
+        } else {
+            tongue.style.opacity = "0";
+        }
+
+
     });
 </script>
 
