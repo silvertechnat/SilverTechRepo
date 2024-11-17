@@ -55,7 +55,6 @@
             border-radius: 50%;
             transition: transform 0.3s ease;
         }
-
         .emoji-eye.left { top: 35px; left: 25px; }
         .emoji-eye.right { top: 35px; left: 60px; }
 
@@ -68,28 +67,9 @@
             left: 33px;
             transition: all 0.3s ease;
         }
-
         .emoji-mouth.smile {
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
-        }
-
-        .emoji-mouth.sad {
-            border-top: 4px solid #00FFC8;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .emoji-tongue {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: pink;
-            border-radius: 0 0 20px 20px;
-            top: 85px;
-            left: 35px;
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.3s ease;
         }
 
         /* Services Section */
@@ -111,11 +91,16 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
+            align-items: center;
             height: 350px;
+            justify-content: space-between;
+        }
+
+        .service-card svg {
+            margin-bottom: 20px;
         }
 
         .service-button {
@@ -135,13 +120,16 @@
             display: block;
         }
 
-        .service-card:hover ~ .service-button,
-        .service-card:focus ~ .service-button {
-            display: block;
-        }
-
         .service-button:hover {
             background-color: #F4F4F4;
+        }
+
+        /* Spinning globe animation */
+        .networking-icon:hover {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -151,8 +139,7 @@
     <div class="emoji-canvas" id="emojiCanvas">
         <div class="emoji-eye left" id="leftEye"></div>
         <div class="emoji-eye right" id="rightEye"></div>
-        <div class="emoji-mouth" id="emojiMouth"></div>
-        <div class="emoji-tongue" id="emojiTongue"></div>
+        <div class="emoji-mouth smile" id="emojiMouth"></div>
     </div>
     <h4 class="hero-title">Silver Tech Support UK</h4>
     <div class="tagline">Swift and prompt local IT Advice in East Anglia, with attention to detail.</div>
@@ -160,57 +147,61 @@
 
 <!-- Services Cards -->
 <div class="services-container">
-    <!-- Service Cards -->
+    <!-- Networking Solutions -->
     <div class="service-card">
         <h3>Networking Solutions</h3>
-
-        <svg width="100" height="100" viewBox="0 0 100 100" class="networking-icon">
-            <!-- Outline of the globe -->
-            <circle cx="50" cy="50" r="45" stroke="#00FFC8" stroke-width="3" fill="none" />
-            
-            <!-- Basic continents -->
-            <path d="M50,5 Q65,20 50,35 Q35,50 20,65 Q5,80 20,95 Q35,110 50,95 Q65,80 80,65 Q95,50 80,35 Q65,20 50,5 Z" 
-                  stroke="#00FFC8" stroke-width="2" fill="none" />
-            <path d="M50,5 Q65,30 50,55 Q35,80 20,105" stroke="#00FFC8" stroke-width="2" fill="none" />
+        <svg class="networking-icon" width="100" height="100">
+            <circle cx="50" cy="50" r="45" stroke="#00FFC8" stroke-width="3" fill="none"/>
+            <path d="M35,30 Q50,10 65,30 T65,50 Q50,70 35,50 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
         </svg>
-        
-        <style>
-        .networking-icon:hover {
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        </style>
-        
-                    
-        <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
+        <p>Robust network configurations to handle any challenge.</p>
     </div>
+
+    <!-- Cloud Solutions -->
     <div class="service-card">
         <h3>Cloud Solutions</h3>
         <svg width="100" height="100">
-            <ellipse cx="50" cy="60" rx="40" ry="20" fill="#00FFC8" />
-            <circle cx="40" cy="40" r="20" fill="#00FFC8" />
-            <circle cx="60" cy="40" r="20" fill="#00FFC8" />
+            <ellipse cx="50" cy="60" rx="30" ry="20" stroke="#00FFC8" stroke-width="3" fill="none"/>
+            <circle cx="40" cy="45" r="15" stroke="#00FFC8" stroke-width="3" fill="none"/>
         </svg>
-        <p>Your data in the cloud, secured and always accessible with industry-leading tools for your business needs.</p>
+        <p>Your data secured in the cloud.</p>
     </div>
+
+    <!-- IT Consulting -->
     <div class="service-card">
         <h3>IT Consulting</h3>
-        <p>We diagnose tech issues swiftly and efficiently, ensuring your systems run smoothly for optimal performance.</p>
+        <svg width="100" height="100">
+            <rect x="20" y="30" width="60" height="40" rx="10" stroke="#00FFC8" stroke-width="3" fill="none"/>
+        </svg>
+        <p>Efficient diagnosis of tech issues.</p>
     </div>
+
+    <!-- Remote Support -->
     <div class="service-card">
         <h3>Remote Technical Support</h3>
-        <p>Quickly resolve IT issues remotely, providing fast and friendly support without unnecessary jargon.</p>
+        <svg width="100" height="100">
+            <circle cx="50" cy="50" r="40" stroke="#00FFC8" stroke-width="3" fill="none"/>
+        </svg>
+        <p>Resolve IT issues remotely with ease.</p>
     </div>
+
+    <!-- Domain Configuration -->
     <div class="service-card">
         <h3>Domain Configuration</h3>
-        <svg width="100" height="100" class="domain-icon"> <text x="10" y="50" font-family="Arial" font-size="24" fill="#00FFC8">www.</text> </svg> <style> .domain-icon:hover text { content: "www.silvertechsupport.uk"; } </style>
-        <p>Secure and efficient domain setups with industry-leading tools for small businesses.</p>
+        <svg width="100" height="100">
+            <text x="10" y="50" font-family="Arial" font-size="20" fill="#00FFC8">www</text>
+        </svg>
+        <p>Secure domain setups for businesses.</p>
     </div>
+
+    <!-- Microsoft 365 Management -->
     <div class="service-card">
         <h3>Microsoft 365 Management</h3>
-        <p>Boost productivity with expertly managed Microsoft 365 setups, tailored to your business requirements.</p>
+        <svg width="100" height="100">
+            <rect x="20" y="30" width="60" height="40" rx="5" stroke="#00FFC8" stroke-width="3" fill="none"/>
+            <text x="40" y="55" font-family="Arial" font-size="18" fill="#00FFC8">365</text>
+        </svg>
+        <p>Boost productivity with Microsoft 365.</p>
     </div>
 </div>
 
@@ -220,7 +211,6 @@
     const leftEye = document.getElementById("leftEye");
     const rightEye = document.getElementById("rightEye");
     const emojiMouth = document.getElementById("emojiMouth");
-    const emojiTongue = document.getElementById("emojiTongue");
     const contactUsButton = document.getElementById("contactUsButton");
 
     document.addEventListener("mousemove", (e) => {
@@ -228,19 +218,6 @@
         const y = (e.clientY / window.innerHeight - 0.5) * 30;
         leftEye.style.transform = `translate(${x}px, ${y}px)`;
         rightEye.style.transform = `translate(${x}px, ${y}px)`;
-
-        if (e.clientX > window.innerWidth - 100 && e.clientY < 50) {
-            emojiMouth.classList.add("sad");
-            emojiTongue.style.transform = "scaleY(1)";
-        } else {
-            emojiMouth.classList.remove("sad");
-        }
-
-        if (e.clientY < 50) {
-            emojiTongue.style.transform = "scaleY(1)";
-        } else {
-            emojiTongue.style.transform = "scaleY(0)";
-        }
     });
 
     document.querySelectorAll('.service-card').forEach(card => {
@@ -250,7 +227,7 @@
     });
 
     contactUsButton.addEventListener("mouseout", () => {
-        contactUsButton.classList.remove("show");
+        contactUsButton.classList.remove('show');
     });
 </script>
 
