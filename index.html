@@ -8,19 +8,17 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding-top: 160px; /* Ensure content isn't hidden by fixed header */
             background-color: #FFFFFF;
             color: #0F213E;
-            overflow-x: hidden;
+            padding-top: 160px;
         }
 
-        /* Fixed Header */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,16 +27,15 @@
             background-color: #0F213E;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
+            z-index: 1000;
         }
 
         .hero-title {
-            margin-top: 30px;
             font-size: 1.5em;
             color: #F4F4F4;
         }
 
         .tagline {
-            margin-top: 10px;
             font-size: 1em;
             font-style: italic;
             color: #00FFC8;
@@ -62,7 +59,9 @@
             height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
+            transition: transform 0.3s ease;
         }
+
         .emoji-eye.left { top: 35px; left: 25px; }
         .emoji-eye.right { top: 35px; left: 60px; }
 
@@ -75,7 +74,6 @@
             left: 33px;
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
-            transition: all 0.3s;
         }
 
         .emoji-tongue {
@@ -109,8 +107,8 @@
             background-color: #1A3457;
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
             transition: transform 0.3s ease;
         }
 
@@ -118,33 +116,21 @@
             transform: translateY(-10px);
         }
 
-        /* Footer Contact Button */
-        .footer {
-            background-color: #0F213E;
-            padding: 40px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: none;
-        }
-
-        .service-card:hover ~ .footer {
-            display: block;
-        }
-
+        /* Contact Button */
         .service-button {
             background-color: #00FFC8;
             color: #1A3457;
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
         }
 
-        .service-button:hover {
-            background-color: #F4F4F4;
+        .service-card:hover ~ .service-button {
+            display: block;
         }
     </style>
 </head>
@@ -164,36 +150,48 @@
 <div class="services-container">
     <div class="service-card">
         <h3>Networking Solutions</h3>
-        <p>Robust configurations to handle your business needs.</p>
+        <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
     </div>
     <div class="service-card">
         <h3>Cloud Solutions</h3>
-        <p>Secure, scalable cloud solutions for your data.</p>
+        <p>Your data in the cloud, secured and always accessible.</p>
     </div>
     <div class="service-card">
         <h3>IT Consulting</h3>
         <p>Expert advice to keep your systems running smoothly.</p>
     </div>
+    <div class="service-card">
+        <h3>Remote Technical Support</h3>
+        <p>Quickly resolve IT issues remotely, with fast support.</p>
+    </div>
+    <div class="service-card">
+        <h3>Domain Configuration</h3>
+        <p>Efficient domain setups for small businesses.</p>
+    </div>
+    <div class="service-card">
+        <h3>Microsoft 365 Management</h3>
+        <p>Boost productivity with expertly managed setups.</p>
+    </div>
 </div>
 
-<div class="footer" id="footer">
-    <a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button">Contact Us</a>
-</div>
+<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button" id="contactUsButton">Contact Us</a>
 
 <script>
-    const emojiMouth = document.getElementById("emojiMouth");
-    const emojiTongue = document.getElementById("emojiTongue");
     const leftEye = document.getElementById("leftEye");
     const rightEye = document.getElementById("rightEye");
+    const emojiTongue = document.getElementById("emojiTongue");
 
     document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 50;
-        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        const canvasRect = document.getElementById("emojiCanvas").getBoundingClientRect();
+        const centerX = canvasRect.left + canvasRect.width / 2;
+        const centerY = canvasRect.bottom;
+        const x = ((e.clientX - centerX) / canvasRect.width) * 30;
+        const y = ((e.clientY - centerY) / canvasRect.height) * 30;
         leftEye.style.transform = `translate(${x}px, ${y}px)`;
         rightEye.style.transform = `translate(${x}px, ${y}px)`;
 
-        if (e.clientY < 160) {
-            const tongueScale = 1 - (e.clientY / 160);
+        if (e.clientY < canvasRect.bottom) {
+            const tongueScale = 1 - (e.clientY / canvasRect.top);
             emojiTongue.style.transform = `scaleY(${tongueScale})`;
         } else {
             emojiTongue.style.transform = "scaleY(0)";
