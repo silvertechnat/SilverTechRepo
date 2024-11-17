@@ -9,10 +9,9 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 0;
             background-color: #FFFFFF;
             color: #0F213E;
-            padding-top: 180px; /* Space for fixed header */
+            padding-top: 150px; /* Space for fixed header */
         }
 
         /* Header section */
@@ -25,7 +24,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 20px;
             background-color: #0F213E;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
@@ -33,19 +32,25 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Shrink header on scroll */
+        /* Header shrinking effect */
         .header.shrink {
-            padding: 20px;
+            height: 80px;
+            padding: 10px;
         }
 
-        /* Header text styling */
         .hero-title {
             font-size: 1.5em;
             color: #F4F4F4;
+            transition: font-size 0.3s ease-in-out, transform 0.3s ease;
+        }
+
+        .header.shrink .hero-title {
+            font-size: 1em;
+            transform: translateY(-20px);
         }
 
         .tagline {
-            font-size: 1em;
+            font-size: 0.9em;
             font-style: italic;
             color: #00FFC8;
         }
@@ -53,8 +58,8 @@
         /* Emoji styles */
         .emoji-canvas {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background-color: #1A3457;
             border-radius: 50%;
             display: flex;
@@ -72,16 +77,16 @@
             transition: transform 0.2s ease;
         }
 
-        .emoji-eye.left { top: 35px; left: 25px; }
-        .emoji-eye.right { top: 35px; left: 60px; }
+        .emoji-eye.left { top: 25px; left: 20px; }
+        .emoji-eye.right { top: 25px; left: 50px; }
 
         .emoji-mouth {
             position: absolute;
             width: 35px;
             height: 5px;
             background-color: #00FFC8;
-            top: 70px;
-            left: 33px;
+            top: 60px;
+            left: 23px;
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
         }
@@ -92,9 +97,9 @@
             height: 30px;
             background-color: pink;
             border-radius: 0 0 20px 20px;
-            top: 85px;
-            left: 35px;
-            transform: scaleY(0); /* Initially hidden */
+            top: 75px;
+            left: 25px;
+            transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.3s ease;
         }
@@ -105,7 +110,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 40px;
-            margin-top: 20px; /* Ensure it's not hidden behind the header */
+            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
@@ -120,7 +125,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
-            transition: transform 0.3s ease;
             color: #F4F4F4;
         }
 
@@ -128,17 +132,23 @@
             transform: translateY(-10px);
         }
 
-        /* Contact Us button styles */
+        .service-card p {
+            color: #F4F4F4;
+        }
+
+        /* Contact Us Button */
         .service-button {
             background-color: #00FFC8;
             color: #1A3457;
-            padding: 15px 30px;
+            padding: 15px;
+            text-align: center;
             border: none;
-            border-radius: 5px;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: none;
+            z-index: 1000;
         }
 
         .service-card:hover ~ .service-button {
@@ -148,7 +158,7 @@
 </head>
 <body>
 
-<!-- Fixed Header with Emoji and Text -->
+<!-- Header -->
 <header class="header" id="header">
     <div class="emoji-canvas" id="emojiCanvas">
         <div class="emoji-eye left" id="leftEye"></div>
@@ -160,55 +170,55 @@
     <div class="tagline">Swift and prompt local IT Advice in East Anglia.</div>
 </header>
 
-<!-- Services Cards Section -->
+<!-- Services Cards -->
 <div class="services-container">
-    <div class="service-card">Networking Solutions</div>
-    <div class="service-card">Cloud Solutions</div>
-    <div class="service-card">IT Consulting</div>
-    <div class="service-card">Remote Technical Support</div>
-    <div class="service-card">Domain Configuration</div>
-    <div class="service-card">Microsoft 365 Management</div>
+    <div class="service-card">
+        <h3>Networking Solutions</h3>
+        <p>We configure networks for seamless operation and performance.</p>
+    </div>
+    <div class="service-card">
+        <h3>Cloud Solutions</h3>
+        <p>Your data in the cloud, always accessible and secure.</p>
+    </div>
+    <div class="service-card">
+        <h3>IT Consulting</h3>
+        <p>Expert advice to optimize your IT infrastructure.</p>
+    </div>
+    <div class="service-card">
+        <h3>Remote Technical Support</h3>
+        <p>Quick issue resolution from anywhere.</p>
+    </div>
+    <div class="service-card">
+        <h3>Domain Configuration</h3>
+        <p>Secure domain setups for businesses.</p>
+    </div>
+    <div class="service-card">
+        <h3>Microsoft 365 Management</h3>
+        <p>Boost productivity with expert Microsoft 365 management.</p>
+    </div>
 </div>
 
 <!-- Contact Us Button -->
-<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button">Contact Us</a>
+<a href="mailto:help@silvertechsupport.uk" class="service-button">Contact Us</a>
 
 <script>
-    const header = document.getElementById("header");
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
+    const header = document.getElementById("header");
 
-    // Header shrinking on scroll
+    // Shrink header on scroll
     window.addEventListener("scroll", () => {
-        if (window.scrollY > 100) {
+        if (window.scrollY > 50) {
             header.classList.add("shrink");
         } else {
             header.classList.remove("shrink");
         }
     });
 
-    // Emoji eye and tongue movement
+    // Tongue grows downward as mouse moves up
     document.addEventListener("mousemove", (e) => {
         const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        // Eyes follow the cursor within a limited range
-        const maxOffset = 15;
-        const offsetX = Math.min(Math.max((e.clientX - centerX) / 5, -maxOffset), maxOffset);
-        const offsetY = Math.min(Math.max((e.clientY - centerY) / 5, -maxOffset), maxOffset);
-        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-
-        // Tongue extends downward as mouse moves higher on the page
-        const tongueThreshold = rect.bottom;
-        if (e.clientY < tongueThreshold) {
-            const tongueScale = Math.min(1, (tongueThreshold - e.clientY) / 100);
-            emojiTongue.style.transform = `scaleY(${tongueScale})`;
-        } else {
-            emojiTongue.style.transform = "scaleY(0)";
-        }
+        const tongueScale = Math.max(0, 1 - (e.clientY - rect.bottom) / 200);
+        emojiTongue.style.transform = `scaleY(${tongueScale})`;
     });
 </script>
 
