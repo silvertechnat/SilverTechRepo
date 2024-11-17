@@ -26,26 +26,13 @@
             justify-content: center;
             padding: 20px;
             background-color: #0F213E;
-            background-image: radial-gradient(#1A3457 1px, transparent 1px);
-            background-size: 10px 10px;
             z-index: 1000;
             transition: all 0.3s ease-in-out;
-        }
-
-        .header.shrink {
-            height: 80px;
-            padding: 10px;
         }
 
         .hero-title {
             font-size: 1.5em;
             color: #F4F4F4;
-            transition: font-size 0.3s ease-in-out, transform 0.3s ease;
-        }
-
-        .header.shrink .hero-title {
-            font-size: 1em;
-            transform: translateY(-20px);
         }
 
         .tagline {
@@ -64,7 +51,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .emoji-eye {
@@ -204,16 +191,17 @@
     const emojiTongue = document.getElementById("emojiTongue");
     const contactUsButton = document.getElementById("contactUsButton");
 
-    // Eye tracking logic
+    // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
         const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
-        const offsetX = (e.clientX - rect.left - rect.width / 2) / 10;
-        const offsetY = (e.clientY - rect.top - rect.height / 2) / 10;
+        const maxOffset = 15;
+        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
+        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-        
+
         // Tongue behavior
-        const tongueScale = Math.max(0, 1 - (e.clientY - rect.bottom) / 200);
+        const tongueScale = Math.max(0, (rect.top - e.clientY) / 50);
         emojiTongue.style.transform = `scaleY(${tongueScale})`;
     });
 
@@ -221,9 +209,6 @@
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('mouseover', () => {
             contactUsButton.classList.add('show-button');
-        });
-        card.addEventListener('mouseout', () => {
-            contactUsButton.classList.remove('show-button');
         });
     });
 </script>
