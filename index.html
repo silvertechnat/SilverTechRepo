@@ -32,7 +32,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Header shrinking effect */
         .header.shrink {
             height: 80px;
             padding: 10px;
@@ -99,7 +98,6 @@
             border-radius: 0 0 20px 20px;
             top: 75px;
             left: 25px;
-            transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.3s ease;
         }
@@ -110,7 +108,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 40px;
-            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
@@ -151,7 +148,7 @@
             z-index: 1000;
         }
 
-        .service-card:hover ~ .service-button {
+        .show-button {
             display: block;
         }
     </style>
@@ -199,26 +196,35 @@
 </div>
 
 <!-- Contact Us Button -->
-<a href="mailto:help@silvertechsupport.uk" class="service-button">Contact Us</a>
+<a href="mailto:help@silvertechsupport.uk" class="service-button" id="contactUsButton">Contact Us</a>
 
 <script>
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
-    const header = document.getElementById("header");
+    const contactUsButton = document.getElementById("contactUsButton");
 
-    // Shrink header on scroll
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            header.classList.add("shrink");
-        } else {
-            header.classList.remove("shrink");
-        }
-    });
-
-    // Tongue grows downward as mouse moves up
+    // Eye tracking logic
     document.addEventListener("mousemove", (e) => {
         const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
+        const offsetX = (e.clientX - rect.left - rect.width / 2) / 10;
+        const offsetY = (e.clientY - rect.top - rect.height / 2) / 10;
+        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        
+        // Tongue behavior
         const tongueScale = Math.max(0, 1 - (e.clientY - rect.bottom) / 200);
         emojiTongue.style.transform = `scaleY(${tongueScale})`;
+    });
+
+    // Show contact button on hover over service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseover', () => {
+            contactUsButton.classList.add('show-button');
+        });
+        card.addEventListener('mouseout', () => {
+            contactUsButton.classList.remove('show-button');
+        });
     });
 </script>
 
