@@ -8,6 +8,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
+            padding-top: 160px; /* Ensure content isn't hidden by fixed header */
             background-color: #FFFFFF;
             color: #0F213E;
             overflow-x: hidden;
@@ -41,25 +42,6 @@
             font-size: 1em;
             font-style: italic;
             color: #00FFC8;
-        }
-
-        /* Background Transition */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            z-index: -1;
-            background-image: radial-gradient(#1A3457 1px, transparent 1px);
-            background-size: 10px 10px;
-            transition: background-size 0.5s, background-color 0.5s;
-        }
-
-        .scrolled {
-            background-size: 20px 20px;
-            background-color: #FFFFFF;
         }
 
         /* Emoji Styles */
@@ -99,11 +81,12 @@
         .emoji-tongue {
             position: absolute;
             width: 30px;
-            height: 15px;
+            height: 30px;
             background-color: pink;
             border-radius: 0 0 20px 20px;
             top: 85px;
             left: 35px;
+            transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.3s ease;
         }
@@ -113,7 +96,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            padding: 200px 40px 40px;
+            padding: 40px;
         }
 
         @media (max-width: 768px) {
@@ -128,6 +111,7 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
         .service-card:hover {
@@ -168,8 +152,8 @@
 
 <header class="header">
     <div class="emoji-canvas" id="emojiCanvas">
-        <div class="emoji-eye left"></div>
-        <div class="emoji-eye right"></div>
+        <div class="emoji-eye left" id="leftEye"></div>
+        <div class="emoji-eye right" id="rightEye"></div>
         <div class="emoji-mouth" id="emojiMouth"></div>
         <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
@@ -178,15 +162,15 @@
 </header>
 
 <div class="services-container">
-    <div class="service-card" onmouseover="showSmile()">
+    <div class="service-card">
         <h3>Networking Solutions</h3>
         <p>Robust configurations to handle your business needs.</p>
     </div>
-    <div class="service-card" onmouseover="showSmile()">
+    <div class="service-card">
         <h3>Cloud Solutions</h3>
         <p>Secure, scalable cloud solutions for your data.</p>
     </div>
-    <div class="service-card" onmouseover="showSmile()">
+    <div class="service-card">
         <h3>IT Consulting</h3>
         <p>Expert advice to keep your systems running smoothly.</p>
     </div>
@@ -199,18 +183,21 @@
 <script>
     const emojiMouth = document.getElementById("emojiMouth");
     const emojiTongue = document.getElementById("emojiTongue");
-
-    function showSmile() {
-        emojiMouth.style.borderRadius = "0 0 20px 20px";
-    }
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
 
     document.addEventListener("mousemove", (e) => {
-        const yPos = e.clientY / window.innerHeight;
-        emojiTongue.style.transform = `scaleY(${1 - yPos})`;
-    });
+        const x = (e.clientX / window.innerWidth - 0.5) * 50;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        leftEye.style.transform = `translate(${x}px, ${y}px)`;
+        rightEye.style.transform = `translate(${x}px, ${y}px)`;
 
-    window.addEventListener("scroll", () => {
-        document.body.classList.toggle("scrolled", window.scrollY > 100);
+        if (e.clientY < 160) {
+            const tongueScale = 1 - (e.clientY / 160);
+            emojiTongue.style.transform = `scaleY(${tongueScale})`;
+        } else {
+            emojiTongue.style.transform = "scaleY(0)";
+        }
     });
 </script>
 
