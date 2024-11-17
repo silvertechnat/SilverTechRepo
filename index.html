@@ -10,6 +10,7 @@
             margin: 0;
             background-color: #FFFFFF;
             color: #0F213E;
+            overflow-x: hidden;
         }
 
         /* Fixed Header */
@@ -32,12 +33,14 @@
         .hero-title {
             margin-top: 30px;
             font-size: 1.5em;
+            color: #F4F4F4;
         }
 
         .tagline {
             margin-top: 10px;
             font-size: 1em;
             font-style: italic;
+            color: #00FFC8;
         }
 
         /* Background Transition */
@@ -51,7 +54,7 @@
             z-index: -1;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
-            transition: background-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            transition: background-size 0.5s, background-color 0.5s;
         }
 
         .scrolled {
@@ -77,7 +80,6 @@
             height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
-            transition: transform 0.3s ease;
         }
         .emoji-eye.left { top: 35px; left: 25px; }
         .emoji-eye.right { top: 35px; left: 60px; }
@@ -89,13 +91,9 @@
             background-color: #00FFC8;
             top: 70px;
             left: 33px;
-            transition: all 0.3s ease;
-        }
-
-        .emoji-mouth.straight { border-bottom: 4px solid #00FFC8; }
-        .emoji-mouth.smile {
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
+            transition: all 0.3s;
         }
 
         .emoji-tongue {
@@ -106,7 +104,6 @@
             border-radius: 0 0 20px 20px;
             top: 85px;
             left: 35px;
-            transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.3s ease;
         }
@@ -131,7 +128,6 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
         }
 
         .service-card:hover {
@@ -172,9 +168,9 @@
 
 <header class="header">
     <div class="emoji-canvas" id="emojiCanvas">
-        <div class="emoji-eye left" id="leftEye"></div>
-        <div class="emoji-eye right" id="rightEye"></div>
-        <div class="emoji-mouth straight" id="emojiMouth"></div>
+        <div class="emoji-eye left"></div>
+        <div class="emoji-eye right"></div>
+        <div class="emoji-mouth" id="emojiMouth"></div>
         <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
     <h4 class="hero-title">Silver Tech Support UK</h4>
@@ -205,10 +201,13 @@
     const emojiTongue = document.getElementById("emojiTongue");
 
     function showSmile() {
-        emojiMouth.classList.remove("straight");
-        emojiMouth.classList.add("smile");
-        emojiTongue.style.transform = "scaleY(1)";
+        emojiMouth.style.borderRadius = "0 0 20px 20px";
     }
+
+    document.addEventListener("mousemove", (e) => {
+        const yPos = e.clientY / window.innerHeight;
+        emojiTongue.style.transform = `scaleY(${1 - yPos})`;
+    });
 
     window.addEventListener("scroll", () => {
         document.body.classList.toggle("scrolled", window.scrollY > 100);
