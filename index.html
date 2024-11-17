@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
+        /* General body styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #FFFFFF;
+            background-color: #FFFFFF; /* White background */
             color: #0F213E;
-            padding-top: 160px;
+            padding-top: 160px; /* Space for fixed header */
         }
 
-        /* Header */
+        /* Header section */
         .header {
             position: fixed;
             top: 0;
@@ -28,8 +29,15 @@
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
             z-index: 1000;
+            transition: all 0.3s ease-in-out; /* Smooth transition when shrinking */
         }
 
+        /* Shrink header on scroll */
+        .header.shrink {
+            padding: 20px;
+        }
+
+        /* Header text styling */
         .hero-title {
             font-size: 1.5em;
             color: #F4F4F4;
@@ -41,7 +49,7 @@
             color: #00FFC8;
         }
 
-        /* Emoji Styles */
+        /* Emoji styles */
         .emoji-canvas {
             position: relative;
             width: 100px;
@@ -51,6 +59,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden; /* Prevent eyes from leaving the circle */
         }
 
         .emoji-eye {
@@ -59,7 +68,7 @@
             height: 12px;
             background-color: #00FFC8;
             border-radius: 50%;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
         .emoji-eye.left { top: 35px; left: 25px; }
@@ -84,12 +93,12 @@
             border-radius: 0 0 20px 20px;
             top: 85px;
             left: 35px;
-            transform: scaleY(0);
+            transform: scaleY(0); /* Initially hidden */
             transform-origin: top;
             transition: transform 0.3s ease;
         }
 
-        /* Services Section */
+        /* Services section */
         .services-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -110,13 +119,14 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             transition: transform 0.3s ease;
+            color: #F4F4F4; /* White text for better readability */
         }
 
         .service-card:hover {
             transform: translateY(-10px);
         }
 
-        /* Contact Button */
+        /* Contact Us button styles */
         .service-button {
             background-color: #00FFC8;
             color: #1A3457;
@@ -136,7 +146,7 @@
 </head>
 <body>
 
-<header class="header">
+<header class="header" id="header">
     <div class="emoji-canvas" id="emojiCanvas">
         <div class="emoji-eye left" id="leftEye"></div>
         <div class="emoji-eye right" id="rightEye"></div>
@@ -148,50 +158,48 @@
 </header>
 
 <div class="services-container">
-    <div class="service-card">
-        <h3>Networking Solutions</h3>
-        <p>We configure networks so robust, they'll handle anything from office hustle to busy Monday mornings!</p>
-    </div>
-    <div class="service-card">
-        <h3>Cloud Solutions</h3>
-        <p>Your data in the cloud, secured and always accessible.</p>
-    </div>
-    <div class="service-card">
-        <h3>IT Consulting</h3>
-        <p>Expert advice to keep your systems running smoothly.</p>
-    </div>
-    <div class="service-card">
-        <h3>Remote Technical Support</h3>
-        <p>Quickly resolve IT issues remotely, with fast support.</p>
-    </div>
-    <div class="service-card">
-        <h3>Domain Configuration</h3>
-        <p>Efficient domain setups for small businesses.</p>
-    </div>
-    <div class="service-card">
-        <h3>Microsoft 365 Management</h3>
-        <p>Boost productivity with expertly managed setups.</p>
-    </div>
+    <div class="service-card">Networking Solutions</div>
+    <div class="service-card">Cloud Solutions</div>
+    <div class="service-card">IT Consulting</div>
+    <div class="service-card">Remote Technical Support</div>
+    <div class="service-card">Domain Configuration</div>
+    <div class="service-card">Microsoft 365 Management</div>
 </div>
 
-<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button" id="contactUsButton">Contact Us</a>
+<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button">Contact Us</a>
 
 <script>
+    // JavaScript for emoji interaction and header shrinking
+    const header = document.getElementById("header");
     const leftEye = document.getElementById("leftEye");
     const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
 
-    document.addEventListener("mousemove", (e) => {
-        const canvasRect = document.getElementById("emojiCanvas").getBoundingClientRect();
-        const centerX = canvasRect.left + canvasRect.width / 2;
-        const centerY = canvasRect.bottom;
-        const x = ((e.clientX - centerX) / canvasRect.width) * 30;
-        const y = ((e.clientY - centerY) / canvasRect.height) * 30;
-        leftEye.style.transform = `translate(${x}px, ${y}px)`;
-        rightEye.style.transform = `translate(${x}px, ${y}px)`;
+    // Handle scroll event to shrink header
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+            header.classList.add("shrink");
+        } else {
+            header.classList.remove("shrink");
+        }
+    });
 
-        if (e.clientY < canvasRect.bottom) {
-            const tongueScale = 1 - (e.clientY / canvasRect.top);
+    // Eye and tongue movement
+    document.addEventListener("mousemove", (e) => {
+        const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        // Limit eye movement within the circle
+        const maxOffset = 15;
+        const offsetX = Math.min(Math.max((e.clientX - centerX) / 5, -maxOffset), maxOffset);
+        const offsetY = Math.min(Math.max((e.clientY - centerY) / 5, -maxOffset), maxOffset);
+        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+        // Control tongue movement to only grow downward
+        if (e.clientY > rect.bottom) {
+            const tongueScale = Math.min(1, (e.clientY - rect.bottom) / 100);
             emojiTongue.style.transform = `scaleY(${tongueScale})`;
         } else {
             emojiTongue.style.transform = "scaleY(0)";
