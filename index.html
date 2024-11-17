@@ -9,9 +9,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #FFFFFF; /* White background */
+            padding: 0;
+            background-color: #FFFFFF;
             color: #0F213E;
-            padding-top: 160px; /* Space for fixed header */
+            padding-top: 180px; /* Space for fixed header */
         }
 
         /* Header section */
@@ -29,7 +30,7 @@
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
             z-index: 1000;
-            transition: all 0.3s ease-in-out; /* Smooth transition when shrinking */
+            transition: all 0.3s ease-in-out;
         }
 
         /* Shrink header on scroll */
@@ -59,7 +60,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Prevent eyes from leaving the circle */
+            overflow: hidden;
         }
 
         .emoji-eye {
@@ -104,6 +105,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 40px;
+            margin-top: 20px; /* Ensure it's not hidden behind the header */
         }
 
         @media (max-width: 768px) {
@@ -119,7 +121,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
             transition: transform 0.3s ease;
-            color: #F4F4F4; /* White text for better readability */
+            color: #F4F4F4;
         }
 
         .service-card:hover {
@@ -146,6 +148,7 @@
 </head>
 <body>
 
+<!-- Fixed Header with Emoji and Text -->
 <header class="header" id="header">
     <div class="emoji-canvas" id="emojiCanvas">
         <div class="emoji-eye left" id="leftEye"></div>
@@ -157,6 +160,7 @@
     <div class="tagline">Swift and prompt local IT Advice in East Anglia.</div>
 </header>
 
+<!-- Services Cards Section -->
 <div class="services-container">
     <div class="service-card">Networking Solutions</div>
     <div class="service-card">Cloud Solutions</div>
@@ -166,16 +170,16 @@
     <div class="service-card">Microsoft 365 Management</div>
 </div>
 
+<!-- Contact Us Button -->
 <a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button">Contact Us</a>
 
 <script>
-    // JavaScript for emoji interaction and header shrinking
     const header = document.getElementById("header");
     const leftEye = document.getElementById("leftEye");
     const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
 
-    // Handle scroll event to shrink header
+    // Header shrinking on scroll
     window.addEventListener("scroll", () => {
         if (window.scrollY > 100) {
             header.classList.add("shrink");
@@ -184,22 +188,23 @@
         }
     });
 
-    // Eye and tongue movement
+    // Emoji eye and tongue movement
     document.addEventListener("mousemove", (e) => {
         const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        
-        // Limit eye movement within the circle
+
+        // Eyes follow the cursor within a limited range
         const maxOffset = 15;
         const offsetX = Math.min(Math.max((e.clientX - centerX) / 5, -maxOffset), maxOffset);
         const offsetY = Math.min(Math.max((e.clientY - centerY) / 5, -maxOffset), maxOffset);
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
 
-        // Control tongue movement to only grow downward
-        if (e.clientY > rect.bottom) {
-            const tongueScale = Math.min(1, (e.clientY - rect.bottom) / 100);
+        // Tongue extends downward as mouse moves higher on the page
+        const tongueThreshold = rect.bottom;
+        if (e.clientY < tongueThreshold) {
+            const tongueScale = Math.min(1, (tongueThreshold - e.clientY) / 100);
             emojiTongue.style.transform = `scaleY(${tongueScale})`;
         } else {
             emojiTongue.style.transform = "scaleY(0)";
