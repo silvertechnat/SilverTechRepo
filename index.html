@@ -199,16 +199,16 @@
 
     // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
-        const rect = document.getElementById("emojiCanvas").getBoundingClientRect();
+        const rect = emojiCanvas.getBoundingClientRect();
         const maxOffset = 15;
         const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
         const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
 
-
-   // Mouth and tongue behavior
-   document.addEventListener("mousemove", (e) => {
+    // Mouth and tongue behavior
+    document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
 
         // Open mouth if cursor is in emoji circle
@@ -217,22 +217,26 @@
         } else {
             mouth.style.height = "5px"; // Close mouth
         }
+    });
 
     // Show contact button on hover over service cards
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('mouseover', () => {
             contactUsButton.classList.add('show-button');
         });
+    });
+
+    // Tongue appears based on mouse position above it
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        const tongue = document.getElementById("emojiTongue");
         
-        // Tongue appears based on mouse position above it
         if (e.clientY < rect.top) {
             tongue.style.opacity = "1";
             tongue.style.transform = `scaleY(${(rect.top - e.clientY) / 50})`;
         } else {
             tongue.style.opacity = "0";
         }
-
-
     });
 </script>
 
