@@ -8,18 +8,23 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #0F213E;
-            color: #F4F4F4;
-            transition: background 0.5s ease-in-out;
+            background-color: #FFFFFF;
+            color: #0F213E;
         }
 
-        /* Header */
+        /* Fixed Header */
         .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px;
+            background-color: #0F213E;
             background-image: radial-gradient(#1A3457 1px, transparent 1px);
             background-size: 10px 10px;
         }
@@ -33,6 +38,25 @@
             margin-top: 10px;
             font-size: 1em;
             font-style: italic;
+        }
+
+        /* Background Transition */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            z-index: -1;
+            background-image: radial-gradient(#1A3457 1px, transparent 1px);
+            background-size: 10px 10px;
+            transition: background-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .scrolled {
+            background-size: 20px 20px;
+            background-color: #FFFFFF;
         }
 
         /* Emoji Styles */
@@ -67,9 +91,24 @@
             left: 33px;
             transition: all 0.3s ease;
         }
+
+        .emoji-mouth.straight { border-bottom: 4px solid #00FFC8; }
         .emoji-mouth.smile {
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
+        }
+
+        .emoji-tongue {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            background-color: pink;
+            border-radius: 0 0 20px 20px;
+            top: 85px;
+            left: 35px;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.3s ease;
         }
 
         /* Services Section */
@@ -77,7 +116,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            padding: 40px;
+            padding: 200px 40px 40px;
         }
 
         @media (max-width: 768px) {
@@ -90,46 +129,42 @@
             background-color: #1A3457;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 350px;
-            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
-        .service-card svg {
-            margin-bottom: 20px;
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Footer Contact Button */
+        .footer {
+            background-color: #0F213E;
+            padding: 40px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+        }
+
+        .service-card:hover ~ .footer {
+            display: block;
         }
 
         .service-button {
             background-color: #00FFC8;
             color: #1A3457;
-            padding: 10px;
+            padding: 15px 30px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
-
-        .service-button.show {
-            display: block;
         }
 
         .service-button:hover {
             background-color: #F4F4F4;
-        }
-
-        /* Spinning globe animation */
-        .networking-icon:hover {
-            animation: spin 3s linear infinite;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -139,95 +174,44 @@
     <div class="emoji-canvas" id="emojiCanvas">
         <div class="emoji-eye left" id="leftEye"></div>
         <div class="emoji-eye right" id="rightEye"></div>
-        <div class="emoji-mouth smile" id="emojiMouth"></div>
+        <div class="emoji-mouth straight" id="emojiMouth"></div>
+        <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
     <h4 class="hero-title">Silver Tech Support UK</h4>
-    <div class="tagline">Swift and prompt local IT Advice in East Anglia, with attention to detail.</div>
+    <div class="tagline">Swift and prompt local IT Advice in East Anglia.</div>
 </header>
 
-<!-- Services Cards -->
 <div class="services-container">
-    <!-- Networking Solutions -->
-    <div class="service-card">
+    <div class="service-card" onmouseover="showSmile()">
         <h3>Networking Solutions</h3>
-        <svg class="networking-icon" width="100" height="100">
-            <circle cx="50" cy="50" r="45" stroke="#00FFC8" stroke-width="3" fill="none"/>
-            <path d="M35,30 Q50,10 65,30 T65,50 Q50,70 35,50 Z" stroke="#00FFC8" stroke-width="2" fill="none"/>
-        </svg>
-        <p>Robust network configurations to handle any challenge.</p>
+        <p>Robust configurations to handle your business needs.</p>
     </div>
-
-    <!-- Cloud Solutions -->
-    <div class="service-card">
+    <div class="service-card" onmouseover="showSmile()">
         <h3>Cloud Solutions</h3>
-        <svg width="100" height="100">
-            <ellipse cx="50" cy="60" rx="30" ry="20" stroke="#00FFC8" stroke-width="3" fill="none"/>
-            <circle cx="40" cy="45" r="15" stroke="#00FFC8" stroke-width="3" fill="none"/>
-        </svg>
-        <p>Your data secured in the cloud.</p>
+        <p>Secure, scalable cloud solutions for your data.</p>
     </div>
-
-    <!-- IT Consulting -->
-    <div class="service-card">
+    <div class="service-card" onmouseover="showSmile()">
         <h3>IT Consulting</h3>
-        <svg width="100" height="100">
-            <rect x="20" y="30" width="60" height="40" rx="10" stroke="#00FFC8" stroke-width="3" fill="none"/>
-        </svg>
-        <p>Efficient diagnosis of tech issues.</p>
-    </div>
-
-    <!-- Remote Support -->
-    <div class="service-card">
-        <h3>Remote Technical Support</h3>
-        <svg width="100" height="100">
-            <circle cx="50" cy="50" r="40" stroke="#00FFC8" stroke-width="3" fill="none"/>
-        </svg>
-        <p>Resolve IT issues remotely with ease.</p>
-    </div>
-
-    <!-- Domain Configuration -->
-    <div class="service-card">
-        <h3>Domain Configuration</h3>
-        <svg width="100" height="100">
-            <text x="10" y="50" font-family="Arial" font-size="20" fill="#00FFC8">www</text>
-        </svg>
-        <p>Secure domain setups for businesses.</p>
-    </div>
-
-    <!-- Microsoft 365 Management -->
-    <div class="service-card">
-        <h3>Microsoft 365 Management</h3>
-        <svg width="100" height="100">
-            <rect x="20" y="30" width="60" height="40" rx="5" stroke="#00FFC8" stroke-width="3" fill="none"/>
-            <text x="40" y="55" font-family="Arial" font-size="18" fill="#00FFC8">365</text>
-        </svg>
-        <p>Boost productivity with Microsoft 365.</p>
+        <p>Expert advice to keep your systems running smoothly.</p>
     </div>
 </div>
 
-<a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button" id="contactUsButton">Contact Us</a>
+<div class="footer" id="footer">
+    <a href="mailto:help@silvertechsupport.uk?subject=Help Request" class="service-button">Contact Us</a>
+</div>
 
 <script>
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
     const emojiMouth = document.getElementById("emojiMouth");
-    const contactUsButton = document.getElementById("contactUsButton");
+    const emojiTongue = document.getElementById("emojiTongue");
 
-    document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 50;
-        const y = (e.clientY / window.innerHeight - 0.5) * 30;
-        leftEye.style.transform = `translate(${x}px, ${y}px)`;
-        rightEye.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    function showSmile() {
+        emojiMouth.classList.remove("straight");
+        emojiMouth.classList.add("smile");
+        emojiTongue.style.transform = "scaleY(1)";
+    }
 
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mouseover', () => {
-            contactUsButton.classList.add('show');
-        });
-    });
-
-    contactUsButton.addEventListener("mouseout", () => {
-        contactUsButton.classList.remove('show');
+    window.addEventListener("scroll", () => {
+        document.body.classList.toggle("scrolled", window.scrollY > 100);
     });
 </script>
 
