@@ -47,12 +47,13 @@
             width: 80px;
             height: 80px;
             background-color: #1A3457;
-            border-radius: 50%;
-            border-color: #00FFC8;
+            border: 3px solid #00FFC8; /* Blue border matching eye color */
+            border-radius: 10%; /* Slightly less rounded for a pixelated look */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: visible;
+            image-rendering: pixelated; /* Pixelated effect */
         }
 
         .emoji-eye {
@@ -79,7 +80,16 @@
         }
 
         .emoji-tongue {
-            position: absolute; width: 30px; height: 30px; background-color: pink; border-radius: 0 0 20px 20px; top: 65px; left: 25px; transform-origin: top; transition: transform 0.3s ease, opacity 0.3s ease; /* Added opacity transition */ opacity: 0; /* Hidden by default */
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: pink;
+            border-radius: 0 0 20px 20px;
+            top: 65px;
+            left: 25px;
+            transform-origin: top;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0; /* Hidden by default */
         }
 
         /* Services section */
@@ -150,7 +160,6 @@
 </header>
 
 <!-- Services Cards -->
-
 <div class="services-container">
     <div class="service-card">
         <h3>Networking Solutions</h3>
@@ -189,7 +198,6 @@
     const emojiCanvas = document.getElementById("emojiCanvas");
     const mouth = document.getElementById("emojiMouth");
  
-
     // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
@@ -207,8 +215,12 @@
         // Open mouth if cursor is in emoji circle
         if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
             mouth.style.height = "20px"; // Open mouth
+        if (e.clientY > rect.bottom) {
+            emojiTongue.style.opacity = "1";
+            emojiTongue.style.transform = `scaleY(${(e.clientY - rect.bottom) / 30})`;
         } else {
             mouth.style.height = "5px"; // Close mouth
+            emojiTongue.style.opacity = "0";
         }
     });
 
