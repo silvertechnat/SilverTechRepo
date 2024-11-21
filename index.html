@@ -208,18 +208,13 @@
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
 
-    // Mouth and tongue behavior
+    // Tongue activation when the pointer reaches bottom of the emoji face circle
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
-
-        // Open mouth if cursor is in emoji circle
-        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-            mouth.style.height = "20px"; // Open mouth
         if (e.clientY > rect.bottom) {
             emojiTongue.style.opacity = "1";
             emojiTongue.style.transform = `scaleY(${(e.clientY - rect.bottom) / 30})`;
         } else {
-            mouth.style.height = "5px"; // Close mouth
             emojiTongue.style.opacity = "0";
         }
     });
@@ -229,19 +224,6 @@
         card.addEventListener('mouseover', () => {
             contactUsButton.classList.add('show-button');
         });
-    });
-
-    // Tongue appears based on mouse position above it
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        const tongue = document.getElementById("emojiTongue");
-        
-        if (e.clientY < rect.top) {
-            tongue.style.opacity = "1";
-            tongue.style.transform = `scaleY(${(rect.top - e.clientY) / 50})`;
-        } else {
-            tongue.style.opacity = "0";
-        }
     });
 </script>
 
