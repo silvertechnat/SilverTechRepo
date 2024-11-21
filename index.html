@@ -100,12 +100,12 @@
 
         .emoji-tongue {
             position: absolute;
-            width: 20px; /* Adjusted */
+            width: 20px;
             height: 20px;
             background-color: pink;
             border-radius: 0 0 20px 20px;
-            top: 50px; /* Adjusted */
-            left: 20px; /* Adjusted */
+            top: 50px;
+            left: 20px;
             transform-origin: top;
             transition: transform 0.3s ease, opacity 0.3s ease;
             opacity: 0; /* Hidden by default */
@@ -117,7 +117,6 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             padding: 100px 40px;
-            z-index: 2; /* Above scanlines */
         }
 
         @media (max-width: 768px) {
@@ -134,10 +133,37 @@
             padding: 40px;
             color: #00FFC8;
             box-shadow: 0 0 10px #00FFC8; /* Glow effect for cards */
+            position: relative;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
+        }
+
+        .service-details {
+            display: none;
+            position: absolute;
+            bottom: -90px;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background-color: #001A29;
+            border: 2px solid #00FFC8;
+            border-radius: 10px;
+            color: #00FFC8;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .service-card:hover .service-details {
+            display: block;
+        }
+
+        .contact-quote {
+            display: block;
+            margin-top: 10px;
+            color: #00FFC8;
+            text-decoration: underline;
         }
 
         /* Contact Us Button */
@@ -153,12 +179,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            display: none;
-            z-index: 1000;
-        }
-
-        .show-button {
             display: block;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -170,6 +192,7 @@
         <div class="emoji-eye left" id="leftEye"></div>
         <div class="emoji-eye right" id="rightEye"></div>
         <div class="emoji-mouth" id="emojiMouth"></div>
+        <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
     <div>
         <h4 class="hero-title">Silver Tech Support UK</h4>
@@ -203,6 +226,7 @@
         <h3>Microsoft 365 Management</h3>
         <p>We handle all those pesky settings so you can spend less time in Outlook and more time actually enjoying your coffee breaks.</p>
     </div>
+    <!-- Add similar structure for other cards -->
 </div>
 
 <!-- Contact Us Button -->
@@ -214,7 +238,7 @@
     const emojiTongue = document.getElementById("emojiTongue");
     const emojiCanvas = document.getElementById("emojiCanvas");
     const mouth = document.getElementById("emojiMouth");
- 
+
     // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
@@ -231,7 +255,7 @@
         if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
             mouth.style.height = "20px"; // Open mouth
         } else {
-            mouth.style.height = "5px"; // Close mouth
+            mouth.style.height = "6px"; // Close mouth
         }
     });
 
