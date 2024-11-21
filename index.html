@@ -48,12 +48,13 @@
             height: 80px;
             background-color: #1A3457;
             border: 3px solid #00FFC8; /* Blue border matching eye color */
-            border-radius: 10%; /* Slightly less rounded for a pixelated look */
+            border-radius: 10%; /* Slightly blocky for pixelated effect */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: visible;
-            image-rendering: pixelated; /* Pixelated effect */
+            image-rendering: pixelated; /* Force blocky rendering for 8-bit style */
+            box-shadow: 0 0 0 1px #00FFC8; /* Accentuate blockiness */
         }
 
         .emoji-eye {
@@ -77,6 +78,7 @@
             left: 23px;
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
+            transition: height 0.2s ease; /* Smooth transition for mouth opening/closing */
         }
 
         .emoji-tongue {
@@ -194,7 +196,6 @@
     const leftEye = document.getElementById("leftEye");
     const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
-    const contactUsButton = document.getElementById("contactUsButton");
     const emojiCanvas = document.getElementById("emojiCanvas");
     const mouth = document.getElementById("emojiMouth");
  
@@ -208,22 +209,25 @@
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
 
-    // Tongue activation when the pointer reaches bottom of the emoji face circle
+    // Mouth reactions based on cursor position
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
-        if (e.clientY > rect.bottom) {
-            emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(e.clientY - rect.bottom) / 30})`;
+        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
+            mouth.style.height = "20px"; // Open mouth
         } else {
-            emojiTongue.style.opacity = "0";
+            mouth.style.height = "5px"; // Close mouth
         }
     });
 
-    // Show contact button on hover over service cards
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mouseover', () => {
-            contactUsButton.classList.add('show-button');
-        });
+    // Tongue activation when pointer is above emoji
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        if (e.clientY < rect.top) {
+            emojiTongue.style.opacity = "1";
+            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
+        } else {
+            emojiTongue.style.opacity = "0";
+        }
     });
 </script>
 
