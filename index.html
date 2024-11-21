@@ -106,7 +106,7 @@
             height: 20px;
             background-color: pink;
             border-radius: 0 0 20px 20px;
-            top: 50px;
+            top: 55px;
             left: 25px;
             transform-origin: top;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -266,7 +266,7 @@
         const rect = emojiCanvas.getBoundingClientRect();
         if (e.clientY < rect.top) {
             emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 10})`;
+            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
         } else {
             emojiTongue.style.opacity = "0";
         }
