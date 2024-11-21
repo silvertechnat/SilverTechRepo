@@ -5,13 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
-        /* General body styles */
+        /* General body styles for DSTN look */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Retro feel */
             margin: 0;
-            background-color: #FFFFFF;
-            color: #0F213E;
+            background-color: #001A29; /* Dark blue-green for DSTN base */
+            color: #00FFC8; /* Neon green for text */
             padding-top: 150px; /* Space for fixed header */
+            image-rendering: pixelated; /* Blocky rendering for the entire page */
+        }
+
+        /* Add scanline effect for the entire page */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background: linear-gradient(rgba(0, 0, 0, 0.05) 50%, transparent 50%);
+            background-size: 100% 2px; /* Thin lines for scan effect */
+            z-index: 1;
         }
 
         /* Header section */
@@ -25,59 +40,59 @@
             justify-content: center; /* Center horizontally */
             gap: 20px; /* Space between emoji and text */
             padding: 20px;
-            background: linear-gradient(to right, #0F213E 75%, silver 25%);
+            background: linear-gradient(to right, #001A29, #99B3CC); /* Dark blue to silver gradient */
+            border-bottom: 2px solid #00FFC8; /* Green border to frame header */
             z-index: 1000;
             transition: all 0.3s ease-in-out;
         }
 
         .hero-title {
-            font-size: 1.5em; /* Original size */
-            color: #F4F4F4;
+            font-size: 1.8em; /* Slightly larger for readability */
+            color: #00FFC8; /* Neon green text */
             margin: 0;
+            text-shadow: 1px 1px 0 #001A29; /* Subtle shadow for LCD effect */
         }
 
         .tagline {
-            font-size: 0.9em; /* Original size */
+            font-size: 1em; /* Adjusted size */
             font-style: italic;
-            color: #00FFC8;
+            color: #66FFCC; /* Softer green for contrast */
             margin: 0;
         }
 
-        /* Emoji styles */
+        /* Emoji styles for DSTN pixelated look */
         .emoji-canvas {
             position: relative;
-            width: 60px; /* Adjusted to fit tagline alignment */
-            height: 60px;
-            background-color: #1A3457;
-            border: 3px solid #00FFC8; /* Blue border matching eye color */
-            border-radius: 10%; /* Slightly blocky for pixelated effect */
+            width: 70px; /* Adjusted for better visibility */
+            height: 70px;
+            background-color: #001A29; /* Match DSTN background */
+            border: 3px solid #00FFC8; /* Neon green border */
+            border-radius: 10%; /* Slightly rounded edges */
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: visible;
-            image-rendering: pixelated; /* Force blocky rendering for 8-bit style */
-            box-shadow: 0 0 0 1px #00FFC8; /* Accentuate blockiness */
+            overflow: hidden;
+            box-shadow: 0 0 10px #00FFC8; /* Glowing effect */
         }
 
         .emoji-eye {
             position: absolute;
-            width: 8px; /* Adjusted to match new size */
-            height: 8px;
+            width: 10px; /* Adjusted size for DSTN look */
+            height: 10px;
             background-color: #00FFC8;
             border-radius: 50%;
-            transition: transform 0.2s ease;
         }
 
-        .emoji-eye.left { top: 20px; left: 15px; }
-        .emoji-eye.right { top: 20px; left: 35px; }
+        .emoji-eye.left { top: 20px; left: 18px; }
+        .emoji-eye.right { top: 20px; right: 18px; }
 
         .emoji-mouth {
             position: absolute;
-            width: 25px; /* Adjusted */
-            height: 5px;
+            width: 30px;
+            height: 6px;
             background-color: #00FFC8;
-            top: 45px;
-            left: 15px;
+            top: 50px;
+            left: 20px;
             border-bottom: 4px solid #00FFC8;
             border-radius: 0 0 20px 20px;
             transition: height 0.2s ease; /* Smooth transition for mouth opening/closing */
@@ -101,7 +116,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            padding: 100px 40px; 
+            padding: 100px 40px;
+            z-index: 2; /* Above scanlines */
         }
 
         @media (max-width: 768px) {
@@ -111,27 +127,24 @@
         }
 
         .service-card {
-            background-color: #1A3457;
-            padding: 40px;
+            background-color: #001A29; /* Match background */
+            border: 2px solid #00FFC8; /* Neon border */
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
-            color: #F4F4F4;
+            padding: 40px;
+            color: #00FFC8;
+            box-shadow: 0 0 10px #00FFC8; /* Glow effect for cards */
         }
 
         .service-card:hover {
             transform: translateY(-10px);
         }
 
-        .service-card p {
-            color: #F4F4F4;
-        }
-
         /* Contact Us Button */
         .service-button {
             background-color: #00FFC8;
-            color: #1A3457;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #001A29;
+            font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
             padding: 15px;
             text-align: center;
@@ -157,7 +170,6 @@
         <div class="emoji-eye left" id="leftEye"></div>
         <div class="emoji-eye right" id="rightEye"></div>
         <div class="emoji-mouth" id="emojiMouth"></div>
-        <div class="emoji-tongue" id="emojiTongue"></div>
     </div>
     <div>
         <h4 class="hero-title">Silver Tech Support UK</h4>
