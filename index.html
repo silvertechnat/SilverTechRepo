@@ -265,7 +265,7 @@
         const rect = emojiCanvas.getBoundingClientRect();
         if (e.clientY < rect.top) {
             emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(rect.top + 30 - e.clientY) / 30})`;
+            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
         } else {
             emojiTongue.style.opacity = "0";
         }
