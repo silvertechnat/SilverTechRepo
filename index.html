@@ -9,56 +9,111 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background: linear-gradient(to bottom left, #001A29 80%, #c6c6c6 20%);
+            background: linear-gradient(135deg, #001A29 80%, #c6c6c6 20%);
             color: #c6c6c6;
-            padding-top: 150px; /* Space for fixed header */
+            padding-top: 150px;
         }
 
-        /* Fixed Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #001A29;
-            color: #c6c6c6;
-            padding: 20px;
+        /* Header section */
+        .header {
             position: fixed;
-            width: 100%;
             top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #001A29;
             z-index: 1000;
         }
 
-        /* Menu dropdown */
-        .menu {
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            color: #c6c6c6;
+        }
+
+        .dropdown-menu {
             display: none;
-            flex-direction: column;
             position: absolute;
             top: 60px;
             right: 20px;
             background-color: #001A29;
-            border: 2px solid #c6c6c6;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #c6c6c6;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: #c6c6c6;
+            border: 1px solid #c6c6c6;
+            border-radius: 5px;
             padding: 10px;
-            display: block;
+            z-index: 2000;
         }
 
-        .menu a:hover {
-            background-color: #c6c6c6;
-            color: #001A29;
+        .dropdown-menu a {
+            display: block;
+            color: #c6c6c6;
+            text-decoration: none;
+            margin: 10px 0;
         }
 
-        .menu-icon {
-            display: block;
+        .dropdown-menu a:hover {
+            color: #00FFC8;
+        }
+
+        /* Summary section above services */
+        .summary {
+            text-align: center;
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px #767676;
+        }
+
+        /* Service cards */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background-color: #001A29;
+            border: 2px solid #c6c6c6;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            color: #c6c6c6;
             cursor: pointer;
         }
 
-        /* Emoji styling */
+        .service-details {
+            display: none;
+        }
+
+        .service-card.open .service-details {
+            display: block;
+            margin-top: 10px;
+            color: #00FFC8;
+        }
+
+        .service-card.open .emoji-mouth {
+            background: radial-gradient(circle, #c6c6c6 50%, transparent 100%);
+        }
+
+        .contact-quote {
+            display: block;
+            margin-top: 10px;
+            color: #00FFC8;
+            text-decoration: underline;
+        }
+
+        /* Emoji styles */
         .emoji-canvas {
             width: 70px;
             height: 70px;
@@ -66,31 +121,26 @@
             border: 3px solid #c6c6c6;
             border-radius: 50%;
             position: relative;
+            margin: auto;
         }
 
         .emoji-eye {
-            position: absolute;
             width: 10px;
             height: 10px;
             background-color: #c6c6c6;
             border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .emoji-eye::after {
-            content: "";
             position: absolute;
-            background-color: #001A29;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
         }
 
-        .emoji-eye.left { top: 20px; left: 18px; }
-        .emoji-eye.right { top: 20px; right: 18px; }
+        .emoji-eye.left {
+            top: 20px;
+            left: 18px;
+        }
+
+        .emoji-eye.right {
+            top: 20px;
+            right: 18px;
+        }
 
         .emoji-mouth {
             position: absolute;
@@ -103,168 +153,99 @@
             transition: transform 0.3s ease;
         }
 
-        .emoji-tongue {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: pink;
-            border-radius: 0 0 20px 20px;
-            top: 55px;
-            left: 25px;
-            transform-origin: top;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        /* Services section and summary text */
-        .services-summary {
+        /* Contact Us Button */
+        .service-button {
+            background-color: #00FFC8;
+            color: #001A29;
+            font-weight: bold;
+            padding: 15px;
             text-align: center;
-            margin: 20px auto;
-            padding: 10px;
-            font-size: 1.2em;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-        }
-
-        /* Services section */
-        .services-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 5px 5px;
-        }
-
-        @media (max-width: 768px) {
-            .services-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-card {
-            background-color: #001A29;
-            color: #c6c6c6;
-            border: 2px solid #c6c6c6;
-            border-radius: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .service-card h3 {
-            margin: 0;
-            padding: 10px;
-        }
-
-        .service-card p {
-            display: none;
-            padding: 10px;
-        }
-
-        .service-card.active p {
-            display: block;
-        }
-
-        .contact-button {
+            border: none;
             position: fixed;
             bottom: 0;
-            width: 100%;
-            background-color: #c6c6c6;
-            color: #001A29;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .services-container {
-                grid-template-columns: 1fr;
-            }
+            left: 0;
+            right: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Header with dropdown menu -->
-    <header>
-        <div class="emoji-canvas">
-            <div class="emoji-eye left"></div>
-            <div class="emoji-eye right"></div>
-            <div class="emoji-mouth"></div>
-            <div class="emoji-tongue"></div>
-        </div>
-        <div>
-            <h1 class="hero-title">Silver Tech Support</h1>
-            <p class="tagline">Quick and Reliable IT Support in East Anglia</p>
-        </div>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <div class="menu" id="menu">
-            <a href="#">Home</a>
-            <a href="#">About Us</a>
-            <a href="#services">Services</a>
-            <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
-        </div>
-    </header>
 
-    <!-- Summary section -->
-    <div class="services-summary">
-        We provide comprehensive IT support services, including networking solutions, device repairs, security training, and more. Our flexible cost packages ensure tailored solutions for your needs.
+<!-- Header -->
+<header class="header">
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <div class="emoji-canvas" id="emojiCanvas">
+        <div class="emoji-eye left" id="leftEye"></div>
+        <div class="emoji-eye right" id="rightEye"></div>
+        <div class="emoji-mouth" id="emojiMouth"></div>
     </div>
+    <h4>Silver Tech Support</h4>
+</header>
 
-    <!-- Services section -->
-    <div class="services-container" id="services">
-        <div class="service-card" onclick="toggleCard(this)">
-            <h3>Networking Solutions</h3>
-            <p>We tangle with wires so you don’t have to—ensuring your network is faster than your morning coffee kick.</p>
-        </div>
-        <div class="service-card" onclick="toggleCard(this)">
-            <h3>Repairs, Upgrades and Updates</h3>
-            <p>Got a computer that's slower than your gran's Wi-Fi? Trade that clunky HDD for a sleek SSD and watch your device go from tortoise to hare!</p>
-        </div>
-        <div class="service-card" onclick="toggleCard(this)">
-            <h3>Cyber Security How To's</h3>
-            <p>We prescribe solutions so you can get back to doing what you do best—without hitting Ctrl+Alt+Delete on your sanity.</p>
+<div class="dropdown-menu" id="dropdownMenu">
+    <a href="#header">Home</a>
+    <a href="#">About Us</a>
+    <a href="#services">Services</a>
+    <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
+</div>
+
+<!-- Summary Section -->
+<div class="summary">
+    <p>Welcome to Silver Tech Support! We provide fast, reliable, and affordable IT services tailored to your needs. 
+    From networking solutions to Microsoft 365 management, we have flexible cost packages to suit everyone. Explore our services below!</p>
+</div>
+
+<!-- Services -->
+<div class="services-container" id="services">
+    <div class="service-card">
+        <h3>Networking Solutions</h3>
+        <p>Fast and efficient networking services to keep you connected.</p>
+        <div class="service-details">
+            <p>We ensure your network is optimized and secure, with minimal downtime.</p>
         </div>
     </div>
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
-    const emojiTongue = document.getElementById("emojiTongue");
-    const emojiCanvas = document.getElementById("emojiCanvas");
-    const mouth = document.getElementById("emojiMouth");
+    <div class="service-card">
+        <h3>Repairs & Upgrades</h3>
+        <p>Get your devices running like new!</p>
+        <div class="service-details">
+            <p>Upgrade your storage, OS, and hardware for a better performance.</p>
+        </div>
+    </div>
+    <!-- Additional cards as needed -->
+</div>
 
-    // Constrain eye movement within the emoji face
-    document.addEventListener("mousemove", (e) => {
+<!-- Contact Us Button -->
+<a href="mailto:help@silvertechsupport.uk" class="service-button">Contact us to discuss how we can help you</a>
+
+<script>
+    // Dropdown menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    menuToggle.addEventListener('click', () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Expand/Collapse service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('open');
+        });
+    });
+
+    // Emoji eyes tracking
+    const emojiCanvas = document.getElementById('emojiCanvas');
+    const leftEye = document.getElementById('leftEye');
+    const rightEye = document.getElementById('rightEye');
+
+    document.addEventListener('mousemove', (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
-        const maxOffset = 15;
-        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
-        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
+        const maxOffset = 10;
+        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 10));
+        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 10));
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
-
-    // Mouth reactions based on cursor position
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-            mouth.style.height = "20px"; // Open mouth
-        } else {
-            mouth.style.height = "6px"; // Close mouth
-        }
-    });
-
-    // Tongue activation when pointer is above emoji
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        if (e.clientY < rect.top) {
-            emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
-        } else {
-            emojiTongue.style.opacity = "0";
-        }
 </script>
 
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-
-            const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
-    </script>
 </body>
 </html>
