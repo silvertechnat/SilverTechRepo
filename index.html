@@ -200,33 +200,178 @@
         <div class="tagline">Quick and Reliable IT Support, in East Anglia.</div>
     </div>
 </header>
-
-<!-- Services Cards -->
+<!-- Services Container -->
 <div class="services-container">
-    <div class="service-card">
+    <!-- Networking Solutions -->
+    <div class="service-card" onclick="showPopup('networking')">
         <h3>Networking Solutions</h3>
         <p>We tangle with wires so you don’t have to—ensuring your network is faster than your morning coffee kick.</p>
     </div>
-    <div class="service-card">
+
+    <!-- Repairs, Upgrades and Updates -->
+    <div class="service-card" onclick="showPopup('repairs')">
         <h3>Repairs, Upgrades and Updates</h3>
         <p>Got a computer that's slower than your gran's Wi-Fi? Let's fix that! Trade that clunky HDD for a sleek SSD and watch your device go from tortoise to hare! Plus, upgrade to Windows 11 and enjoy a fresh, faster, and friendlier experience.</p>
     </div>
-    <div class="service-card">
+
+    <!-- Cyber Security How To's -->
+    <div class="service-card" onclick="showPopup('cybersecurity')">
         <h3>Cyber Security How To's</h3>
-        <p>We make being secure easy, from simplified setups while using industry best practice to cyber security training, We prescribe solutions so you can get back to doing what you do best—without hitting Ctrl+Alt+Delete on your sanity.</p>
+        <p>We make being secure easy, from simplified setups while using industry best practice to cyber security training. We prescribe solutions so you can get back to doing what you do best—without hitting Ctrl+Alt+Delete on your sanity.</p>
     </div>
-    <div class="service-card">
+
+    <!-- Remote Technical Support -->
+    <div class="service-card" onclick="showPopup('remote')">
         <h3>Remote Technical Support</h3>
         <p>When things go *beep-boop* wrong, we fix it from afar like tech wizards, minus the robes. Instant help, no matter where you are!</p>
     </div>
-    <div class="service-card">
+
+    <!-- Domain Configuration -->
+    <div class="service-card" onclick="showPopup('domain')">
         <h3>Domain Configuration</h3>
         <p>We handle the "www.what-am-I-doing?" Your online domain, set up securely and just right, without the headaches.</p>
     </div>
-    <div class="service-card">
+
+    <!-- Microsoft 365 Management -->
+    <div class="service-card" onclick="showPopup('microsoft')">
         <h3>Microsoft 365 Management</h3>
         <p>We handle all those pesky settings so you can spend less time in Outlook and more time actually enjoying your coffee breaks.</p>
     </div>
+</div>
+
+<!-- Popup Details -->
+<div class="popup" id="popup-container">
+    <!-- Placeholder for dynamic content -->
+</div>
+
+<script>
+function showPopup(service) {
+    const popup = document.getElementById('popup-container');
+    let content = '';
+
+    switch (service) {
+        case 'networking':
+            content = `
+                <h3>Networking Solutions</h3>
+                <p>Optimize and secure your network with tailored solutions.</p>
+                <ul>
+                    <li>On-site network diagnostics and optimization</li>
+                    <li>Hardware and cabling installation</li>
+                    <li>Configuration of routers, switches, and firewalls</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for ad hoc troubleshooting</li>
+                    <li>Monthly packages from £250 for continuous support and maintenance</li>
+                </ul>
+            `;
+            break;
+
+        case 'repairs':
+            content = `
+                <h3>Repairs, Upgrades and Updates</h3>
+                <p>Restore speed and functionality to your devices.</p>
+                <ul>
+                    <li>SSD installation and HDD to SSD data transfer</li>
+                    <li>Operating system updates, including Windows 11</li>
+                    <li>General repairs and hardware diagnostics</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for individual tasks</li>
+                    <li>Upgrade bundles starting at £250 (e.g., SSD install and Windows update)</li>
+                </ul>
+            `;
+            break;
+
+        case 'cybersecurity':
+            content = `
+                <h3>Cyber Security How To's</h3>
+                <p>Secure your business or personal systems with confidence.</p>
+                <ul>
+                    <li>Comprehensive security assessments</li>
+                    <li>Guided setup of firewalls, antivirus, and best practices</li>
+                    <li>Cybersecurity awareness training for teams</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for consultation</li>
+                    <li>Customized training sessions from £200</li>
+                </ul>
+            `;
+            break;
+
+        case 'remote':
+            content = `
+                <h3>Remote Technical Support</h3>
+                <p>Fast and effective support, anytime, anywhere.</p>
+                <ul>
+                    <li>Remote troubleshooting and fixes</li>
+                    <li>Software installation and updates</li>
+                    <li>Device optimization and cleaning</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for single sessions</li>
+                    <li>Subscription plans starting from £180/month</li>
+                </ul>
+            `;
+            break;
+
+        case 'domain':
+            content = `
+                <h3>Domain Configuration</h3>
+                <p>Seamlessly set up and secure your online presence.</p>
+                <ul>
+                    <li>Domain purchase and configuration</li>
+                    <li>SSL security setup</li>
+                    <li>Placeholder website design (up to 4 pages)</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>Approx. 4 hours for setup at £260</li>
+                    <li>Monthly management plans available from £65/month</li>
+                </ul>
+            `;
+            break;
+
+        case 'microsoft':
+            content = `
+                <h3>Microsoft 365 Management</h3>
+                <p>Simplify your Microsoft 365 experience with expert management.</p>
+                <ul>
+                    <li>User account creation and management</li>
+                    <li>Cloud storage setup and organization</li>
+                    <li>Email configuration and optimization</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for ad hoc management</li>
+                    <li>Business management packages starting at £250/month</li>
+                </ul>
+            `;
+            break;
+
+        default:
+            content = '<p>Service details not found.</p>';
+    }
+
+    popup.innerHTML = `
+        <div class="popup-content">
+            <button onclick="closePopup()">Close</button>
+            ${content}
+        </div>
+    `;
+    popup.style.display = 'block';
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup-container');
+    popup.style.display = 'none';
+    popup.innerHTML = '';
+}
+</script>
+
     <!-- Add similar structure for other cards -->
 </div>
 
