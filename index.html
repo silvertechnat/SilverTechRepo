@@ -140,24 +140,27 @@
 
 
         .service-details {
-            display: none;
-            position: relative;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%; /* Adjust width to fit within the card */
-            padding: 20px;
-            background-color: #3C3C3C; /* Slightly lighter grey for cards */
-            border: 2px solid #E0E0E0; /* Light grey border */
-            border-radius: 10px;
-            box-shadow: 0 0 10px #767676;
-            z-index: 10;
-            text-align: center;
-        }
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Ensure it is not interactable when hidden */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Adjust width to fit within the card */
+    padding: 20px;
+    background-color: #3C3C3C; /* Slightly lighter grey for cards */
+    border: 2px solid #E0E0E0; /* Light grey border */
+    border-radius: 10px;
+    box-shadow: 0 0 10px #767676;
+    z-index: 10;
+    text-align: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
 
-        .service-card:hover .service-details {
-            display: flex;
-        }
+.service-card:hover .service-details {
+    opacity: 1; /* Fully visible on hover */
+    visibility: visible; /* Make it interactable */
+}
 /* Popup Container */
 .popup {
     position: fixed;
@@ -448,6 +451,18 @@ function closePopup() {
             emojiTongue.style.opacity = "0";
         }
     });
+
+    document.querySelectorAll('.service-card').forEach(card => {
+    const details = card.querySelector('.service-details');
+    card.addEventListener('mouseenter', () => {
+        details.style.opacity = '1';
+        details.style.visibility = 'visible';
+    });
+    card.addEventListener('mouseleave', () => {
+        details.style.opacity = '0';
+        details.style.visibility = 'hidden';
+    });
+});
 
     
 </script>
