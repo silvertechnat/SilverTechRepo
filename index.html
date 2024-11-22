@@ -254,7 +254,7 @@
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
         if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-            mouth.style.height = "20px"; // Open mouth
+            mouth.style.height = "15px"; // Open mouth
         } else {
             mouth.style.height = "6px"; // Close mouth
         }
@@ -265,7 +265,7 @@
         const rect = emojiCanvas.getBoundingClientRect();
         if (e.clientY < rect.top) {
             emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
+            emojiTongue.style.transform = `scaleY(${(rect.topbottom - e.clientY) / 30})`;
         } else {
             emojiTongue.style.opacity = "0";
         }
