@@ -5,113 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silver Tech Support</title>
     <style>
-        /* General Styles */
+        /* Psion 3c-inspired styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #2C3E3E; /* Dark green background for an LCD feel */
+            color: #C8F0C8; /* Light green text to mimic LCD contrast */
             margin: 0;
-            background-color: #2E2E2E;
-            color: #E0E0E0;
-            padding-top: 150px;
+            padding: 0;
         }
 
         .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            background-color: #e0e0e0;
-            z-index: 1000;
+            padding: 10px;
+            border-bottom: 2px solid #C8F0C8;
+            margin-bottom: 20px;
         }
 
         .hero-title {
-            font-size: 1.6em;
-            color: #444444;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            margin: 5px 0;
         }
 
         .tagline {
             font-size: 0.8em;
             font-style: italic;
-            color: #444444;
-            margin: 0;
+            margin: 5px 0;
         }
 
         .emoji-canvas {
             width: 70px;
-            height: 70px;
-            background-color: #444444;
-            border: 3px solid #E0E0E0;
-            border-radius: 10%;
+            height: 50px;
+            border: 2px solid #C8F0C8;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 10px #797979;
+            background-color: #1E2B2B; /* Slightly darker green */
+            margin-bottom: 10px;
         }
 
         .emoji-eye {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #c6c6c6;
+            width: 6px;
+            height: 6px;
+            background-color: #C8F0C8;
             border-radius: 50%;
         }
 
-        .emoji-eye.left { top: 20px; left: 18px; }
-        .emoji-eye.right { top: 20px; right: 18px; }
+        .emoji-eye.left { top: 15px; left: 15px; }
+        .emoji-eye.right { top: 15px; right: 15px; }
 
         .emoji-mouth {
             position: absolute;
             width: 30px;
-            height: 6px;
-            background-color: #c6c6c6;
-            top: 50px;
+            height: 4px;
+            background-color: #C8F0C8;
+            top: 35px;
             left: 20px;
-            border-bottom: 4px solid #c6c6c6;
-            border-radius: 0 0 20px 20px;
-            transition: height 0.2s ease;
         }
 
         .emoji-tongue {
             position: absolute;
             width: 20px;
-            height: 20px;
-            background-color: pink;
-            border-radius: 0 0 20px 20px;
-            top: 55px;
+            height: 10px;
+            background-color: #85D4AA; /* Slightly dimmer green for tongue */
+            top: 38px;
             left: 25px;
-            transform-origin: top;
-            transition: transform 0.3s ease, opacity 0.3s ease;
             opacity: 0;
         }
 
         .content {
-            padding: 20px;
+            padding: 10px;
         }
 
         .comedic-line {
             text-align: center;
-            font-size: 1.2em;
-            margin: 20px 0;
-            color: #FFD700;
+            font-size: 1em;
+            margin: 10px 0;
+            border-top: 2px dashed #C8F0C8;
+            border-bottom: 2px dashed #C8F0C8;
+            padding: 5px;
         }
 
         .service-section {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #3C3C3C;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #767676;
+            border: 2px solid #C8F0C8;
+            padding: 10px;
+            margin: 10px 0;
         }
 
         .service-section h2 {
-            color: #FFD700;
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
         }
 
         .service-section ul {
-            margin: 10px 0;
             padding-left: 20px;
         }
 
@@ -120,22 +109,26 @@
         }
 
         .contact-section {
-            margin-top: 50px;
             text-align: center;
+            margin-top: 20px;
         }
 
         .contact-section a {
-            background-color: #FFD700;
-            color: #2E2E2E;
+            color: #1E2B2B;
+            background-color: #C8F0C8;
             text-decoration: none;
-            font-weight: bold;
-            padding: 15px 25px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            padding: 5px 10px;
+            border: 2px solid #C8F0C8;
         }
 
         .contact-section a:hover {
-            background-color: #E0E0E0;
+            background-color: #1E2B2B;
+            color: #C8F0C8;
+        }
+
+        /* Reduce resolution feel for low-res appearance */
+        * {
+            image-rendering: pixelated;
         }
     </style>
 </head>
@@ -161,51 +154,35 @@
     <!-- Networking Solutions -->
     <section class="service-section">
         <h2>Networking Solutions</h2>
-        <p>We tangle with wires so you don’t have to—ensuring your network is faster than your morning coffee kick.</p>
         <ul>
-            <li>On-site network diagnostics and optimisation</li>
+            <li>On-site network diagnostics</li>
             <li>Hardware and cabling installation</li>
-            <li>Configuration of routers, switches, and firewalls</li>
+            <li>Router and firewall setup</li>
         </ul>
-        <p><strong>Quotations available on request</strong></p>
     </section>
 
-    <!-- Repairs, Upgrades and Updates -->
+    <!-- Repairs, Upgrades -->
     <section class="service-section">
-        <h2>Repairs, Upgrades and Updates</h2>
-        <p>Got a computer that's slower than your gran's Wi-Fi? Let's fix that!</p>
+        <h2>Repairs & Upgrades</h2>
         <ul>
-            <li>SSD installation and HDD to SSD data transfer</li>
-            <li>Operating system updates, including Windows 11</li>
-            <li>General repairs and hardware diagnostics</li>
-        </ul>
-        <p><strong>Pricing:</strong></p>
-        <ul>
-            <li>£65/hour for individual tasks</li>
-            <li>Upgrade bundles starting at £250 (e.g., SSD install and Windows update)</li>
+            <li>SSD installation</li>
+            <li>OS updates</li>
+            <li>General repairs</li>
         </ul>
     </section>
 
-    <!-- Cyber Security How To's -->
+    <!-- Cyber Security -->
     <section class="service-section">
-        <h2>Cyber Security How To's</h2>
-        <p>We make being secure easy, from simplified setups to cybersecurity training.</p>
+        <h2>Cyber Security</h2>
         <ul>
-            <li>Comprehensive security assessments</li>
-            <li>Guided setup of firewalls, antivirus, and best practices</li>
-            <li>Cybersecurity awareness training for teams</li>
-        </ul>
-        <p><strong>Pricing:</strong></p>
-        <ul>
-            <li>£65/hour for consultation</li>
-            <li>Customised training sessions from £200</li>
+            <li>Security audits</li>
+            <li>Training sessions</li>
+            <li>Firewall setup</li>
         </ul>
     </section>
-
-    <!-- Add more sections (Remote Technical Support, Domain Configuration, etc.) -->
 
     <div class="contact-section">
-        <a href="mailto:help@silvertechsupport.uk">Contact us to discuss how we can help you</a>
+        <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
     </div>
 </div>
 
@@ -214,34 +191,21 @@
     const rightEye = document.getElementById("rightEye");
     const emojiTongue = document.getElementById("emojiTongue");
     const emojiCanvas = document.getElementById("emojiCanvas");
-    const mouth = document.getElementById("emojiMouth");
 
     // Constrain eye movement within the emoji face
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
-        const maxOffset = 15;
-        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
-        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
+        const offsetX = Math.min(5, (e.clientX - rect.left - rect.width / 2) / 8);
+        const offsetY = Math.min(5, (e.clientY - rect.top - rect.height / 2) / 8);
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
 
-    // Mouth reactions based on cursor position
+    // Open/close mouth logic
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
         if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-            mouth.style.height = "15px"; // Open mouth
-        } else {
-            mouth.style.height = "6px"; // Close mouth
-        }
-    });
-
-    // Tongue activation when pointer is above emoji
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        if (e.clientY < rect.top) {
             emojiTongue.style.opacity = "1";
-            emojiTongue.style.transform = `scaleY(${(rect.top - e.clientY) / 30})`;
         } else {
             emojiTongue.style.opacity = "0";
         }
