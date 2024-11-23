@@ -229,66 +229,150 @@
         <p>We tangle with wires so you don’t have to—ensuring your network is faster than your morning coffee kick.</p>
     </div>
 
-    <div class="service-card" onclick="showPopup('Repairs, Upgrades and Updates')">
+    <!-- Repairs, Upgrades and Updates -->
+    <div class="service-card" onclick="showPopup('repairs')" onmouseleave="closePopup('repairs')">
         <h3>Repairs, Upgrades and Updates</h3>
-        <p>Got a computer that's slower than your gran's Wi-Fi? Let's fix that!</p>
+        <p>Got a computer that's slower than your gran's Wi-Fi? Let's fix that! Trade that clunky HDD for a sleek SSD and watch your device go from tortoise to hare! Plus, upgrade to Windows 11 and enjoy a fresh, faster, and friendlier experience.</p>
     </div>
 
-    <div class="service-card" onclick="showPopup('Cyber Security How To\'s')">
+    <!-- Cyber Security How To's -->
+    <div class="service-card" onclick="showPopup('cybersecurity')" onmouseleave="closePopup('cybersecurity')">
         <h3>Cyber Security How To's</h3>
-        <p>We make being secure easy, from simplified setups while using industry best practices to cyber security training.</p>
+        <p>We make being secure easy, from simplified setups while using industry best practice to cyber security training. We prescribe solutions so you can get back to doing what you do best—without hitting Ctrl+Alt+Delete on your sanity.</p>
     </div>
 
-    <div class="service-card" onclick="showPopup('Remote Technical Support')">
+    <!-- Remote Technical Support -->
+    <div class="service-card" onclick="showPopup('remote')" onmouseleave="closePopup('remote')">
         <h3>Remote Technical Support</h3>
-        <p>When things go *beep-boop* wrong, we fix it from afar like tech wizards, minus the robes.</p>
+        <p>When things go *beep-boop* wrong, we fix it from afar like tech wizards, minus the robes. Instant help, no matter where you are!</p>
     </div>
+
+    <!-- Domain Configuration -->
+    <div class="service-card" onclick="showPopup('domain')" onmouseleave="closePopup('domain')">
+        <h3>Domain Configuration</h3>
+        <p>We handle the "www.what-am-I-doing?" Your online domain, set up securely and just right, without the headaches.</p>
+    </div>
+
+    <!-- Microsoft 365 Management -->
+    <div class="service-card" onclick="showPopup('microsoft')" onmouseleave="closePopup('microsoft')">
+        <h3>Microsoft 365 Management</h3>
+        <p>We handle all those pesky settings so you can spend less time in Outlook and more time actually enjoying your coffee breaks.</p>
+    </div>
+    <!-- Add other service cards -->
 </div>
 
-<!-- Popup Modal -->
 <div class="popup" id="popup-container">
-    <!-- Dynamic content will be injected here -->
-</div>
-
-<!-- Keyboard Buttons for Interactive Features -->
-<div class="keyboard">
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <button onclick="toggleGreenBacklight()">Toggle Green Backlight</button>
-    <button onclick="openCalculator()">Calculator</button>
-    <button onclick="openWebBrowser()">Open Web Browser</button>
+    <!-- Placeholder for dynamic content -->
 </div>
 
 <script>
-// Emoji Functionality (Tracking mouse movements)
-const leftEye = document.getElementById("leftEye");
-const rightEye = document.getElementById("rightEye");
-const emojiMouth = document.getElementById("emojiMouth");
-const emojiTongue = document.getElementById("emojiTongue");
-const emojiCanvas = document.getElementById("emojiCanvas");
+function showPopup(service) {
+    const popup = document.getElementById('popup-container');
+    let content = '';
 
-let eyesMoveSpeed = 0.05;
+    switch (service) {
+        case 'networking':
+            content = `
+                <h3>Networking Solutions</h3>
+                <p>Optimise and secure your network with tailored solutions.</p>
+                <ul>
+                    <p>On-site network diagnostics and optimisation</p>
+                    <p>Hardware and cabling installation</p>
+                    <p>Configuration of routers, switches, and firewalls</p>
 
-document.addEventListener('mousemove', (e) => {
-    const centerX = emojiCanvas.offsetWidth / 2;
-    const centerY = emojiCanvas.offsetHeight / 2;
-    
-    const deltaX = e.clientX - emojiCanvas.getBoundingClientRect().left - centerX;
-    const deltaY = e.clientY - emojiCanvas.getBoundingClientRect().top - centerY;
+                    <p>Quotations available on request</p>
+                </ul>
+            `;
+            break;
 
-    let distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 30);
-    
-    leftEye.style.transform = `translate(${(deltaX / 10)}px, ${(deltaY / 10)}px)`;
-    rightEye.style.transform = `translate(${(deltaX / 10)}px, ${(deltaY / 10)}px)`;
+        case 'repairs':
+            content = `
+                <h3>Repairs, Upgrades and Updates</h3>
+                <p>Restore speed and functionality to your devices.</p>
+                <ul>
+                    <li>SSD installation and HDD to SSD data transfer</li>
+                    <li>Operating system updates, including Windows 11</li>
+                    <li>General repairs and hardware diagnostics</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for individual tasks</li>
+                    <li>Upgrade bundles starting at £250 (e.g., SSD install and Windows update)</li>
+                </ul>
+            `;
+            break;
 
-    if (distance < 20) {
-        emojiMouth.style.height = '4px';
-        emojiTongue.style.opacity = 1;
-        emojiTongue.style.transform = `rotate(${(distance / 2)}deg)`;
-    } else {
-        emojiMouth.style.height = '6px';
-        emojiTongue.style.opacity = 0;
+        case 'cybersecurity':
+            content = `
+                <h3>Cyber Security How To's</h3>
+                <p>Secure your business or personal systems with confidence.</p>
+                <ul>
+                    <li>Comprehensive security assessments</li>
+                    <li>Guided setup of firewalls, antivirus, and best practices</li>
+                    <li>Cybersecurity awareness training for teams</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for consultation</li>
+                    <li>Customised training sessions from £200</li>
+                </ul>
+            `;
+            break;
+
+        case 'remote':
+            content = `
+                <h3>Remote Technical Support</h3>
+                <p>Fast and effective support, anytime, anywhere.</p>
+                <ul>
+                    <li>Remote troubleshooting and fixes</li>
+                    <li>Software installation and updates</li>
+                    <li>Device optimisation and cleaning</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for single sessions</li>
+                    <li>Subscription plans starting from £180/month</li>
+                </ul>
+            `;
+            break;
+
+        case 'domain':
+            content = `
+                <h3>Domain Configuration</h3>
+                <p>Seamlessly set up and secure your online presence.</p>
+                <ul>
+                    <li>Domain purchase and configuration</li>
+                    <li>SSL security setup</li>
+                    <li>Placeholder website design (up to 4 pages)</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>Approx. 4 hours for setup at £260</li>
+                    <li>Monthly management plans available from £65/month</li>
+                </ul>
+            `;
+            break;
+
+        case 'microsoft':
+            content = `
+                <h3>Microsoft 365 Management</h3>
+                <p>Simplify your Microsoft 365 experience with expert management.</p>
+                <ul>
+                    <li>User account creation and management</li>
+                    <li>Cloud storage setup and organisation</li>
+                    <li>Email configuration and optimisation</li>
+                </ul>
+                <p><strong>Pricing:</strong></p>
+                <ul>
+                    <li>£65/hour for ad hoc management</li>
+                    <li>Business management packages starting at £250/month</li>
+                </ul>
+            `;
+            break;
+
+        default:
+            content = '<p>Service details not found.</p>';
     }
-});
 
 // Popup Modal Logic
 function showPopup(service) {
@@ -301,28 +385,73 @@ function showPopup(service) {
             <p>More details about ${service} will go here...</p>
         </div>
     `;
+    popup.style.display = 'block';
 }
 
 function closePopup() {
     document.getElementById("popup-container").classList.remove("show");
 }
+</script>
 
-// Keyboard Button Functions
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-}
 
-function toggleGreenBacklight() {
-    document.body.classList.toggle("green-backlight");
-}
+    <!-- Add similar structure for other cards -->
+</div>
 
-function openCalculator() {
-    alert("Opening Calculator...");
-}
+<a href="mailto:help@silvertechsupport.uk" class="service-button">Contact us to discuss how we can help you</a>
 
-function openWebBrowser() {
-    alert("Opening Web Browser...");
-}
+<script>
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
+    const emojiTongue = document.getElementById("emojiTongue");
+    const emojiCanvas = document.getElementById("emojiCanvas");
+    const mouth = document.getElementById("emojiMouth");
+
+    // Constrain eye movement within the emoji face
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        const maxOffset = 15;
+        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
+        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
+        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+
+    // Mouth reactions based on cursor position
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
+            mouth.style.height = "15px"; // Open mouth
+        } else {
+            mouth.style.height = "6px"; // Close mouth
+        }
+    });
+
+    // Tongue activation when pointer is above emoji
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        if (e.clientY < rect.top) {
+            emojiTongue.style.opacity = "1";
+            emojiTongue.style.transform = `scaleY(${(rect.topbottom - e.clientY) / 30})`;
+        } else {
+            emojiTongue.style.opacity = "0";
+        }
+    });
+
+    document.querySelectorAll('.service-card').forEach(card => {
+    const details = card.querySelector('.service-details');
+    card.addEventListener('mouseenter', () => {
+        details.style.opacity = '1';
+        details.style.visibility = 'visible';
+    });
+    card.addEventListener('mouseleave', () => {
+        details.style.opacity = '0';
+        details.style.visibility = 'hidden';
+    });
+});
+
+    function closePopup() {
+        document.getElementById('popup-container').classList.remove('show');
+    }
 </script>
 </body>
 </html>
