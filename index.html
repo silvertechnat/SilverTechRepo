@@ -21,31 +21,34 @@
 </header>
 
 <div class="services-container">
-    <div class="service-card" onclick="showPopup('Networking Solutions')">
+    <div class="service-card" onclick="showServiceDetails('Networking Solutions')">
         <h3>Networking Solutions</h3>
         <p>We tangle with wires so you don’t have to—ensuring your network is faster than your morning coffee kick.</p>
     </div>
-    <div class="service-card" onclick="showPopup('repairs')" onmouseleave="closePopup()">
+    <div class="service-card" onclick="showServiceDetails('repairs')" onmouseleave="closePopup()">
         <h3>Repairs, Upgrades and Updates</h3>
         <p>Got a computer that's slower than your gran's Wi-Fi? Let's fix that! Trade that clunky HDD for a sleek SSD and watch your device go from tortoise to hare!</p>
     </div>
-    <div class="service-card" onclick="showPopup('cybersecurity')" onmouseleave="closePopup()">
+    <div class="service-card" onclick="showServiceDetails('cybersecurity')" onmouseleave="closePopup()">
         <h3>Cyber Security How To's</h3>
         <p>We make being secure easy, from simplified setups while using industry best practice to cyber security training.</p>
     </div>
-    <div class="service-card" onclick="showPopup('remote')" onmouseleave="closePopup()">
+    <div class="service-card" onclick="showServiceDetails('remote')" onmouseleave="closePopup()">
         <h3>Remote Technical Support</h3>
         <p>When things go *beep-boop* wrong, we fix it from afar like tech wizards, minus the robes.</p>
     </div>
-    <div class="service-card" onclick="showPopup('domain')" onmouseleave="closePopup()">
+    <div class="service-card" onclick="showServiceDetails('domain')" onmouseleave="closePopup()">
         <h3>Domain Configuration</h3>
         <p>We handle the "www.what-am-I-doing?" Your online domain, set up securely and just right, without the headaches.</p>
     </div>
-    <div class="service-card" onclick="showPopup('microsoft')" onmouseleave="closePopup()">
+    <div class="service-card" onclick="showServiceDetails('microsoft')" onmouseleave="closePopup()">
         <h3>Microsoft 365 Management</h3>
         <p>We handle all those pesky settings so you can spend less time in Outlook and more time enjoying your coffee breaks.</p>
     </div>
 </div>
+
+<!-- Service Details Section -->
+<div id="service-details"></div>
 
 <div class="popup" id="popup-container"></div>
 
