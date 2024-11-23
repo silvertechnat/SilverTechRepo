@@ -3,176 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silver Tech Support</title>
+    <title>Silver Tech Support - Psion Style</title>
     <style>
-        /* Psion 3c-inspired styles */
+        /* General body styling */
         body {
             font-family: "Courier New", Courier, monospace;
-            background-color: #C6D6C6; /* Transreflective greenish background */
-            color: #1A1A1A; /* Dark black for text */
+            background-color: #C6D6C6; /* Light transreflective green */
+            color: #1A1A1A; /* Dark black text */
             margin: 0;
             padding: 0;
-        }
-
-        .container {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
         }
 
-        .content-wrapper {
+        /* Full-page border styling */
+        .wrapper {
+            width: 90%;
+            height: 90%;
+            border: 5px solid #1A1A1A; /* Dark border to frame the page */
+            box-shadow: inset 0 0 10px #1A1A1A;
+            background-color: #AEBBAE; /* Slightly darker green for the main panel */
             display: flex;
-            flex-direction: row;
-            border: 2px solid #1A1A1A;
-            background-color: #AEBBAE; /* Slightly lighter for a 3D panel effect */
-            padding: 10px;
-            box-shadow: inset 0 0 5px #1A1A1A;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .emoji-canvas {
-            width: 80px;
-            height: 80px;
-            display: grid;
-            grid-template-columns: repeat(16, 1fr); /* 16x16 pixel grid */
-            grid-template-rows: repeat(16, 1fr);
-            position: relative;
-            border: 2px solid #1A1A1A;
-            background-color: #C6D6C6; /* Same as body for a cohesive LCD feel */
-        }
-
-        .pixel {
-            width: 100%;
-            height: 100%;
-            background-color: #AEBBAE; /* Pixels off */
-        }
-
-        .pixel.on {
-            background-color: #1A1A1A; /* Pixels on */
-        }
-
-        .emoji-eye {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #1A1A1A;
-            border-radius: 50%;
-        }
-
-        .emoji-eye.left {
-            top: 25%;
-            left: 20%;
-        }
-
-        .emoji-eye.right {
-            top: 25%;
-            right: 20%;
-        }
-
-        .emoji-mouth {
-            position: absolute;
-            width: 30px;
-            height: 5px;
-            background-color: #1A1A1A;
-            bottom: 25%;
-            left: 25%;
-        }
-
-        .emoji-tongue {
-            position: absolute;
-            width: 10px;
-            height: 15px;
-            background-color: #AEBBAE; /* Match 'pixels off' color */
-            bottom: 10%;
-            left: 45%;
-            opacity: 0;
-        }
-
-        .info-section {
-            margin-left: 20px;
-        }
-
-        .hero-title {
-            font-size: 1.2em;
+        /* Header style */
+        .header {
+            font-size: 2em;
             font-weight: bold;
+            text-align: center;
             margin-bottom: 10px;
         }
 
-        .tagline {
-            font-size: 0.8em;
+        .sub-header {
+            font-size: 1em;
             font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .comedic-line {
-            margin-top: 15px;
+        /* Service card grid */
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Service card styling */
+        .service-card {
+            border: 2px solid #1A1A1A;
+            background-color: #C6D6C6;
+            padding: 10px;
+            box-shadow: 2px 2px 5px #1A1A1A;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            background-color: #AEBBAE; /* Slight hover effect */
+        }
+
+        .service-card h3 {
+            font-size: 1.2em;
+            margin: 0 0 10px;
+        }
+
+        .service-card p {
             font-size: 0.9em;
-            padding: 5px;
-            border: 2px dashed #1A1A1A;
         }
 
-        .contact-section {
-            margin-top: 15px;
-        }
-
-        .contact-section a {
-            text-decoration: none;
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #AEBBAE;
             color: #1A1A1A;
-            border: 1px solid #1A1A1A;
-            padding: 3px 6px;
+            border: 3px solid #1A1A1A;
+            padding: 20px;
+            z-index: 1000;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px #1A1A1A;
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .popup-content h3 {
+            margin: 0 0 10px;
+        }
+
+        .popup-content p,
+        .popup-content ul {
+            margin: 5px 0;
+        }
+
+        .popup button {
+            align-self: flex-end;
+            padding: 5px 10px;
+            border: 2px solid #1A1A1A;
+            background-color: #C6D6C6;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
             background-color: #AEBBAE;
         }
 
-        .contact-section a:hover {
-            background-color: #C6D6C6;
+        /* Overlay to dim background */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="content-wrapper">
-        <div class="emoji-canvas" id="emojiCanvas">
-            <div class="emoji-eye left" id="leftEye"></div>
-            <div class="emoji-eye right" id="rightEye"></div>
-            <div class="emoji-mouth" id="emojiMouth"></div>
-            <div class="emoji-tongue" id="emojiTongue"></div>
+    <div class="wrapper">
+        <!-- Header Section -->
+        <div>
+            <div class="header">Silver Tech Support</div>
+            <div class="sub-header">"Because life's too short for tech troubles."</div>
         </div>
-        <div class="info-section">
-            <h4 class="hero-title">Silver Tech Support</h4>
-            <div class="tagline">Quick and Reliable IT Support in East Anglia.</div>
-            <div class="comedic-line">
-                "Because life's too short for slow Wi-Fi and broken gadgets."
+
+        <!-- Service Cards Section -->
+        <div class="service-cards">
+            <div class="service-card" onclick="showPopup('networking')">
+                <h3>Networking Solutions</h3>
+                <p>We tangle with wires so you don’t have to—ensuring your network is faster than your coffee kick.</p>
             </div>
-            <div class="contact-section">
-                <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
+            <div class="service-card" onclick="showPopup('repairs')">
+                <h3>Repairs, Upgrades and Updates</h3>
+                <p>Got a computer that's slower than your gran's Wi-Fi? Let’s fix that!</p>
             </div>
+            <div class="service-card" onclick="showPopup('cybersecurity')">
+                <h3>Cyber Security How To's</h3>
+                <p>We prescribe solutions so you can focus on what you do best.</p>
+            </div>
+            <div class="service-card" onclick="showPopup('remote')">
+                <h3>Remote Technical Support</h3>
+                <p>When things go *beep-boop* wrong, we fix it like tech wizards.</p>
+            </div>
+            <div class="service-card" onclick="showPopup('domain')">
+                <h3>Domain Configuration</h3>
+                <p>We handle the "www.what-am-I-doing?"</p>
+            </div>
+            <div class="service-card" onclick="showPopup('microsoft')">
+                <h3>Microsoft 365 Management</h3>
+                <p>Spend less time on settings and more on coffee breaks.</p>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div>
+            <div class="sub-header">Contact us at <a href="mailto:help@silvertechsupport.uk">help@silvertechsupport.uk</a></div>
         </div>
     </div>
-</div>
 
-<script>
-    const leftEye = document.getElementById("leftEye");
-    const rightEye = document.getElementById("rightEye");
-    const emojiTongue = document.getElementById("emojiTongue");
-    const emojiCanvas = document.getElementById("emojiCanvas");
+    <!-- Popup -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup-container"></div>
 
-    // Make eye movement proportional to mouse position
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        const offsetX = Math.min(8, Math.max(-8, (e.clientX - rect.left - rect.width / 2) / 12));
-        const offsetY = Math.min(8, Math.max(-8, (e.clientY - rect.top - rect.height / 2) / 12));
-        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    });
+    <script>
+        function showPopup(service) {
+            const popup = document.getElementById('popup-container');
+            const overlay = document.getElementById('overlay');
+            let content = '';
 
-    // Open/close mouth logic
-    document.addEventListener("mousemove", (e) => {
-        const rect = emojiCanvas.getBoundingClientRect();
-        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
-            emojiTongue.style.opacity = "1";
-        } else {
-            emojiTongue.style.opacity = "0";
+            switch (service) {
+                case 'networking':
+                    content = `
+                        <h3>Networking Solutions</h3>
+                        <p>Optimise and secure your network with tailored solutions.</p>
+                        <ul>
+                            <li>On-site network diagnostics</li>
+                            <li>Hardware and cabling installation</li>
+                            <li>Router, switch, and firewall configuration</li>
+                        </ul>`;
+                    break;
+                case 'repairs':
+                    content = `
+                        <h3>Repairs, Upgrades and Updates</h3>
+                        <p>Restore speed and functionality to your devices.</p>
+                        <ul>
+                            <li>SSD upgrades</li>
+                            <li>Windows 11 installation</li>
+                            <li>General repairs</li>
+                        </ul>`;
+                    break;
+                // Add cases for other services...
+                default:
+                    content = `<p>Service details not found.</p>`;
+            }
+
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <button onclick="closePopup()">Close</button>
+                    ${content}
+                </div>`;
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
         }
-    });
-</script>
+
+        function closePopup() {
+            const popup = document.getElementById('popup-container');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
