@@ -20,16 +20,11 @@ function showPopup(service) {
                 <h3>Repairs, Upgrades and Updates</h3>
                 <p>Restore speed and functionality to your devices.</p>
                 <ul>
-                    <li>SSD installation and HDD to SSD data transfer</li>
-                    <li>Operating system updates, including Windows 11</li>
-                    <li>General repairs and hardware diagnostics</li>
+                    <p>SSD installation and HDD to SSD data transfer</p>
+                    <p>Operating system updates, including Windows 11</p>
+                    <p>General repairs and hardware diagnostics</p>
                 </ul>
-                <p><strong>Pricing:</strong></p>
-                <ul>
-                    <li>£65/hour for individual tasks</li>
-                    <li>Upgrade bundles starting at £250 (e.g., SSD install and Windows update)</li>
-                </ul>
-            `;
+              `;
             break;
         // Add cases for other services here
         default:
