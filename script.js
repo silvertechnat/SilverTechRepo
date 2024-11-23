@@ -51,40 +51,40 @@ function closePopup() {
 }
 
 // Emoji Interaction
-const emojiCanvas = document.getElementById('emojiCanvas');
-const leftEye = document.getElementById('leftEye');
-const rightEye = document.getElementById('rightEye');
-const emojiMouth = document.getElementById('emojiMouth');
-const emojiTongue = document.getElementById('emojiTongue');
 
-emojiCanvas.addEventListener('mousemove', function (e) {
-    const canvasRect = emojiCanvas.getBoundingClientRect();
-    const mouseX = e.clientX - canvasRect.left;
-    const mouseY = e.clientY - canvasRect.top;
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
+    const emojiTongue = document.getElementById("emojiTongue");
+    const emojiCanvas = document.getElementById("emojiCanvas");
+    const mouth = document.getElementById("emojiMouth");
 
-    // Eyes movement
-    const maxEyeOffset = 10;
-    const eyeX = (mouseX / emojiCanvas.offsetWidth) * maxEyeOffset;
-    const eyeY = (mouseY / emojiCanvas.offsetHeight) * maxEyeOffset;
+    // Constrain eye movement within the emoji face
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        const maxOffset = 15;
+        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, (e.clientX - rect.left - rect.width / 2) / 8));
+        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, (e.clientY - rect.top - rect.height / 2) / 8));
+        leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
 
-    leftEye.style.transform = `translate(${eyeX - 5}px, ${eyeY - 5}px)`;
-    rightEye.style.transform = `translate(${eyeX - 5}px, ${eyeY - 5}px)`;
+    // Mouth reactions based on cursor position
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        if (e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom) {
+            mouth.style.height = "15px"; // Open mouth
+        } else {
+            mouth.style.height = "6px"; // Close mouth
+        }
+    });
 
-    // Mouth open or close
-    emojiMouth.style.height = (mouseY < emojiCanvas.offsetHeight / 2) ? '30px' : '6px';
-
-    // Tongue appearance based on position
-    if (mouseY > emojiCanvas.offsetHeight / 2) {
-        emojiTongue.style.opacity = 1;
-        emojiTongue.style.transform = 'rotate(180deg)';
-    } else {
-        emojiTongue.style.opacity = 0;
-    }
-});
-
-emojiCanvas.addEventListener('mouseleave', function () {
-    leftEye.style.transform = 'translate(0, 0)';
-    rightEye.style.transform = 'translate(0, 0)';
-    emojiMouth.style.height = '6px';
-    emojiTongue.style.opacity = 0;
-});
+    // Tongue activation when pointer is above emoji
+    document.addEventListener("mousemove", (e) => {
+        const rect = emojiCanvas.getBoundingClientRect();
+        if (e.clientY < rect.top) {
+            emojiTongue.style.opacity = "1";
+            emojiTongue.style.transform = `scaleY(${(rect.topbottom - e.clientY) / 30})`;
+        } else {
+            emojiTongue.style.opacity = "0";
+        }
+    });
