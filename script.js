@@ -34,7 +34,6 @@ function showPopup(service) {
     popup.classList.add("show");
     popup.innerHTML = `
         <div class="popup-content">
-            <button onclick="closePopup()">×</button>
             ${content}
         </div>
     `;
