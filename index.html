@@ -8,181 +8,144 @@
         /* Psion 3c-inspired styles */
         body {
             font-family: "Courier New", Courier, monospace;
-            background-color: #2C3E3E; /* Dark green background for an LCD feel */
-            color: #C8F0C8; /* Light green text to mimic LCD contrast */
+            background-color: #C6D6C6; /* Transreflective greenish background */
+            color: #1A1A1A; /* Dark black for text */
             margin: 0;
             padding: 0;
         }
 
-        .header {
+        .container {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            border: 2px solid #1A1A1A;
+            background-color: #AEBBAE; /* Slightly lighter for a 3D panel effect */
             padding: 10px;
-            border-bottom: 2px solid #C8F0C8;
-            margin-bottom: 20px;
+            box-shadow: inset 0 0 5px #1A1A1A;
+        }
+
+        .emoji-canvas {
+            width: 80px;
+            height: 80px;
+            display: grid;
+            grid-template-columns: repeat(16, 1fr); /* 16x16 pixel grid */
+            grid-template-rows: repeat(16, 1fr);
+            position: relative;
+            border: 2px solid #1A1A1A;
+            background-color: #C6D6C6; /* Same as body for a cohesive LCD feel */
+        }
+
+        .pixel {
+            width: 100%;
+            height: 100%;
+            background-color: #AEBBAE; /* Pixels off */
+        }
+
+        .pixel.on {
+            background-color: #1A1A1A; /* Pixels on */
+        }
+
+        .emoji-eye {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #1A1A1A;
+            border-radius: 50%;
+        }
+
+        .emoji-eye.left {
+            top: 25%;
+            left: 20%;
+        }
+
+        .emoji-eye.right {
+            top: 25%;
+            right: 20%;
+        }
+
+        .emoji-mouth {
+            position: absolute;
+            width: 30px;
+            height: 5px;
+            background-color: #1A1A1A;
+            bottom: 25%;
+            left: 25%;
+        }
+
+        .emoji-tongue {
+            position: absolute;
+            width: 10px;
+            height: 15px;
+            background-color: #AEBBAE; /* Match 'pixels off' color */
+            bottom: 10%;
+            left: 45%;
+            opacity: 0;
+        }
+
+        .info-section {
+            margin-left: 20px;
         }
 
         .hero-title {
-            font-size: 1.4em;
-            text-transform: uppercase;
-            margin: 5px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .tagline {
             font-size: 0.8em;
             font-style: italic;
-            margin: 5px 0;
-        }
-
-        .emoji-canvas {
-            width: 70px;
-            height: 50px;
-            border: 2px solid #C8F0C8;
-            position: relative;
-            overflow: hidden;
-            background-color: #1E2B2B; /* Slightly darker green */
-            margin-bottom: 10px;
-        }
-
-        .emoji-eye {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background-color: #C8F0C8;
-            border-radius: 50%;
-        }
-
-        .emoji-eye.left { top: 15px; left: 15px; }
-        .emoji-eye.right { top: 15px; right: 15px; }
-
-        .emoji-mouth {
-            position: absolute;
-            width: 30px;
-            height: 4px;
-            background-color: #C8F0C8;
-            top: 35px;
-            left: 20px;
-        }
-
-        .emoji-tongue {
-            position: absolute;
-            width: 20px;
-            height: 10px;
-            background-color: #85D4AA; /* Slightly dimmer green for tongue */
-            top: 38px;
-            left: 25px;
-            opacity: 0;
-        }
-
-        .content {
-            padding: 10px;
         }
 
         .comedic-line {
-            text-align: center;
-            font-size: 1em;
-            margin: 10px 0;
-            border-top: 2px dashed #C8F0C8;
-            border-bottom: 2px dashed #C8F0C8;
+            margin-top: 15px;
+            font-size: 0.9em;
             padding: 5px;
-        }
-
-        .service-section {
-            border: 2px solid #C8F0C8;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        .service-section h2 {
-            font-size: 1.2em;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-        }
-
-        .service-section ul {
-            padding-left: 20px;
-        }
-
-        .service-section ul li {
-            margin-bottom: 5px;
+            border: 2px dashed #1A1A1A;
         }
 
         .contact-section {
-            text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .contact-section a {
-            color: #1E2B2B;
-            background-color: #C8F0C8;
             text-decoration: none;
-            padding: 5px 10px;
-            border: 2px solid #C8F0C8;
+            color: #1A1A1A;
+            border: 1px solid #1A1A1A;
+            padding: 3px 6px;
+            background-color: #AEBBAE;
         }
 
         .contact-section a:hover {
-            background-color: #1E2B2B;
-            color: #C8F0C8;
-        }
-
-        /* Reduce resolution feel for low-res appearance */
-        * {
-            image-rendering: pixelated;
+            background-color: #C6D6C6;
         }
     </style>
 </head>
 <body>
-<header class="header">
-    <div class="emoji-canvas" id="emojiCanvas">
-        <div class="emoji-eye left" id="leftEye"></div>
-        <div class="emoji-eye right" id="rightEye"></div>
-        <div class="emoji-mouth" id="emojiMouth"></div>
-        <div class="emoji-tongue" id="emojiTongue"></div>
-    </div>
-    <div>
-        <h4 class="hero-title">Silver Tech Support</h4>
-        <div class="tagline">Quick and Reliable IT Support in East Anglia.</div>
-    </div>
-</header>
-
-<div class="content">
-    <div class="comedic-line">
-        "Because life's too short for slow Wi-Fi and broken gadgets."
-    </div>
-
-    <!-- Networking Solutions -->
-    <section class="service-section">
-        <h2>Networking Solutions</h2>
-        <ul>
-            <li>On-site network diagnostics</li>
-            <li>Hardware and cabling installation</li>
-            <li>Router and firewall setup</li>
-        </ul>
-    </section>
-
-    <!-- Repairs, Upgrades -->
-    <section class="service-section">
-        <h2>Repairs & Upgrades</h2>
-        <ul>
-            <li>SSD installation</li>
-            <li>OS updates</li>
-            <li>General repairs</li>
-        </ul>
-    </section>
-
-    <!-- Cyber Security -->
-    <section class="service-section">
-        <h2>Cyber Security</h2>
-        <ul>
-            <li>Security audits</li>
-            <li>Training sessions</li>
-            <li>Firewall setup</li>
-        </ul>
-    </section>
-
-    <div class="contact-section">
-        <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
+<div class="container">
+    <div class="content-wrapper">
+        <div class="emoji-canvas" id="emojiCanvas">
+            <div class="emoji-eye left" id="leftEye"></div>
+            <div class="emoji-eye right" id="rightEye"></div>
+            <div class="emoji-mouth" id="emojiMouth"></div>
+            <div class="emoji-tongue" id="emojiTongue"></div>
+        </div>
+        <div class="info-section">
+            <h4 class="hero-title">Silver Tech Support</h4>
+            <div class="tagline">Quick and Reliable IT Support in East Anglia.</div>
+            <div class="comedic-line">
+                "Because life's too short for slow Wi-Fi and broken gadgets."
+            </div>
+            <div class="contact-section">
+                <a href="mailto:help@silvertechsupport.uk">Contact Us</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -192,11 +155,11 @@
     const emojiTongue = document.getElementById("emojiTongue");
     const emojiCanvas = document.getElementById("emojiCanvas");
 
-    // Constrain eye movement within the emoji face
+    // Make eye movement proportional to mouse position
     document.addEventListener("mousemove", (e) => {
         const rect = emojiCanvas.getBoundingClientRect();
-        const offsetX = Math.min(5, (e.clientX - rect.left - rect.width / 2) / 8);
-        const offsetY = Math.min(5, (e.clientY - rect.top - rect.height / 2) / 8);
+        const offsetX = Math.min(8, Math.max(-8, (e.clientX - rect.left - rect.width / 2) / 12));
+        const offsetY = Math.min(8, Math.max(-8, (e.clientY - rect.top - rect.height / 2) / 12));
         leftEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
         rightEye.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
