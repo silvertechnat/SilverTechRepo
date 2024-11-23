@@ -3,67 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silver Tech Support - Psion Style</title>
+    <title>Silver Tech Support - PDA Style</title>
     <style>
         /* General body styling */
         body {
-            font-family: "Courier New", Courier, monospace;
-            background-color: #C6D6C6; /* Light transreflective green */
-            color: #1A1A1A; /* Dark black text */
             margin: 0;
             padding: 0;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #1A1A1A; /* Dark grey/black for the plastic casing */
+            color: #1A1A1A;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow: hidden;
         }
 
-        /* Full-page border styling */
+        /* Dimpled texture for PDA plastic casing */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#333 1px, #1A1A1A 1px);
+            background-size: 10px 10px;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        /* Full-page wrapper */
         .wrapper {
+            position: relative;
             width: 90%;
             height: 90%;
-            border: 5px solid #1A1A1A; /* Dark border to frame the page */
-            box-shadow: inset 0 0 10px #1A1A1A;
-            background-color: #AEBBAE; /* Slightly darker green for the main panel */
+            background-color: #AEBBAE; /* LCD-style green */
+            border: 5px solid #1A1A1A; /* Frame border */
+            box-shadow: inset 0 0 15px #1A1A1A;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: space-between;
-            padding: 20px;
-            box-sizing: border-box;
+            align-items: center;
+            z-index: 1;
         }
 
-        /* Header style */
+        /* Logo styling in the top-right corner */
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 1.2em;
+            color: #C6C6C6;
+        }
+
+        /* Header */
         .header {
             font-size: 2em;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
+            margin: 20px 0 10px;
         }
 
         .sub-header {
             font-size: 1em;
             font-style: italic;
-            text-align: center;
             margin-bottom: 20px;
         }
 
-        /* Service card grid */
-        .service-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
+        /* Emoji styling */
+        .emoji-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            background-color: #C6D6C6;
+            border: 3px solid #1A1A1A;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px #1A1A1A;
         }
 
-        /* Service card styling */
+        .emoji-face {
+            position: relative;
+            font-size: 50px;
+        }
+
+        .emoji-eye {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #1A1A1A;
+            border-radius: 50%;
+        }
+
+        .eye-left {
+            top: 30%;
+            left: 30%;
+        }
+
+        .eye-right {
+            top: 30%;
+            right: 30%;
+        }
+
+        .emoji-mouth {
+            position: absolute;
+            bottom: 20%;
+            left: 25%;
+            width: 50%;
+            height: 15px;
+            background-color: #1A1A1A;
+            border-radius: 50%;
+        }
+
+        /* Emoji hover reactions */
+        .emoji-container:hover .emoji-mouth {
+            height: 20px;
+            background-color: red;
+        }
+
+        /* Tongue out on top mouse */
+        .tongue {
+            display: none;
+            position: absolute;
+            bottom: -10px;
+            left: 45%;
+            width: 10px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .emoji-container.mouse-top .tongue {
+            display: block;
+        }
+
+        /* Service cards */
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
         .service-card {
+            padding: 10px;
             border: 2px solid #1A1A1A;
             background-color: #C6D6C6;
-            padding: 10px;
             box-shadow: 2px 2px 5px #1A1A1A;
-            cursor: pointer;
+            text-align: center;
             transition: transform 0.2s;
+            cursor: pointer;
         }
 
         .service-card:hover {
@@ -76,8 +169,10 @@
             margin: 0 0 10px;
         }
 
-        .service-card p {
+        /* Footer */
+        .footer {
             font-size: 0.9em;
+            margin: 20px 0;
         }
 
         /* Popup styling */
@@ -87,10 +182,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
             background-color: #AEBBAE;
             color: #1A1A1A;
             border: 3px solid #1A1A1A;
             padding: 20px;
+            box-shadow: 0 5px 10px #1A1A1A;
             z-index: 1000;
             width: 80%;
             max-width: 600px;
@@ -115,8 +213,8 @@
         .popup button {
             align-self: flex-end;
             padding: 5px 10px;
-            border: 2px solid #1A1A1A;
             background-color: #C6D6C6;
+            border: 2px solid #1A1A1A;
             cursor: pointer;
         }
 
@@ -139,21 +237,34 @@
 </head>
 <body>
     <div class="wrapper">
-        <!-- Header Section -->
+        <!-- Logo -->
+        <div class="logo">Silver Tech Support</div>
+
+        <!-- Header -->
         <div>
             <div class="header">Silver Tech Support</div>
-            <div class="sub-header">"Because life's too short for tech troubles."</div>
+            <div class="sub-header">"Tech fixes on a retro vibe"</div>
         </div>
 
-        <!-- Service Cards Section -->
+        <!-- Emoji with eye tracking -->
+        <div class="emoji-container" id="emoji">
+            <div class="emoji-eye eye-left" id="eye-left"></div>
+            <div class="emoji-eye eye-right" id="eye-right"></div>
+            <div class="emoji-mouth"></div>
+            <div class="tongue"></div>
+        </div>
+
+        <!-- Service Cards -->
         <div class="service-cards">
             <div class="service-card" onclick="showPopup('networking')">
                 <h3>Networking Solutions</h3>
                 <p>We tangle with wires so you don’t have to—ensuring your network is faster than your coffee kick.</p>
+                Networking Solutions
             </div>
             <div class="service-card" onclick="showPopup('repairs')">
                 <h3>Repairs, Upgrades and Updates</h3>
                 <p>Got a computer that's slower than your gran's Wi-Fi? Let’s fix that!</p>
+                Repairs and Updates
             </div>
             <div class="service-card" onclick="showPopup('cybersecurity')">
                 <h3>Cyber Security How To's</h3>
@@ -170,13 +281,12 @@
             <div class="service-card" onclick="showPopup('microsoft')">
                 <h3>Microsoft 365 Management</h3>
                 <p>Spend less time on settings and more on coffee breaks.</p>
+                Cyber Security How-To's
             </div>
         </div>
 
-        <!-- Footer Section -->
-        <div>
-            <div class="sub-header">Contact us at <a href="mailto:help@silvertechsupport.uk">help@silvertechsupport.uk</a></div>
-        </div>
+        <!-- Footer -->
+        <div class="footer">Contact: <a href="mailto:help@silvertechsupport.com">help@silvertechsupport.com</a></div>
     </div>
 
     <!-- Popup -->
@@ -214,6 +324,11 @@
                 default:
                     content = `<p>Service details not found.</p>`;
             }
+        // Eye tracking
+        const emoji = document.getElementById('emoji');
+        const eyeLeft = document.getElementById('eye-left');
+        const eyeRight = document.getElementById('eye-right');
+        const mouth = document.querySelector('.emoji-mouth');
 
             popup.innerHTML = `
                 <div class="popup-content">
@@ -223,6 +338,10 @@
             popup.style.display = 'block';
             overlay.style.display = 'block';
         }
+        document.addEventListener('mousemove', (e) => {
+            const rect = emoji.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
 
         function closePopup() {
             const popup = document.getElementById('popup-container');
@@ -230,6 +349,19 @@
             popup.style.display = 'none';
             overlay.style.display = 'none';
         }
+            const angleX = (e.clientX - centerX) / rect.width * 30;
+            const angleY = (e.clientY - centerY) / rect.height * 30;
+
+            eyeLeft.style.transform = `translate(${angleX}px, ${angleY}px)`;
+            eyeRight.style.transform = `translate(${angleX}px, ${angleY}px)`;
+
+            // Tongue toggle
+            if (e.clientY < rect.top) {
+                emoji.classList.add('mouse-top');
+            } else {
+                emoji.classList.remove('mouse-top');
+            }
+        });
     </script>
 </body>
 </html>
